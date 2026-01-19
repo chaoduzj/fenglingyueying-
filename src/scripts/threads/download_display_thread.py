@@ -59,6 +59,14 @@ class DownloadDisplayThread(DownloadBaseThread):
                 return
         
         # ======================================================
+        # CT
+        if settings["enableCT"]:
+            status = self.search_from_ct(keywordList)
+            if not status:
+                self.finished.emit(1)
+                return
+        
+        # ======================================================
         # GCM
         if settings["enableGCM"]:
             status = self.search_from_gcm(keywordList)
@@ -67,7 +75,7 @@ class DownloadDisplayThread(DownloadBaseThread):
                 return
 
         # ======================================================
-        # General
+        # Finalize
         self.message.emit(tr("Translating search results..."), None)
         with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
             futures = {
@@ -276,6 +284,39 @@ class DownloadDisplayThread(DownloadBaseThread):
             return False
 
         self.message.emit(tr("Search from XiaoXing success!"), "success")
+        time.sleep(self.status_pause_time)
+
+        return True
+    
+    def search_from_ct(self, keywordList):
+        CTData = self.load_json_content("cheat_table.json")
+
+        if not CTData:
+            self.message.emit(tr("Search failed, please update trainer search data."), "failure")
+            return False
+
+        try:
+            for trainer in CTData:
+                gameName = trainer['game_name']
+                url = trainer['gcm_url']
+                version = trainer['version']
+                origin = trainer['origin']
+
+                if gameName and self.keyword_match(keywordList, gameName):
+                    DownloadBaseThread.trainer_urls.append({
+                        "game_name": gameName,
+                        "trainer_name": None,
+                        "origin": origin,  # could be "the_cheat_script" or "ct_other"
+                        "url": url,
+                        "version": version
+                    })
+
+        except Exception as e:
+            print(f"Error processing CT data: {e}")
+            self.message.emit(tr("Search failed, please update trainer search data."), "failure")
+            return False
+
+        self.message.emit(tr("Search from CT success!"), "success")
         time.sleep(self.status_pause_time)
 
         return True

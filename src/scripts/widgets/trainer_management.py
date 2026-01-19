@@ -35,6 +35,7 @@ class TrainerManagementDialog(QDialog):
         self.tabWidget.addTab(self.createXiaoXingTab(), tr("XiaoXing"))
         self.tabWidget.addTab(self.createWemodTab(), "WeMod")
         self.tabWidget.addTab(self.createCETab(), "Cheat Engine")
+        self.tabWidget.addTab(self.createCevoTab(), "Cheat Evolution")
 
     def closeEvent(self, event):
         super().closeEvent(event)
@@ -62,6 +63,9 @@ class TrainerManagementDialog(QDialog):
         settings["unlockXiaoXing"] = self.unlockXiaoXingCheckbox.isChecked()
         settings["autoUpdateXiaoXingData"] = self.autoUpdateXiaoXingDataCheckbox.isChecked()
         settings["autoUpdateXiaoXingTrainers"] = self.autoUpdateXiaoXingTrainersCheckbox.isChecked()
+        settings["enableCT"] = self.enableCTCheckbox.isChecked()
+        settings["autoUpdateCTData"] = self.autoUpdateCTDataCheckbox.isChecked()
+        settings["autoUpdateCTTrainers"] = self.autoUpdateCTTrainersCheckbox.isChecked()
         apply_settings(settings)
 
     @staticmethod
@@ -74,7 +78,10 @@ class TrainerManagementDialog(QDialog):
     def show_alert(self, message, alert_type):
         alert = AlertWidget(self, message, alert_type)
         alert.show()
-        QTimer.singleShot(5000, alert.close)
+        alert.auto_close_timer = QTimer()
+        alert.auto_close_timer.setSingleShot(True)
+        alert.auto_close_timer.timeout.connect(alert.close)
+        alert.auto_close_timer.start(5000)
 
     def moveEvent(self, event):
         super().moveEvent(event)
@@ -131,7 +138,7 @@ class TrainerManagementDialog(QDialog):
         layout = QVBoxLayout()
         layout.setContentsMargins(0, 15, 0, 0)
         flingTab.setLayout(layout)
-        officialLink = QLabel(tr("Official Website: ") + '<a href="https://flingtrainer.com" style="text-decoration: none;">https://flingtrainer.com</a>')
+        officialLink = QLabel(tr("Official Website: ") + '<a href="https://flingtrainer.com" style="text-decoration: none; color: #0078D4;">https://flingtrainer.com</a>')
         officialLink.setOpenExternalLinks(True)
         layout.addWidget(officialLink)
 
@@ -190,7 +197,7 @@ class TrainerManagementDialog(QDialog):
         layout = QVBoxLayout()
         layout.setContentsMargins(0, 15, 0, 0)
         xiaoXingTab.setLayout(layout)
-        officialLink = QLabel(tr("Official Website: ") + '<a href="https://www.xiaoxingjie.com" style="text-decoration: none;">https://www.xiaoxingjie.com</a>')
+        officialLink = QLabel(tr("Official Website: ") + '<a href="https://www.xiaoxingjie.com" style="text-decoration: none; color: #0078D4;">https://www.xiaoxingjie.com</a>')
         officialLink.setOpenExternalLinks(True)
         layout.addWidget(officialLink)
 
@@ -243,7 +250,7 @@ class TrainerManagementDialog(QDialog):
         layout = QVBoxLayout()
         layout.setContentsMargins(0, 15, 0, 0)
         wemodTab.setLayout(layout)
-        officialLink = QLabel(tr("Official Website: ") + '<a href="https://www.wemod.com" style="text-decoration: none;">https://www.wemod.com</a>')
+        officialLink = QLabel(tr("Official Website: ") + '<a href="https://www.wemod.com" style="text-decoration: none; color: #0078D4;">https://www.wemod.com</a>')
         officialLink.setOpenExternalLinks(True)
         layout.addWidget(officialLink)
 
@@ -347,9 +354,12 @@ class TrainerManagementDialog(QDialog):
         layout = QVBoxLayout()
         layout.setContentsMargins(0, 15, 0, 0)
         ceTab.setLayout(layout)
-        officialLink = QLabel(tr("Official Website: ") + '<a href="https://www.cheatengine.org" style="text-decoration: none;">https://www.cheatengine.org</a>')
+        officialLink = QLabel(tr("Official Website: ") + '<a href="https://www.cheatengine.org" style="text-decoration: none; color: #0078D4;">https://www.cheatengine.org</a>')
         officialLink.setOpenExternalLinks(True)
         layout.addWidget(officialLink)
+        ctLink = QLabel(tr("Cheat Table Sources: ") + '<a href="https://www.thecheatscript.com" style="text-decoration: none; color: #0078D4;">https://www.thecheatscript.com</a>')
+        ctLink.setOpenExternalLinks(True)
+        layout.addWidget(ctLink)
 
         columns = QHBoxLayout()
         columns.setContentsMargins(30, 20, 30, 20)
@@ -408,6 +418,27 @@ class TrainerManagementDialog(QDialog):
         self.addzhCNCheckbox = QCheckBox(tr("Add Simplified Chinese"))
         column2.addWidget(self.addzhCNCheckbox)
 
+        # add a dashed line
+        line = QLabel()
+        line.setFixedHeight(1)
+        line.setStyleSheet("background-color: #C0C0C0;")
+        column2.addWidget(line)
+
+        # Enable CT
+        self.enableCTCheckbox = QCheckBox(tr("Enable Search for Cheat Tables"))
+        self.enableCTCheckbox.setChecked(settings["enableCT"])
+        column2.addWidget(self.enableCTCheckbox)
+
+        # Auto update CT data
+        self.autoUpdateCTDataCheckbox = QCheckBox(tr("Update Cheat Table data automatically"))
+        self.autoUpdateCTDataCheckbox.setChecked(settings["autoUpdateCTData"])
+        column2.addWidget(self.autoUpdateCTDataCheckbox)
+
+        # Auto update CT trainers
+        self.autoUpdateCTTrainersCheckbox = QCheckBox(tr("Update Cheat Tables automatically"))
+        self.autoUpdateCTTrainersCheckbox.setChecked(settings["autoUpdateCTTrainers"])
+        column2.addWidget(self.autoUpdateCTTrainersCheckbox)
+
         # Apply button
         applyButtonLayout = QHBoxLayout()
         applyButtonLayout.setContentsMargins(0, 0, 10, 10)
@@ -424,12 +455,87 @@ class TrainerManagementDialog(QDialog):
         column2.addStretch(1)
         return ceTab
 
+    def createCevoTab(self):
+        cevoTab = QWidget()
+        layout = QVBoxLayout()
+        layout.setContentsMargins(0, 15, 0, 0)
+        cevoTab.setLayout(layout)
+        officialLink = QLabel(tr("Official Website: ") + '<a href="https://cheatevolution.com" style="text-decoration: none; color: #0078D4;">https://cheatevolution.com</a>')
+        officialLink.setOpenExternalLinks(True)
+        layout.addWidget(officialLink)
+
+        columns = QHBoxLayout()
+        columns.setContentsMargins(30, 20, 30, 20)
+        columns.setSpacing(40)
+        layout.addLayout(columns)
+
+        column1 = QVBoxLayout()
+        columns.addLayout(column1, stretch=2)
+
+        logoPixmap = QPixmap(resource_path("assets/cevo.png"))
+        scaledLogoPixmap = logoPixmap.scaled(130, 130, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation)
+        logoLabel = QLabel()
+        logoLabel.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        logoLabel.setPixmap(scaledLogoPixmap)
+        column1.addWidget(logoLabel)
+
+        column2 = QVBoxLayout()
+        column2.setSpacing(15)
+        column2.addStretch(1)
+        columns.addLayout(column2, stretch=3)
+        columns.setAlignment(column2, Qt.AlignmentFlag.AlignHCenter)
+
+        # Cheat Evolution installation status
+        self.cevoInstallStatus = QLabel()
+        column2.addWidget(self.cevoInstallStatus)
+
+        # Cheat Evolution installation path
+        installLayout = QVBoxLayout()
+        installLayout.setSpacing(2)
+        column2.addLayout(installLayout)
+
+        installLabelLayout = QHBoxLayout()
+        installLabelLayout.setSpacing(3)
+        installLayout.addLayout(installLabelLayout)
+        installLabelLayout.addWidget(QLabel(tr("Cheat Evolution installation path:")))
+        installLabelLayout.addStretch(1)
+
+        installPathLayout = QHBoxLayout()
+        installPathLayout.setSpacing(5)
+        installLayout.addLayout(installPathLayout)
+        self.cevoInstallLineEdit = QLineEdit()
+        self.cevoInstallLineEdit.setReadOnly(True)
+        installPathLayout.addWidget(self.cevoInstallLineEdit)
+        cevoInstallPathButton = CustomButton("...")
+        cevoInstallPathButton.clicked.connect(self.selectCevoPath)
+        installPathLayout.addWidget(cevoInstallPathButton)
+
+        # Activate PRO
+        self.cevoProCheckbox = QCheckBox(tr("Activate PRO"))
+        column2.addWidget(self.cevoProCheckbox)
+
+        # Apply button
+        applyButtonLayout = QHBoxLayout()
+        applyButtonLayout.setContentsMargins(0, 0, 10, 10)
+        applyButtonLayout.addStretch(1)
+        layout.addLayout(applyButtonLayout)
+        self.cevoApplyButton = CustomButton(tr("Apply"))
+        self.cevoApplyButton.setFixedWidth(100)
+        self.cevoApplyButton.clicked.connect(self.applyCevoCustomization)
+        applyButtonLayout.addWidget(self.cevoApplyButton)
+
+        self.cevoInstallLineEdit.setText(settings.get("cevoPath", ""))
+        self.checkCevoInstallStatus()
+
+        column2.addStretch(1)
+        return cevoTab
+
     # ===========================================================================
     # Tab functions
     # ===========================================================================
     def selectWeModPath(self):
         initialPath = self.weModInstallLineEdit.text() or os.path.expanduser("~")
-        directory = QFileDialog.getExistingDirectory(self, tr("Select WeMod installation path"), initialPath)
+        directory = QFileDialog.getExistingDirectory(self, tr("Please select WeMod installation path"), initialPath)
         if directory:
             settings["weModPath"] = os.path.normpath(directory)
             self.weModInstallLineEdit.setText(settings["weModPath"])
@@ -444,7 +550,7 @@ class TrainerManagementDialog(QDialog):
 
     def selectCEPath(self):
         initialPath = self.ceInstallLineEdit.text() or os.path.expanduser("~")
-        directory = QFileDialog.getExistingDirectory(self, tr("Select Cheat Engine installation path"), initialPath)
+        directory = QFileDialog.getExistingDirectory(self, tr("Please select Cheat Engine installation path"), initialPath)
         if directory:
             settings["cePath"] = os.path.normpath(directory)
             self.ceInstallLineEdit.setText(settings["cePath"])
@@ -464,7 +570,7 @@ class TrainerManagementDialog(QDialog):
             self.installStatus.setStyleSheet("color: green;")
             self.ceApplyButton.setEnabled(True)
         else:
-            self.installStatus.setText(tr("Cheat Engine not installed"))
+            self.installStatus.setText(tr("Please select Cheat Engine installation path"))
             self.installStatus.setStyleSheet("color: red;")
             self.ceApplyButton.setDisabled(True)
 
@@ -536,10 +642,60 @@ class TrainerManagementDialog(QDialog):
                 destination_path = os.path.join(self.ceInstallLineEdit.text(), "languages", "zh_CN")
 
                 try:
-                    subprocess.run([elevator_path, 'translation', source_path, destination_path], check=True, shell=True)
+                    subprocess.run([elevator_path, 'copy', source_path, destination_path], check=True, shell=True)
                     self.show_alert(tr("Successfully added translation files"), 'success')
                 except subprocess.CalledProcessError:
                     self.show_alert(tr("Failed to add translation files"), 'error')
 
         self.ceApplyButton.setEnabled(True)
         self.ceResetButton.setEnabled(True)
+
+    def selectCevoPath(self):
+        initialPath = self.cevoInstallLineEdit.text() or os.path.expanduser("~")
+        directory = QFileDialog.getExistingDirectory(self, tr("Please select Cheat Evolution installation path"), initialPath)
+        if directory:
+            settings["cevoPath"] = os.path.normpath(directory)
+            self.cevoInstallLineEdit.setText(settings["cevoPath"])
+            apply_settings(settings)
+            self.checkCevoInstallStatus()
+
+    def checkCevoInstallStatus(self):
+        cevoPath = os.path.join(self.cevoInstallLineEdit.text(), 'CheatEvolution_patched.exe')
+        if os.path.exists(cevoPath):
+            self.cevoInstallStatus.setText(tr("Please launch Cheat Evolution using CheatEvolution_patched.exe"))
+            self.cevoInstallStatus.setStyleSheet("color: green;")
+        else:
+            self.cevoInstallStatus.setText(tr("Please select Cheat Evolution installation path"))
+            self.cevoInstallStatus.setStyleSheet("color: red;")
+
+    def applyCevoCustomization(self):
+        self.cevoApplyButton.setDisabled(True)
+
+        if self.cevoProCheckbox.isChecked():
+            msg_box = QMessageBox(
+                QMessageBox.Icon.Question,
+                tr("Administrator Access Required"),
+                tr("To proceed with adding translation files, administrator rights are needed. A User Account Control (UAC) prompt will appear for permission.") +
+                "\n\n" + tr("Would you like to continue?"),
+                QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
+                self
+            )
+
+            yes_button = msg_box.button(QMessageBox.StandardButton.Yes)
+            yes_button.setText(tr("Yes"))
+            no_button = msg_box.button(QMessageBox.StandardButton.No)
+            no_button.setText(tr("No"))
+            reply = msg_box.exec()
+
+            if reply == QMessageBox.StandardButton.Yes:
+                source_path = resource_path("dependency/CheatEvolution_patched.exe")
+                destination_path = os.path.join(self.cevoInstallLineEdit.text(), "CheatEvolution_patched.exe")
+
+                try:
+                    subprocess.run([elevator_path, 'copy', source_path, destination_path], check=True, shell=True)
+                    self.show_alert(tr("Patch successful"), 'success')
+                except subprocess.CalledProcessError:
+                    self.show_alert(tr("Failed to patch"), 'error')
+
+        self.cevoApplyButton.setEnabled(True)
+        self.checkCevoInstallStatus()

@@ -5,7 +5,7 @@ fuzzywuzzy
 pinyin
 polib
 psutil
-PyQt6
+PyQt6==6.9.1
 python-dotenv
 python-Levenshtein
 qasync

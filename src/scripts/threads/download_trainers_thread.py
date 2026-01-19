@@ -47,6 +47,8 @@ class DownloadTrainersThread(DownloadBaseThread):
             result = self.download_fling(selected_trainer)
         elif origin == "xiaoxing":
             result = self.download_xiaoxing(selected_trainer)
+        elif origin == "the_cheat_script" or origin == "ct_other":
+            result = self.download_ct(selected_trainer)
         elif origin == "gcm" or origin == "other":
             result = self.download_gcm(selected_trainer)
 
@@ -484,6 +486,59 @@ class DownloadTrainersThread(DownloadBaseThread):
                         os.remove(input_file)
 
     def download_gcm(self, selected_trainer):
+        if self.update_entry:
+            trainerName_display = selected_trainer["trainer_name"]
+            self.message.emit(tr("Updating ") + trainerName_display + "...", None)
+        else:
+            trainerName_display = self.symbol_replacement(selected_trainer["trainer_name"])
+            # Trainer duplication check
+            for trainerPath in self.trainers.keys():
+                if self.symbol_replacement(selected_trainer["trainer_name"]) == os.path.splitext(os.path.basename(trainerPath))[0]:
+                    self.message.emit(tr("Trainer already exists, aborted download."), "failure")
+                    time.sleep(self.download_finish_delay)
+                    self.finished.emit(1)
+                    return False
+
+        self.message.emit(tr("Downloading..."), None)
+        extractedContentPath = os.path.join(DOWNLOAD_TEMP_DIR, "extracted")
+        try:
+            signed_url = self.get_signed_download_url(selected_trainer['url'])
+            trainerTemp = self.request_download(signed_url, DOWNLOAD_TEMP_DIR)
+            if not trainerTemp:
+                raise Exception(tr("Internet request failed."))
+
+        except Exception as e:
+            self.message.emit(tr("An error occurred while downloading trainer: ") + str(e), "failure")
+            time.sleep(self.download_finish_delay)
+            self.finished.emit(1)
+            return False
+
+        # Extract compressed file if not single exe
+        extracted = False
+        if os.path.splitext(trainerTemp)[1] in [".zip", ".rar"]:
+            extracted = True
+            self.message.emit(tr("Decompressing..."), None)
+            try:
+                command = [unzip_path, "x", "-y", trainerTemp, f"-o{extractedContentPath}"]
+                subprocess.run(command, check=True, creationflags=subprocess.CREATE_NO_WINDOW)
+
+            except Exception as e:
+                self.message.emit(tr("An error occurred while extracting downloaded trainer: ") + str(e), "failure")
+                time.sleep(self.download_finish_delay)
+                self.finished.emit(1)
+                return False
+
+            os.remove(trainerTemp)
+
+        if self.update_entry:
+            shutil.rmtree(selected_trainer['trainer_dir'])
+
+        destination_path = os.path.join(self.trainerDownloadPath, trainerName_display)
+        self.src_dst.append({"src": extractedContentPath if extracted else trainerTemp, "dst": destination_path if extracted else os.path.join(destination_path, os.path.basename(trainerTemp))})
+
+        return True
+    
+    def download_ct(self, selected_trainer):
         if self.update_entry:
             trainerName_display = selected_trainer["trainer_name"]
             self.message.emit(tr("Updating ") + trainerName_display + "...", None)

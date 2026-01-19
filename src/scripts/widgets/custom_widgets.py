@@ -118,6 +118,7 @@ class AlertWidget(QWidget):
         self.message = message
         self.alert_type = alert_type
         self.margin = 10
+        self.auto_close_timer = None
         self.colors = {
             "info": "#3498db",     # Blue
             "success": "#007110",  # Green
@@ -167,7 +168,13 @@ class AlertWidget(QWidget):
                 alert.move(alert_x, alert_y)
 
     def close(self):
-        """Override close to remove the alert from the parent's active list."""
+        """Override close to remove the alert from the parent's active list and cancel auto-close timer."""
+        # Cancel any pending auto-close timer
+        if self.auto_close_timer is not None:
+            self.auto_close_timer.stop()
+            self.auto_close_timer = None
+
+        # Remove from parent's active alerts list
         if hasattr(self.parent(), "active_alerts") and self in self.parent().active_alerts:
             self.parent().active_alerts.remove(self)
             self.move_to_top_right()

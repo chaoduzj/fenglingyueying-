@@ -92,7 +92,11 @@ def load_settings():
         "autoUpdateXiaoXingData": True,
         "autoUpdateXiaoXingTrainers": True,
         "weModPath": wemod_install_path,
-        "cePath": ce_install_path
+        "cePath": ce_install_path,
+        "enableCT": True,
+        "autoUpdateCTData": True,
+        "autoUpdateCTTrainers": True,
+        "cevoPath": "",
     }
 
     try:

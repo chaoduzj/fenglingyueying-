@@ -206,11 +206,15 @@ class DownloadBaseThread(QThread):
         PREFIX_MAP = {
             "zh": {
                 "xiaoxing": "[小幸]",
+                "the_cheat_script": "[CT]",
+                "ct_other": "[CT]",
                 "gcm": "[GCM]",
                 "other": "[其他]"
             },
             "en": {
                 "xiaoxing": "[XiaoXing]",
+                "the_cheat_script": "[CT]",
+                "ct_other": "[CT]",
                 "gcm": "[GCM]",
                 "other": "[Other]"
             }

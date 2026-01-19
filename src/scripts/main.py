@@ -62,6 +62,7 @@ class GameCheatsManager(QMainWindow):
         self.currentlyUpdatingGCM = False
         self.currentlyUpdatingFling = False
         self.currentlyUpdatingXiaoXing = False
+        self.currentlyUpdatingCT = False
         self.currentlyUpdatingTrans = False
 
         # Window references
@@ -356,7 +357,7 @@ class GameCheatsManager(QMainWindow):
             trainerPath = os.path.normpath(trainer.path)
             if os.path.isfile(trainerPath):
                 trainerName, trainerExt = os.path.splitext(os.path.basename(trainerPath))
-                if trainerExt.lower() == ".exe" and os.path.getsize(trainerPath) != 0:
+                if trainerExt.lower() in [".exe", ".ct"] and os.path.getsize(trainerPath) != 0:
                     self.flingListBox.addItem(trainerName)
                     self.trainers[trainerName] = trainerPath
             else:
@@ -366,7 +367,7 @@ class GameCheatsManager(QMainWindow):
                 for file in os.scandir(trainerPath):
                     filePath = os.path.normpath(file.path)
                     fileExt = os.path.splitext(file.name)[1]
-                    if file.is_file() and fileExt.lower() == ".exe" and file.name not in exe_exclusions:
+                    if file.is_file() and fileExt.lower() in [".exe", ".ct"] and file.name not in exe_exclusions:
                         exe_file_path = filePath
                         break
                 if exe_file_path:
@@ -380,9 +381,12 @@ class GameCheatsManager(QMainWindow):
                 trainerName = self.flingListBox.item(selection).text()
                 trainerPath = os.path.normpath(self.trainers[trainerName])
                 trainerDir = os.path.dirname(trainerPath)
+                trainerExt = os.path.splitext(trainerPath)[1].lower()
 
+                # Use "runas" for exe files (run as admin), "open" for other files (use default app)
+                verb = "runas" if trainerExt == ".exe" else "open"
                 ctypes.windll.shell32.ShellExecuteW(
-                    None, "runas", trainerPath, None, trainerDir, 1
+                    None, verb, trainerPath, None, trainerDir, 1
                 )
         except Exception as e:
             print(str(e))
@@ -501,6 +505,15 @@ class GameCheatsManager(QMainWindow):
             fetch_xiaoxing_site_thread.finished.connect(self.on_interval_finished)
             fetch_xiaoxing_site_thread.start()
 
+    def fetch_ct_data(self):
+        if not self.currentlyUpdatingCT:
+            self.currentlyUpdatingCT = True
+            fetch_ct_site_thread = FetchCTSite(self)
+            fetch_ct_site_thread.message.connect(self.on_status_load)
+            fetch_ct_site_thread.update.connect(self.on_status_update)
+            fetch_ct_site_thread.finished.connect(self.on_interval_finished)
+            fetch_ct_site_thread.start()
+
     def update_trainers(self, auto_check=False):
         if not self.currentlyUpdatingTrainers:
             self.currentlyUpdatingTrainers = True
@@ -515,6 +528,8 @@ class GameCheatsManager(QMainWindow):
         self.fetch_fling_data()
         if settings["enableXiaoXing"]:
             self.fetch_xiaoxing_data()
+        if settings["enableCT"]:
+            self.fetch_ct_data()
         if settings["enableGCM"]:
             self.fetch_gcm_data()
 
@@ -527,7 +542,9 @@ class GameCheatsManager(QMainWindow):
             self.fetch_fling_data()
         if settings["autoUpdateXiaoXingData"]:
             self.fetch_xiaoxing_data()
-        if settings["autoUpdateGCMTrainers"] or settings["autoUpdateFlingTrainers"] or settings["autoUpdateXiaoXingTrainers"]:
+        if settings["autoUpdateCTData"]:
+            self.fetch_ct_data()
+        if settings["autoUpdateGCMTrainers"] or settings["autoUpdateFlingTrainers"] or settings["autoUpdateXiaoXingTrainers"] or settings["autoUpdateCTTrainers"]:
             self.update_trainers(True)
 
     def download_trainers(self, index):
@@ -632,6 +649,8 @@ class GameCheatsManager(QMainWindow):
             self.currentlyUpdatingFling = False
         elif widgetName == "xiaoxing":
             self.currentlyUpdatingXiaoXing = False
+        elif widgetName == "ct":
+            self.currentlyUpdatingCT = False
         elif widgetName == "translations":
             self.currentlyUpdatingTrans = False
         elif widgetName == "trainerUpdate":
@@ -649,7 +668,7 @@ class GameCheatsManager(QMainWindow):
             self.settings_window.show()
 
     def import_files(self):
-        file_names, _ = QFileDialog.getOpenFileNames(self, tr("Select trainers you want to import"), "", "Executable Files (*.exe)")
+        file_names, _ = QFileDialog.getOpenFileNames(self, tr("Select trainers you want to import"), "", "Trainer Files (*.exe, *.ct)")
         if file_names:
             for file_name in file_names:
                 try:

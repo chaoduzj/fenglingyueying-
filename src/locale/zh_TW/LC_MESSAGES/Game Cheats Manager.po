@@ -200,13 +200,16 @@ msgid "Search failed, please update trainer search data."
 msgstr "搜索失敗，請更新修改器檢索數據。"
 
 msgid "Search from FLiNG success!"
-msgstr "風靈月影搜尋成功"
+msgstr "風靈月影搜尋成功！"
 
 msgid "Search from XiaoXing success!"
-msgstr "小幸搜尋成功"
+msgstr "小幸搜尋成功！"
+
+msgid "Search from CT success!"
+msgstr "CT 表搜索成功！"
 
 msgid "Search from GCM success!"
-msgstr "GCM 搜尋成功"
+msgstr "GCM 搜尋成功！"
 
 msgid "Checking for internet connection..."
 msgstr "正在檢查網際網路連接..."
@@ -260,7 +263,7 @@ msgid "Removing trainer background music..."
 msgstr "刪除修改器背景音樂..."
 
 msgid "Patching..."
-msgstr "修補中..."
+msgstr "打補丁中..."
 
 msgid "Updating data from GCM"
 msgstr "正在更新 GCM 資料"
@@ -279,6 +282,12 @@ msgstr "正在更新小幸資料"
 
 msgid "Update from XiaoXing failed"
 msgstr "更新小幸資料失敗"
+
+msgid "Updating data from CT"
+msgstr "正在更新 CT 表數據"
+
+msgid "Update from CT failed"
+msgstr "更新 CT 表數據失敗"
 
 msgid "Fetching trainer translations"
 msgstr "正在獲取修改器翻譯"
@@ -464,23 +473,38 @@ msgstr "停用 WeMod 自動更新"
 msgid "Delete All Other WeMod Versions"
 msgstr "刪除所有其他 WeMod 版本"
 
+msgid "Cheat Table Sources: "
+msgstr "CT 表來源："
+
 msgid "Cheat Engine installation path:"
 msgstr "Cheat Engine 安裝路徑："
 
 msgid "Add Simplified Chinese"
 msgstr "添加簡體中文"
 
-msgid "Select WeMod installation path"
-msgstr "選擇 WeMod 安裝路徑"
+msgid "Enable Search for Cheat Tables"
+msgstr "允許搜索 CT 表"
 
-msgid "Select Cheat Engine installation path"
-msgstr "選擇 Cheat Engine 安裝路徑"
+msgid "Update Cheat Table data automatically"
+msgstr "自動更新 CT 表數據"
+
+msgid "Update Cheat Tables automatically"
+msgstr "自動更新 CT 表"
+
+msgid "Cheat Evolution installation path:"
+msgstr "Cheat Evolution 安裝路徑："
+
+msgid "Activate PRO"
+msgstr "啟用 PRO"
+
+msgid "Please select WeMod installation path"
+msgstr "請選擇 WeMod 安裝路徑"
+
+msgid "Please select Cheat Engine installation path"
+msgstr "請選擇 Cheat Engine 安裝路徑"
 
 msgid "Cheat Engine is installed"
 msgstr "已安裝 Cheat Engine"
-
-msgid "Cheat Engine not installed"
-msgstr "未安裝 Cheat Engine"
 
 msgid "WeMod not installed"
 msgstr "未安裝 WeMod"
@@ -493,3 +517,15 @@ msgstr "成功添加翻譯文件"
 
 msgid "Failed to add translation files"
 msgstr "添加翻譯文件失敗"
+
+msgid "Please select Cheat Evolution installation path"
+msgstr "請選擇 Cheat Evolution 安裝路徑"
+
+msgid "Please launch Cheat Evolution using CheatEvolution_patched.exe"
+msgstr "請使用 CheatEvolution_patched.exe 運行 Cheat Evolution"
+
+msgid "Patch successful"
+msgstr "打補丁成功"
+
+msgid "Failed to patch"
+msgstr "打補丁失敗"

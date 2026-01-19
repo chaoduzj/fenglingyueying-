@@ -205,6 +205,9 @@ msgstr "Suche von FLiNG erfolgreich!"
 msgid "Search from XiaoXing success!"
 msgstr "Suche von XiaoXing erfolgreich!"
 
+msgid "Search from CT success!"
+msgstr "Suche von CT erfolgreich!"
+
 msgid "Search from GCM success!"
 msgstr "Suche von GCM erfolgreich!"
 
@@ -279,6 +282,12 @@ msgstr "Daten von XiaoXing werden aktualisiert"
 
 msgid "Update from XiaoXing failed"
 msgstr "Update von XiaoXing fehlgeschlagen"
+
+msgid "Updating data from CT"
+msgstr "Daten von CT werden aktualisiert"
+
+msgid "Update from CT failed"
+msgstr "Update von CT fehlgeschlagen"
 
 msgid "Fetching trainer translations"
 msgstr "Trainer-Übersetzungen werden abgerufen"
@@ -464,23 +473,38 @@ msgstr "WeMod Auto-Update deaktivieren"
 msgid "Delete All Other WeMod Versions"
 msgstr "Alle anderen WeMod-Versionen löschen"
 
+msgid "Cheat Table Sources: "
+msgstr "Cheat-Table-Quellen: "
+
 msgid "Cheat Engine installation path:"
 msgstr "Cheat Engine-Installationspfad:"
 
 msgid "Add Simplified Chinese"
 msgstr "Vereinfachtes Chinesisch hinzufügen"
 
-msgid "Select WeMod installation path"
-msgstr "WeMod-Installationspfad auswählen"
+msgid "Enable Search for Cheat Tables"
+msgstr "Suche nach Cheat Tables aktivieren"
 
-msgid "Select Cheat Engine installation path"
-msgstr "Cheat Engine-Installationspfad auswählen"
+msgid "Update Cheat Table data automatically"
+msgstr "Cheat-Table-Daten automatisch aktualisieren"
+
+msgid "Update Cheat Tables automatically"
+msgstr "Cheat Tables automatisch aktualisieren"
+
+msgid "Cheat Evolution installation path:"
+msgstr "Cheat Evolution-Installationspfad:"
+
+msgid "Activate PRO"
+msgstr "PRO aktivieren"
+
+msgid "Please select WeMod installation path"
+msgstr "Bitte wähle den WeMod-Installationspfad"
+
+msgid "Please select Cheat Engine installation path"
+msgstr "Bitte wähle den Cheat Engine-Installationspfad"
 
 msgid "Cheat Engine is installed"
 msgstr "Cheat Engine ist installiert"
-
-msgid "Cheat Engine not installed"
-msgstr "Cheat Engine ist nicht installiert"
 
 msgid "WeMod not installed"
 msgstr "WeMod ist nicht installiert"
@@ -493,3 +517,15 @@ msgstr "Übersetzungsdateien wurden erfolgreich hinzugefügt"
 
 msgid "Failed to add translation files"
 msgstr "Übersetzungsdateien konnten nicht hinzugefügt werden"
+
+msgid "Please select Cheat Evolution installation path"
+msgstr "Bitte wähle den Cheat Evolution-Installationspfad"
+
+msgid "Please launch Cheat Evolution using CheatEvolution_patched.exe"
+msgstr "Bitte starte Cheat Evolution mit CheatEvolution_patched.exe"
+
+msgid "Patch successful"
+msgstr "Patch erfolgreich"
+
+msgid "Failed to patch"
+msgstr "Patch fehlgeschlagen"

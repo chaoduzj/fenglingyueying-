@@ -39,7 +39,8 @@ class UpdateTrainers(DownloadBaseThread):
                 "gcm": "gcm_trainers.json" if (self.auto_check and settings["autoUpdateGCMTrainers"]) or not self.auto_check else None,
                 "other": "gcm_trainers.json" if (self.auto_check and settings["autoUpdateGCMTrainers"]) or not self.auto_check else None,
                 "fling_main": "fling_main.json" if (self.auto_check and settings["autoUpdateFlingTrainers"]) or not self.auto_check else None,
-                "xiaoxing": "xiaoxing.json" if (self.auto_check and settings["autoUpdateXiaoXingTrainers"]) or not self.auto_check else None
+                "xiaoxing": "xiaoxing.json" if (self.auto_check and settings["autoUpdateXiaoXingTrainers"]) or not self.auto_check else None,
+                "the_cheat_script": "cheat_table.json" if (self.auto_check and settings["autoUpdateCTTrainers"]) or not self.auto_check else None
             }
             origin_database = origin_to_file.get(origin)
             if not origin_database:

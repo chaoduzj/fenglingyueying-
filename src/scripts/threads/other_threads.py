@@ -182,6 +182,29 @@ class FetchXiaoXingSite(DownloadBaseThread):
 
         self.finished.emit(statusWidgetName)
 
+class FetchCTSite(DownloadBaseThread):
+    message = pyqtSignal(str, str)
+    update = pyqtSignal(str, str, str)
+    finished = pyqtSignal(str)
+
+    def __init__(self, parent=None):
+        super().__init__(parent)
+
+    def run(self):
+        statusWidgetName = "ct"
+        update_message = tr("Updating data from CT")
+        update_failed = tr("Update from CT failed")
+
+        self.message.emit(statusWidgetName, update_message)
+        url = "GCM/Data/cheat_table.json"
+        signed_url = self.get_signed_download_url(url)
+        file_path = self.request_download(signed_url, DATABASE_PATH)
+        if not file_path:
+            self.update.emit(statusWidgetName, update_failed, "error")
+            time.sleep(2)
+
+        self.finished.emit(statusWidgetName)
+
 
 class FetchTrainerTranslations(DownloadBaseThread):
     message = pyqtSignal(str, str)
@@ -414,7 +437,8 @@ class WeModCustomization(QThread):
                 for pattern, file_path in lines.items():
                     self.apply_patch(file_path, pattern, patterns[pattern])
             else:
-                print(f"Not all patterns found for {self.patchMethod} patch")
+                not_found = [pattern for pattern, file_path in lines.items() if file_path is None]
+                print(f"Patterns not found: {not_found}")
                 return False
 
         except Exception as e:

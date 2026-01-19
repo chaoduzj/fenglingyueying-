@@ -4,8 +4,9 @@ secret_config.py
 .vscode
 .DS_Store
 *.mo
-dist
+dist/
 compile.ps1
 utility.py
 ResourceHacker.ini
 elevate.manifest
+cpp/
