@@ -70,6 +70,9 @@ msgstr "Update Trainers"
 msgid "Trainer Management"
 msgstr "Trainer Management"
 
+msgid "Upload Trainer"
+msgstr "Upload Trainer"
+
 msgid "Launch"
 msgstr "Launch"
 
@@ -295,6 +298,22 @@ msgstr "Fetching trainer translations"
 msgid "Fetch trainer translations failed"
 msgstr "Fetch trainer translations failed"
 
+msgid "Failed to retrieve upload authorization."
+msgstr "Failed to retrieve upload authorization."
+
+msgid "Failed to retrieve upload url."
+msgstr "Failed to retrieve upload url."
+
+msgid ""
+"Upload successful! Thank you for your contribution.\n"
+"Your trainer will be available for download after passing a manual review."
+msgstr ""
+"Upload successful! Thank you for your contribution.\n"
+"Your trainer will be available for download after passing a manual review."
+
+msgid "Upload failed: "
+msgstr "Upload failed: "
+
 msgid ""
 "WeMod is currently running,\n"
 "please close the application first"
@@ -410,6 +429,48 @@ msgstr "Update Now"
 msgid "Failed to load"
 msgstr "Failed to load"
 
+msgid "Contact Info (Optional):"
+msgstr "Contact Info (Optional):"
+
+msgid "Email, Social Media, etc."
+msgstr "Email, Social Media, etc."
+
+msgid "Trainer Name:"
+msgstr "Trainer Name:"
+
+msgid "What game does it work for"
+msgstr "What game does it work for"
+
+msgid "Trainer Source (Optional):"
+msgstr "Trainer Source (Optional):"
+
+msgid "Original URL or author"
+msgstr "Original URL or author"
+
+msgid "Trainer File:"
+msgstr "Trainer File:"
+
+msgid "Select a trainer file"
+msgstr "Select a trainer file"
+
+msgid "Additional Notes:"
+msgstr "Additional Notes:"
+
+msgid "Anything else to add..."
+msgstr "Anything else to add..."
+
+msgid "Upload"
+msgstr "Upload"
+
+msgid "All Files (*)"
+msgstr "All Files (*)"
+
+msgid "Please select a valid file."
+msgstr "Please select a valid file."
+
+msgid "Please provide a trainer name."
+msgstr "Please provide a trainer name."
+
 msgid "FLiNG"
 msgstr "FLiNG"
 
@@ -523,6 +584,12 @@ msgstr "Please select Cheat Evolution installation path"
 
 msgid "Please launch Cheat Evolution using CheatEvolution_patched.exe"
 msgstr "Please launch Cheat Evolution using CheatEvolution_patched.exe"
+
+msgid "Invalid Cheat Evolution installation path"
+msgstr "Invalid Cheat Evolution installation path"
+
+msgid "Cheat Evolution is installed and ready to patch"
+msgstr "Cheat Evolution is installed and ready to patch"
 
 msgid "Patch successful"
 msgstr "Patch successful"

@@ -69,6 +69,7 @@ class GameCheatsManager(QMainWindow):
         self.settings_window = None
         self.about_window = None
         self.trainer_manage_window = None
+        self.trainer_upload_window = None
 
         # Main widget group
         centralWidget = QWidget(self)
@@ -124,6 +125,11 @@ class GameCheatsManager(QMainWindow):
         trainerManagement = QAction(tr("Trainer Management"), self)
         trainerManagement.triggered.connect(self.open_trainer_management)
         menu.addAction(trainerManagement)
+
+        # Upload menu
+        uploadTrainerAction = QAction(tr("Upload Trainer"), self)
+        uploadTrainerAction.triggered.connect(self.open_trainer_upload)
+        menu.addAction(uploadTrainerAction)
 
         # Status bar setup
         self.statusbar = QStatusBar()
@@ -746,6 +752,14 @@ class GameCheatsManager(QMainWindow):
         else:
             self.trainer_manage_window = TrainerManagementDialog(self)
             self.trainer_manage_window.show()
+    
+    def open_trainer_upload(self):
+        if self.trainer_upload_window is not None and self.trainer_upload_window.isVisible():
+            self.trainer_upload_window.raise_()
+            self.trainer_upload_window.activateWindow()
+        else:
+            self.trainer_upload_window = TrainerUploadDialog(self)
+            self.trainer_upload_window.show()
 
 
 if __name__ == "__main__":

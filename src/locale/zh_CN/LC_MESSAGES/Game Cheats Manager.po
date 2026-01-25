@@ -70,6 +70,9 @@ msgstr "更新修改器"
 msgid "Trainer Management"
 msgstr "修改器管理"
 
+msgid "Upload Trainer"
+msgstr "上传修改器"
+
 msgid "Launch"
 msgstr "启动"
 
@@ -295,6 +298,22 @@ msgstr "正在获取修改器翻译"
 msgid "Fetch trainer translations failed"
 msgstr "获取修改器翻译失败"
 
+msgid "Failed to retrieve upload authorization."
+msgstr "获取上传授权失败。"
+
+msgid "Failed to retrieve upload url."
+msgstr "获取上传链接失败。"
+
+msgid ""
+"Upload successful! Thank you for your contribution.\n"
+"Your trainer will be available for download after passing a manual review."
+msgstr ""
+"上传成功！感谢您的贡献。\n"
+"您的修改器将在通过人工审核后开放下载。"
+
+msgid "Upload failed: "
+msgstr "上传失败："
+
 msgid ""
 "WeMod is currently running,\n"
 "please close the application first"
@@ -410,6 +429,48 @@ msgstr "立即更新"
 msgid "Failed to load"
 msgstr "加载失败"
 
+msgid "Contact Info (Optional):"
+msgstr "联系方式（选填）："
+
+msgid "Email, Social Media, etc."
+msgstr "邮箱、社交媒体等"
+
+msgid "Trainer Name:"
+msgstr "修改器名称："
+
+msgid "What game does it work for"
+msgstr "适用于哪款游戏"
+
+msgid "Trainer Source (Optional):"
+msgstr "修改器来源（选填）："
+
+msgid "Original URL or author"
+msgstr "原始链接或作者"
+
+msgid "Trainer File:"
+msgstr "修改器文件："
+
+msgid "Select a trainer file"
+msgstr "选择修改器文件"
+
+msgid "Additional Notes:"
+msgstr "备注："
+
+msgid "Anything else to add..."
+msgstr "其他补充说明..."
+
+msgid "Upload"
+msgstr "上传"
+
+msgid "All Files (*)"
+msgstr "所有文件 (*)"
+
+msgid "Please select a valid file."
+msgstr "请选择一个有效的文件。"
+
+msgid "Please provide a trainer name."
+msgstr "请提供修改器名称。"
+
 msgid "FLiNG"
 msgstr "风灵月影"
 
@@ -523,6 +584,12 @@ msgstr "请选择 Cheat Evolution 安装路径"
 
 msgid "Please launch Cheat Evolution using CheatEvolution_patched.exe"
 msgstr "请使用 CheatEvolution_patched.exe 运行 Cheat Evolution"
+
+msgid "Invalid Cheat Evolution installation path"
+msgstr "无效的 Cheat Evolution 安装路径"
+
+msgid "Cheat Evolution is installed and ready to patch"
+msgstr "Cheat Evolution 已安装并准备好打补丁"
 
 msgid "Patch successful"
 msgstr "打补丁成功"

@@ -4,11 +4,11 @@ import winreg as reg
 
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QIcon, QPixmap
-from PyQt6.QtWidgets import QCheckBox, QComboBox, QDialog, QHBoxLayout, QLabel, QMessageBox, QSizePolicy, QVBoxLayout
+from PyQt6.QtWidgets import QCheckBox, QComboBox, QDialog, QFileDialog, QHBoxLayout, QLabel, QLineEdit, QMessageBox, QProgressBar, QSizePolicy, QTextEdit, QVBoxLayout
 
 from config import *
 from widgets.custom_widgets import CustomButton
-from threads.other_threads import VersionFetchWorker
+from threads.other_threads import VersionFetchWorker, TrainerUploadWorker
 
 
 class CopyRightWarning(QDialog):
@@ -185,7 +185,7 @@ class SettingsDialog(QDialog):
                 self.add_or_remove_startup(app_name, app_path, True)
             else:
                 self.add_or_remove_startup(app_name, app_path, False)
-        
+
         if original_sortByOrigin != settings["sortByOrigin"]:
             self.parent().show_cheats()
 
@@ -333,3 +333,157 @@ class AboutDialog(QDialog):
         self.newestVersionNumberLabel.setText(tr("Failed to load"))
         self.newestVersionNumberLabel.setStyleSheet("color: red;")
         self.worker.quit()
+
+
+class TrainerUploadDialog(QDialog):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.worker = None
+        self.setWindowTitle(tr("Upload Trainer"))
+        self.setWindowIcon(QIcon(resource_path("assets/logo.ico")))
+        self.setMinimumWidth(500)
+
+        layout = QVBoxLayout()
+        layout.setSpacing(20)
+        layout.setContentsMargins(30, 30, 30, 30)
+        self.setLayout(layout)
+
+        # Contact Info
+        contactLayout = QVBoxLayout()
+        contactLayout.setSpacing(5)
+        contactLayout.addWidget(QLabel(tr("Contact Info (Optional):")))
+        self.contactEdit = QLineEdit()
+        self.contactEdit.setPlaceholderText(tr("Email, Social Media, etc."))
+        contactLayout.addWidget(self.contactEdit)
+        layout.addLayout(contactLayout)
+
+        # Trainer Name
+        nameLayout = QVBoxLayout()
+        nameLayout.setSpacing(5)
+        nameLayout.addWidget(QLabel(tr("Trainer Name:")))
+        self.nameEdit = QLineEdit()
+        self.nameEdit.setPlaceholderText(tr("What game does it work for"))
+        nameLayout.addWidget(self.nameEdit)
+        layout.addLayout(nameLayout)
+
+        # Trainer Source
+        sourceLayout = QVBoxLayout()
+        sourceLayout.setSpacing(5)
+        sourceLayout.addWidget(QLabel(tr("Trainer Source (Optional):")))
+        self.sourceEdit = QLineEdit()
+        self.sourceEdit.setPlaceholderText(tr("Original URL or author"))
+        sourceLayout.addWidget(self.sourceEdit)
+        layout.addLayout(sourceLayout)
+
+        # Trainer File Selection
+        fileLabelLayout = QVBoxLayout()
+        fileLabelLayout.setSpacing(5)
+        fileLabelLayout.addWidget(QLabel(tr("Trainer File:")))
+
+        fileSelectLayout = QHBoxLayout()
+        self.fileEdit = QLineEdit()
+        self.fileEdit.setReadOnly(True)
+        self.fileEdit.setPlaceholderText(tr("Select a trainer file") + "...")
+
+        self.browseButton = CustomButton("...")
+        self.browseButton.clicked.connect(self.browse_file)
+
+        fileSelectLayout.addWidget(self.fileEdit)
+        fileSelectLayout.addWidget(self.browseButton)
+        fileLabelLayout.addLayout(fileSelectLayout)
+        layout.addLayout(fileLabelLayout)
+
+        # Notes
+        notesLayout = QVBoxLayout()
+        notesLayout.setSpacing(5)
+        notesLayout.addWidget(QLabel(tr("Additional Notes:")))
+        self.notesEdit = QTextEdit()
+        self.notesEdit.setPlaceholderText(tr("Anything else to add..."))
+        self.notesEdit.setMaximumHeight(100)
+        notesLayout.addWidget(self.notesEdit)
+        layout.addLayout(notesLayout)
+
+        # Progress Bar
+        self.progressBar = QProgressBar()
+        self.progressBar.setRange(0, 100)
+        self.progressBar.setValue(0)
+        self.progressBar.setVisible(False)
+        layout.addWidget(self.progressBar)
+
+        # Buttons
+        buttonLayout = QHBoxLayout()
+        buttonLayout.addStretch()
+
+        self.uploadButton = CustomButton(tr("Upload"))
+        self.uploadButton.setFixedWidth(100)
+        self.uploadButton.clicked.connect(self.start_upload)
+
+        buttonLayout.addWidget(self.uploadButton)
+        layout.addLayout(buttonLayout)
+
+    def browse_file(self):
+        file_path, _ = QFileDialog.getOpenFileName(
+            self,
+            tr("Select a trainer file"),
+            "",
+            tr("All Files (*)")
+        )
+        if file_path:
+            self.fileEdit.setText(file_path)
+            if not self.nameEdit.text():
+                self.nameEdit.setText(os.path.basename(file_path))
+
+    def start_upload(self):
+        file_path = self.fileEdit.text()
+        name = self.nameEdit.text()
+
+        if not file_path or not os.path.exists(file_path):
+            QMessageBox.warning(self, tr("Error"), tr("Please select a valid file."))
+            return
+
+        if not name:
+            QMessageBox.warning(self, tr("Error"), tr("Please provide a trainer name."))
+            return
+
+        # Prepare UI for upload
+        self.set_ui_locked(True)
+        self.progressBar.setValue(0)
+        self.progressBar.setVisible(True)
+
+        self.worker = TrainerUploadWorker(
+            file_path,
+            name,
+            self.contactEdit.text(),
+            self.sourceEdit.text(),
+            self.notesEdit.toPlainText()
+        )
+        self.worker.progress.connect(self.update_progress)
+        self.worker.finished.connect(self.handle_upload_finished)
+        self.worker.start()
+
+    def update_progress(self, percent):
+        self.progressBar.setValue(percent)
+
+    def handle_upload_finished(self, success, message):
+        self.progressBar.setVisible(False)
+        self.set_ui_locked(False)
+
+        if success:
+            QMessageBox.information(self, tr("Success"), message)
+            self.accept()
+        else:
+            QMessageBox.critical(self, tr("Error"), message)
+
+    def closeEvent(self, event):
+        if self.worker and self.worker.isRunning():
+            self.worker.stop()
+            self.worker.wait()
+        super().closeEvent(event)
+
+    def set_ui_locked(self, locked):
+        self.contactEdit.setDisabled(locked)
+        self.nameEdit.setDisabled(locked)
+        self.sourceEdit.setDisabled(locked)
+        self.notesEdit.setDisabled(locked)
+        self.browseButton.setDisabled(locked)
+        self.uploadButton.setDisabled(locked)

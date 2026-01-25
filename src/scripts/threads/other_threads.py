@@ -1,5 +1,4 @@
 import os
-from pickle import TRUE
 import psutil
 import re
 import shutil
@@ -23,9 +22,10 @@ class VersionFetchWorker(QThread):
         self.app_name = app_name
 
     def run(self):
-        if not VERSION_CHECKER_API_GATEWAY_ENDPOINT or not CLIENT_API_KEY:
-            print("Error: API Gateway endpoint or Client API Key is not configured.")
+        if not VERSION_CHECKER_ENDPOINT or not CLIENT_API_KEY:
+            print("Error: API endpoint or Client API Key is not configured.")
             self.fetchFailed.emit()
+            return
 
         headers = {
             'x-api-key': CLIENT_API_KEY
@@ -35,7 +35,7 @@ class VersionFetchWorker(QThread):
         }
 
         try:
-            response = requests.get(VERSION_CHECKER_API_GATEWAY_ENDPOINT, headers=headers, params=params, timeout=15)
+            response = requests.get(VERSION_CHECKER_ENDPOINT, headers=headers, params=params, timeout=15)
             response.raise_for_status()
 
             data = response.json()
@@ -95,7 +95,7 @@ class FetchGCMSite(DownloadBaseThread):
         self.message.emit(statusWidgetName, update_message)
         url = "GCM/Data/gcm_trainers.json"
         signed_url = self.get_signed_download_url(url)
-        file_path = self.request_download(signed_url, DATABASE_PATH)
+        file_path = signed_url and self.request_download(signed_url, DATABASE_PATH)
         if not file_path:
             self.update.emit(statusWidgetName, update_failed, "error")
             time.sleep(2)
@@ -132,7 +132,7 @@ class FetchFlingSite(DownloadBaseThread):
         elif settings['flingDownloadServer'] == "gcm":
             url = "GCM/Data/fling_archive.json"
             signed_url = self.get_signed_download_url(url)
-            file_path = self.request_download(signed_url, DATABASE_PATH)
+            file_path = signed_url and self.request_download(signed_url, DATABASE_PATH)
             if not file_path:
                 self.update.emit(statusWidgetName, update_failed1, "error")
                 time.sleep(2)
@@ -151,7 +151,7 @@ class FetchFlingSite(DownloadBaseThread):
         elif settings['flingDownloadServer'] == "gcm":
             url = "GCM/Data/fling_main.json"
             signed_url = self.get_signed_download_url(url)
-            file_path = self.request_download(signed_url, DATABASE_PATH)
+            file_path = signed_url and self.request_download(signed_url, DATABASE_PATH)
             if not file_path:
                 self.update.emit(statusWidgetName, update_failed2, "error")
                 time.sleep(2)
@@ -175,12 +175,13 @@ class FetchXiaoXingSite(DownloadBaseThread):
         self.message.emit(statusWidgetName, update_message)
         url = "GCM/Data/xiaoxing.json"
         signed_url = self.get_signed_download_url(url)
-        file_path = self.request_download(signed_url, DATABASE_PATH)
+        file_path = signed_url and self.request_download(signed_url, DATABASE_PATH)
         if not file_path:
             self.update.emit(statusWidgetName, update_failed, "error")
             time.sleep(2)
 
         self.finished.emit(statusWidgetName)
+
 
 class FetchCTSite(DownloadBaseThread):
     message = pyqtSignal(str, str)
@@ -198,7 +199,7 @@ class FetchCTSite(DownloadBaseThread):
         self.message.emit(statusWidgetName, update_message)
         url = "GCM/Data/cheat_table.json"
         signed_url = self.get_signed_download_url(url)
-        file_path = self.request_download(signed_url, DATABASE_PATH)
+        file_path = signed_url and self.request_download(signed_url, DATABASE_PATH)
         if not file_path:
             self.update.emit(statusWidgetName, update_failed, "error")
             time.sleep(2)
@@ -222,12 +223,90 @@ class FetchTrainerTranslations(DownloadBaseThread):
         self.message.emit(statusWidgetName, fetch_message)
         url = "GCM/Data/translations.json"
         signed_url = self.get_signed_download_url(url)
-        file_path = self.request_download(signed_url, DATABASE_PATH)
+        file_path = signed_url and self.request_download(signed_url, DATABASE_PATH)
         if not file_path:
             self.update.emit(statusWidgetName, fetch_error, "error")
             time.sleep(2)
 
         self.finished.emit(statusWidgetName)
+
+
+class TrainerUploadWorker(QThread):
+    finished = pyqtSignal(bool, str)
+    progress = pyqtSignal(int)
+
+    def __init__(self, file_path, trainer_name, contact_info, trainer_source, notes):
+        super().__init__()
+        self.file_path = file_path
+        self.trainer_name = trainer_name
+        self.contact_info = contact_info
+        self.trainer_source = trainer_source
+        self.notes = notes
+        self._is_cancelled = False
+
+    def stop(self):
+        self._is_cancelled = True
+
+    def run(self):
+        meta_dict = {
+            'uploader-contact': self.contact_info,
+            'trainer-name': self.trainer_name,
+            'trainer-source': self.trainer_source,
+            'notes': self.notes
+        }
+        meta_json = json.dumps(meta_dict)
+
+        upload_data = DownloadBaseThread.get_signed_upload_url(self.file_path, meta_json)
+        if not upload_data:
+            self.finished.emit(False, tr("Failed to retrieve upload authorization."))
+            return
+
+        if self._is_cancelled:
+            return
+        upload_url = upload_data.get('uploadUrl')
+        required_headers = upload_data.get('requiredHeaders', {})
+        if not upload_url:
+            self.finished.emit(False, tr("Failed to retrieve upload url."))
+            return
+
+        try:
+            class ProgressFileObject:
+                def __init__(self, filepath, callback, cancel_check):
+                    self.file = open(filepath, 'rb')
+                    self.len = os.path.getsize(filepath)
+                    self.read_so_far = 0
+                    self.callback = callback
+                    self.cancel_check = cancel_check
+
+                def read(self, size=-1):
+                    # Periodically check for cancellation
+                    if self.cancel_check():
+                        raise Exception("Upload cancelled by user.")
+
+                    data = self.file.read(size)
+                    self.read_so_far += len(data)
+                    if self.len > 0:
+                        percent = int(self.read_so_far * 100 / self.len)
+                        self.callback(percent)
+                    return data
+
+                def close(self):
+                    self.file.close()
+
+                def __len__(self):
+                    return self.len
+
+            wrapped_file = ProgressFileObject(self.file_path, self.progress.emit, lambda: self._is_cancelled)
+
+            # Send the PUT request
+            response = requests.put(upload_url, data=wrapped_file, headers=required_headers, timeout=300)
+            wrapped_file.close()
+            response.raise_for_status()
+            self.finished.emit(True, tr("Upload successful! Thank you for your contribution.\nYour trainer will be available for download after passing a manual review."))
+
+        except Exception as e:
+            if not self._is_cancelled:
+                self.finished.emit(False, tr("Upload failed: ") + str(e))
 
 
 class WeModCustomization(QThread):
@@ -385,8 +464,8 @@ class WeModCustomization(QThread):
             self.message.emit(tr("Failed to patch file:") + f"\n{input_file}", "error")
 
     def patch(self, enable_dev=False):
-        if not PATCH_PATTERNS_API_GATEWAY_ENDPOINT or not CLIENT_API_KEY:
-            print("Error: API Gateway endpoint or Client API Key is not configured.")
+        if not PATCH_PATTERNS_ENDPOINT or not CLIENT_API_KEY:
+            print("Error: API endpoint or Client API Key is not configured.")
             return False
 
         headers = {
@@ -399,7 +478,7 @@ class WeModCustomization(QThread):
 
         response = None
         try:
-            response = requests.get(PATCH_PATTERNS_API_GATEWAY_ENDPOINT, headers=headers, params=params, timeout=15)
+            response = requests.get(PATCH_PATTERNS_ENDPOINT, headers=headers, params=params, timeout=15)
             response.raise_for_status()
             patterns = response.json()
             if not patterns:

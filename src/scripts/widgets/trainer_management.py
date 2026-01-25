@@ -660,13 +660,20 @@ class TrainerManagementDialog(QDialog):
             self.checkCevoInstallStatus()
 
     def checkCevoInstallStatus(self):
-        cevoPath = os.path.join(self.cevoInstallLineEdit.text(), 'CheatEvolution_patched.exe')
-        if os.path.exists(cevoPath):
+        cevoPatchPath = os.path.join(self.cevoInstallLineEdit.text(), 'CheatEvolution_patched.exe')
+        cevoPath = os.path.join(self.cevoInstallLineEdit.text(), 'CheatEvolution.exe')
+        if os.path.exists(cevoPatchPath):
             self.cevoInstallStatus.setText(tr("Please launch Cheat Evolution using CheatEvolution_patched.exe"))
             self.cevoInstallStatus.setStyleSheet("color: green;")
-        else:
-            self.cevoInstallStatus.setText(tr("Please select Cheat Evolution installation path"))
+            self.cevoApplyButton.setEnabled(True)
+        elif not os.path.exists(cevoPath):
+            self.cevoInstallStatus.setText(tr("Invalid Cheat Evolution installation path"))
             self.cevoInstallStatus.setStyleSheet("color: red;")
+            self.cevoApplyButton.setDisabled(True)
+        else:
+            self.cevoInstallStatus.setText(tr("Cheat Evolution is installed and ready to patch"))
+            self.cevoInstallStatus.setStyleSheet("color: yellow;")
+            self.cevoApplyButton.setEnabled(True)
 
     def applyCevoCustomization(self):
         self.cevoApplyButton.setDisabled(True)

@@ -70,6 +70,9 @@ msgstr "Trainer aktualisieren"
 msgid "Trainer Management"
 msgstr "Trainer-Verwaltung"
 
+msgid "Upload Trainer"
+msgstr "Trainer hochladen"
+
 msgid "Launch"
 msgstr "Starten"
 
@@ -295,6 +298,22 @@ msgstr "Trainer-Übersetzungen werden abgerufen"
 msgid "Fetch trainer translations failed"
 msgstr "Abruf der Trainer-Übersetzungen fehlgeschlagen"
 
+msgid "Failed to retrieve upload authorization."
+msgstr "Abruf der Upload-Berechtigung fehlgeschlagen."
+
+msgid "Failed to retrieve upload url."
+msgstr "Abruf der Upload-URL fehlgeschlagen."
+
+msgid ""
+"Upload successful! Thank you for your contribution.\n"
+"Your trainer will be available for download after passing a manual review."
+msgstr ""
+"Upload erfolgreich! Vielen Dank für deinen Beitrag.\n"
+"Dein Trainer wird nach einer manuellen Überprüfung zum Download bereitstehen."
+
+msgid "Upload failed: "
+msgstr "Upload fehlgeschlagen: "
+
 msgid ""
 "WeMod is currently running,\n"
 "please close the application first"
@@ -410,6 +429,48 @@ msgstr "Jetzt aktualisieren"
 msgid "Failed to load"
 msgstr "Laden fehlgeschlagen"
 
+msgid "Contact Info (Optional):"
+msgstr "Kontaktdaten (Optional):"
+
+msgid "Email, Social Media, etc."
+msgstr "E-Mail, Soziale Medien usw."
+
+msgid "Trainer Name:"
+msgstr "Trainer-Name:"
+
+msgid "What game does it work for"
+msgstr "Für welches Spiel ist er gedacht"
+
+msgid "Trainer Source (Optional):"
+msgstr "Trainer-Quelle (Optional):"
+
+msgid "Original URL or author"
+msgstr "Original-URL oder Autor"
+
+msgid "Trainer File:"
+msgstr "Trainer-Datei:"
+
+msgid "Select a trainer file"
+msgstr "Trainer-Datei auswählen"
+
+msgid "Additional Notes:"
+msgstr "Zusätzliche Anmerkungen:"
+
+msgid "Anything else to add..."
+msgstr "Sonstige Ergänzungen..."
+
+msgid "Upload"
+msgstr "Hochladen"
+
+msgid "All Files (*)"
+msgstr "Alle Dateien (*)"
+
+msgid "Please select a valid file."
+msgstr "Bitte wähle eine gültige Datei aus."
+
+msgid "Please provide a trainer name."
+msgstr "Bitte gib einen Trainer-Namen an."
+
 msgid "FLiNG"
 msgstr "FLiNG"
 
@@ -523,6 +584,12 @@ msgstr "Bitte wähle den Cheat Evolution-Installationspfad"
 
 msgid "Please launch Cheat Evolution using CheatEvolution_patched.exe"
 msgstr "Bitte starte Cheat Evolution mit CheatEvolution_patched.exe"
+
+msgid "Invalid Cheat Evolution installation path"
+msgstr "Ungültiger Cheat Evolution Installationspfad"
+
+msgid "Cheat Evolution is installed and ready to patch"
+msgstr "Cheat Evolution ist installiert und bereit zum Patchen"
 
 msgid "Patch successful"
 msgstr "Patch erfolgreich"

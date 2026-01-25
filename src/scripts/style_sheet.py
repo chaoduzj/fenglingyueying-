@@ -110,6 +110,18 @@ white = """
         color: #000000;
     }}
 
+    QTextEdit {{
+        background-color: #f9f9f9;
+        color: #000000;
+        border: 1px solid #dddddd;
+        border-radius: 3px;
+        padding: 6px;
+    }}
+
+    QTextEdit:focus {{
+        border-bottom: 2px solid #0057b7;
+    }}
+
     QLineEdit {{
         background-color: #f9f9f9;
         color: #000000;
@@ -127,6 +139,21 @@ white = """
         border-radius: 3px;
         background-color: #ffffff;
         color: #000000;
+        outline: none;
+    }}
+
+    QListWidget::item {{
+        border-left: 3px solid transparent;
+    }}
+
+    QListWidget::item:hover {{
+        background-color: #f2f2f2;
+    }}
+
+    QListWidget::item:selected {{
+        color: #000000;
+        background-color: #e6e6e6;
+        border-left: 3px solid #0080e3;
     }}
 
     QScrollBar:vertical {{
@@ -239,6 +266,19 @@ white = """
         color: #000000;
         font-weight: bold;
         border-bottom: 2px solid #0057b7;
+    }}
+
+    QProgressBar {{
+        border: 1px solid #dddddd;
+        border-radius: 3px;
+        background-color: #f9f9f9;
+        text-align: center;
+        color: #000000;
+    }}
+
+    QProgressBar::chunk {{
+        background-color: #0057b7;
+        width: 1px; 
     }}
 """
 
@@ -354,6 +394,18 @@ black = """
         color: #FFFFFF;
     }}
 
+    QTextEdit {{
+        background-color: #2a2a2a;
+        color: #FFFFFF;
+        border: 1px solid #555555;
+        border-radius: 3px;
+        padding: 6px;
+    }}
+
+    QTextEdit:focus {{
+        border-bottom: 2px solid #007ad9;
+    }}
+
     QLineEdit {{
         background-color: #2a2a2a;
         color: #FFFFFF;
@@ -371,6 +423,21 @@ black = """
         border-radius: 3px;
         background-color: #2a2a2a;
         color: #ffffff;
+        outline: none;
+    }}
+
+    QListWidget::item {{
+        border-left: 3px solid transparent;
+    }}
+
+    QListWidget::item:hover {{
+        background-color: #2f2f2f;
+    }}
+
+    QListWidget::item:selected {{
+        color: #ffffff;
+        background-color: #3a3a3a;
+        border-left: 3px solid #0080e3;
     }}
 
     QScrollBar:vertical {{
@@ -483,5 +550,18 @@ black = """
         color: #FFFFFF;
         font-weight: bold;
         border-bottom: 2px solid #0080e3;
+    }}
+
+    QProgressBar {{
+        border: 1px solid #555555;
+        border-radius: 3px;
+        background-color: #2a2a2a;
+        text-align: center;
+        color: #FFFFFF;
+    }}
+
+    QProgressBar::chunk {{
+        background-color: #0080e3;
+        width: 1px; 
     }}
 """

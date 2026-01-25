@@ -3,6 +3,7 @@ import os
 import re
 import string
 from urllib.parse import urlparse, unquote
+import uuid
 import warnings
 
 import cloudscraper
@@ -92,8 +93,8 @@ class DownloadBaseThread(QThread):
 
     @staticmethod
     def get_signed_download_url(file_path_on_s3):
-        if not SIGNED_URL_API_GATEWAY_ENDPOINT or not CLIENT_API_KEY:
-            print("Error: API Gateway endpoint or Client API Key is not configured.")
+        if not SIGNED_URL_DOWNLOAD_ENDPOINT or not CLIENT_API_KEY:
+            print("Error: API endpoint or Client API Key is not configured.")
             return None
 
         headers = {
@@ -104,7 +105,7 @@ class DownloadBaseThread(QThread):
         }
 
         try:
-            response = requests.get(SIGNED_URL_API_GATEWAY_ENDPOINT, headers=headers, params=params, timeout=15)
+            response = requests.get(SIGNED_URL_DOWNLOAD_ENDPOINT, headers=headers, params=params, timeout=15)
             response.raise_for_status()
 
             data = response.json()
@@ -114,6 +115,33 @@ class DownloadBaseThread(QThread):
             else:
                 print(f"Error: 'signedUrl' not found in response. Response: {data}")
                 return None
+
+        except Exception as e:
+            print(f"Error retrieving signed URL: {str(e)}")
+        return None
+
+    @staticmethod
+    def get_signed_upload_url(file_path_on_s3, metadata_json):
+        if not SIGNED_URL_UPLOAD_ENDPOINT or not CLIENT_API_KEY:
+            print("Error: API endpoint or Client API Key is not configured.")
+            return None
+
+        # add uniqueness to file
+        file_path, file_ext = os.path.splitext(file_path_on_s3)
+        file_path_on_s3 = os.path.join("trainers", f"{os.path.basename(file_path)}_{uuid.uuid4().hex}{file_ext}").replace("\\", "/")
+
+        headers = {
+            'x-api-key': CLIENT_API_KEY
+        }
+        params = {
+            'filePath': file_path_on_s3,
+            'metadata': metadata_json
+        }
+
+        try:
+            response = requests.get(SIGNED_URL_UPLOAD_ENDPOINT, headers=headers, params=params, timeout=15)
+            response.raise_for_status()
+            return response.json()
 
         except Exception as e:
             print(f"Error retrieving signed URL: {str(e)}")
@@ -205,6 +233,8 @@ class DownloadBaseThread(QThread):
     def translate_trainer(self, trainerName, origin):
         PREFIX_MAP = {
             "zh": {
+                "fling_main": "[风灵]",
+                "fling_archive": "[风灵]",
                 "xiaoxing": "[小幸]",
                 "the_cheat_script": "[CT]",
                 "ct_other": "[CT]",
@@ -212,11 +242,13 @@ class DownloadBaseThread(QThread):
                 "other": "[其他]"
             },
             "en": {
-                "xiaoxing": "[XiaoXing]",
+                "fling_main": "[FL]",
+                "fling_archive": "[FL]",
+                "xiaoxing": "[XX]",
                 "the_cheat_script": "[CT]",
                 "ct_other": "[CT]",
                 "gcm": "[GCM]",
-                "other": "[Other]"
+                "other": "[OT]"
             }
         }
 
