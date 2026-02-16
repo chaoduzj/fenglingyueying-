@@ -7,10 +7,10 @@
         "Process Name:": "Process Name:",
         "Process ID:": "Process ID:",
         "Apply": "Apply",
-        "Just Shapes & Beats Trainer": "Just Shapes & Beats Trainer",
-        "God Mode": "God Mode",
-        "Add Beat Points": "Add Beat Points",
-        "Finish Level": "Finish Level"
+        "Outland Trainer": "Outland Trainer",
+        "Set Health": "Set Health",
+        "Set Maximum Health": "Set Maximum Health",
+        "Set Coins": "Set Coins"
     },
     "zh_CN": {
         "简体中文": "简体中文",
@@ -20,9 +20,9 @@
         "Process Name:": "进程名称：",
         "Process ID:": "进程 ID:",
         "Apply": "应用",
-        "Just Shapes & Beats Trainer": "摇就完事了修改器",
-        "God Mode": "无敌模式",
-        "Add Beat Points": "添加 Beat Points",
-        "Finish Level": "完成关卡"
+        "Outland Trainer": "奇异领域修改器",
+        "Set Health": "设置生命值",
+        "Set Maximum Health": "设置最大生命值",
+        "Set Coins": "设置金币"
     }
 }

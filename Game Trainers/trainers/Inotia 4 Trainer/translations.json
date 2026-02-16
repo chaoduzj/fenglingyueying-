@@ -16,7 +16,8 @@
         "Set Skill Points": "Set Skill Points",
         "Set Backpack Slot 1": "Get Current Mouse Selected Item to Backpack Slot 1",
         "Must have slot 1 item": "Please make sure to have something in backpack slot 1 first to overwrite",
-        "Unlock All Mercenary Slots": "Unlock All Mercenary Slots"
+        "Unlock All Mercenary Slots": "Unlock All Mercenary Slots",
+        "Save and Reload": "Please save and reload your game after using this option"
     },
     "zh_CN": {
         "简体中文": "简体中文",
@@ -35,6 +36,7 @@
         "Set Skill Points": "设置技能点",
         "Set Backpack Slot 1": "获取鼠标选中的物品到背包槽位1",
         "Must have slot 1 item": "请先确保背包槽位1有物品以进行覆盖",
-        "Unlock All Mercenary Slots": "解锁所有佣兵槽位"
+        "Unlock All Mercenary Slots": "解锁所有佣兵槽位",
+        "Save and Reload": "请在使用此选项后保存并重新加载游戏"
     }
 }

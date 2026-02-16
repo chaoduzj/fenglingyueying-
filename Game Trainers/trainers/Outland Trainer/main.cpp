@@ -8,14 +8,6 @@
 #include "trainer.h"
 #include "FLTKUtils.h"
 
-// --- MUTUAL EXCLUSION CONFIGURATION ---
-const std::vector<std::string> g_exclusiveOptions = {
-    "SetExp",
-    "SetStatPoints",
-    "SetSkillPoints"};
-// Global Registry: OptionName -> ToggleData*
-std::map<std::string, ToggleData *> g_toggleRegistry;
-
 // Callback function for apply button
 void apply_callback(Fl_Widget *widget, void *data)
 {
@@ -35,26 +27,6 @@ void apply_callback(Fl_Widget *widget, void *data)
     bool status = true;
     if (input && input->value())
         inputValue = input->value();
-
-    if (optionName == "SetCoins")
-    {
-        status = trainer->setCoins(std::stoi(inputValue));
-    }
-    else if (optionName == "SetSlot1Item")
-    {
-        if (trainer->getSlot1Item() != 0)
-        {
-            unsigned int itemAddr = trainer->getCurMouseItem();
-            if (itemAddr != 0)
-                status = trainer->setSlot1Item(itemAddr);
-        }
-        else
-            fl_alert(t("Must have slot 1 item"));
-    }
-    else if (optionName == "UnlockMercenary")
-    {
-        status = trainer->unlockAllMercenarySlots();
-    }
 
     // Finalize
     if (!status)
@@ -79,72 +51,31 @@ void toggle_callback(Fl_Widget *widget, void *data)
         return;
     }
 
-    // --- MUTUAL EXCLUSION CHECK ---
-    // If turning ON, disable conflicting options
-    if (button->value())
-    {
-        auto it = std::find(g_exclusiveOptions.begin(), g_exclusiveOptions.end(), optionName);
-        if (it != g_exclusiveOptions.end())
-        {
-            for (const std::string &otherName : g_exclusiveOptions)
-            {
-                if (otherName == optionName)
-                    continue; // Skip self
-                if (g_toggleRegistry.find(otherName) != g_toggleRegistry.end())
-                {
-                    ToggleData *otherData = g_toggleRegistry[otherName];
-                    if (otherData->button->value())
-                    {
-                        otherData->button->value(0);          // Visual OFF
-                        trainer->disableNamedHook(otherName); // Logical OFF
-                        if (otherData->input)
-                            otherData->input->readonly(0);
-                    }
-                }
-            }
-        }
-    }
-
     std::string inputValue = "0";
     bool status = true;
     if (input && input->value())
         inputValue = input->value();
 
-    if (optionName == "FreezeHealth")
+    if (optionName == "SetHealth")
     {
         if (button->value())
-            status = trainer->freezeHealth();
+            status = trainer->setHealth(std::stof(inputValue));
         else
             status = trainer->disableNamedPointerToggle(optionName);
     }
-    else if (optionName == "FreezeMana")
+    else if (optionName == "SetMaxHealth")
     {
         if (button->value())
-            status = trainer->freezeMana();
+            status = trainer->setMaxHealth(std::stof(inputValue));
         else
             status = trainer->disableNamedPointerToggle(optionName);
     }
-    else if (optionName == "SetExp")
+    else if (optionName == "SetCoins")
     {
         if (button->value())
-            // real value encrypted with "inputValue ^ 0xa7b3c9d5"
-            status = trainer->setExp(std::stoi(inputValue));
+            status = trainer->setCoins(std::stoi(inputValue));
         else
-            status = trainer->disableNamedHook(optionName);
-    }
-    else if (optionName == "SetStatPoints")
-    {
-        if (button->value())
-            status = trainer->setStatPoints(std::stoi(inputValue));
-        else
-            status = trainer->disableNamedHook(optionName);
-    }
-    else if (optionName == "SetSkillPoints")
-    {
-        if (button->value())
-            status = trainer->setSkillPoints(std::stoi(inputValue));
-        else
-            status = trainer->disableNamedHook(optionName);
+            status = trainer->disableNamedPointerToggle(optionName);
     }
 
     // Finalize
@@ -187,7 +118,7 @@ int main(int argc, char **argv)
     window->color(FL_FREE_COLOR);
     window->icon((char *)LoadIconA(GetModuleHandle(NULL), "APP_ICON"));
     window->callback(main_window_close_callback);
-    tr(window, "Inotia 4 Trainer");
+    tr(window, "Outland Trainer");
 
     // Setup fonts
     DWORD font_mem_size = 0;
@@ -196,11 +127,6 @@ int main(int argc, char **argv)
     font_handle = AddFontMemResourceEx((void *)font_data, font_mem_size, nullptr, &num_fonts);
     Fl::set_font(FL_FREE_FONT, "Noto Sans SC");
     fl_font(FL_FREE_FONT, font_size);
-
-    DWORD info_img_size = 0;
-    const unsigned char *info_img_data = load_resource("INFO_IMG", info_img_size);
-    Fl_PNG_Image *info_img = new Fl_PNG_Image(nullptr, info_img_data, (int)info_img_size);
-    info_img->scale(20, 20, 1, 0);
 
     // ------------------------------------------------------------------
     // Top Row: Language Selection
@@ -278,25 +204,11 @@ int main(int argc, char **argv)
     Fl_Box *spacerTop = new Fl_Box(0, 0, 0, 0);
 
     // Widget Placements
-    place_toggle_widget(options1_flex, &trainer, "FreezeHealth", "Freeze Health");
+    place_toggle_widget(options1_flex, &trainer, "SetHealth", "Set Health", nullptr, "5", "1", "12");
 
-    place_toggle_widget(options1_flex, &trainer, "FreezeMana", "Freeze Mana");
+    place_toggle_widget(options1_flex, &trainer, "SetMaxHealth", "Set Maximum Health", nullptr, "5", "1", "12");
 
-    place_apply_widget(options1_flex, &trainer, "SetCoins", "Set Coins", nullptr, "9999999", "1", "999999999");
-
-    Fl_Check_Button *btnExp = place_toggle_widget(options1_flex, &trainer, "SetExp", "Set Exp", nullptr, "500000", "1", "999999999");
-    g_toggleRegistry["SetExp"] = static_cast<ToggleData *>(btnExp->user_data());
-
-    Fl_Check_Button *btnStat = place_toggle_widget(options1_flex, &trainer, "SetStatPoints", "Set Stat Points", nullptr, "99", "0", "999999999");
-    g_toggleRegistry["SetStatPoints"] = static_cast<ToggleData *>(btnStat->user_data());
-
-    Fl_Check_Button *btnSkill = place_toggle_widget(options1_flex, &trainer, "SetSkillPoints", "Set Skill Points", nullptr, "99", "0", "999999999");
-    g_toggleRegistry["SetSkillPoints"] = static_cast<ToggleData *>(btnSkill->user_data());
-
-    Fl_Box *info_hover = create_info_hover("Save and Reload", info_img);
-    place_apply_widget(options1_flex, &trainer, "SetSlot1Item", "Set Backpack Slot 1", nullptr, nullptr, nullptr, nullptr, NULL, info_hover);
-
-    place_apply_widget(options1_flex, &trainer, "UnlockMercenary", "Unlock All Mercenary Slots");
+    place_toggle_widget(options1_flex, &trainer, "SetCoins", "Set Coins", nullptr, "999999", "0", "999999999");
 
     // End of Option Column 1
     Fl_Box *spacerBottom = new Fl_Box(0, 0, 0, 0);

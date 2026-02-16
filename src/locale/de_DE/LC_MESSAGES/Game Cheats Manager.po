@@ -453,6 +453,9 @@ msgstr "Trainer-Datei:"
 msgid "Select a trainer file"
 msgstr "Trainer-Datei auswählen"
 
+msgid "If the trainer consists of multiple files, please compress them into a single archive (zip/rar/7z) before uploading"
+msgstr "Falls der Trainer aus mehreren Dateien besteht, komprimieren Sie diese bitte vor dem Hochladen in ein einzelnes Archiv (zip/rar/7z)"
+
 msgid "Additional Notes:"
 msgstr "Zusätzliche Anmerkungen:"
 

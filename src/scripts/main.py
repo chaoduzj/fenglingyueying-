@@ -674,7 +674,7 @@ class GameCheatsManager(QMainWindow):
             self.settings_window.show()
 
     def import_files(self):
-        file_names, _ = QFileDialog.getOpenFileNames(self, tr("Select trainers you want to import"), "", "Trainer Files (*.exe, *.ct)")
+        file_names, _ = QFileDialog.getOpenFileNames(self, tr("Select trainers you want to import"), "", "Trainer Files (*.exe *.ct)")
         if file_names:
             for file_name in file_names:
                 try:

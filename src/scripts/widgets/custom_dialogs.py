@@ -391,6 +391,14 @@ class TrainerUploadDialog(QDialog):
         fileSelectLayout.addWidget(self.fileEdit)
         fileSelectLayout.addWidget(self.browseButton)
         fileLabelLayout.addLayout(fileSelectLayout)
+
+        info_label = QLabel(tr("If the trainer consists of multiple files, please compress them into a single archive (zip/rar/7z) before uploading"))
+        info_font = info_label.font()
+        info_font.setPointSize(9)
+        info_label.setFont(info_font)
+        info_label.setStyleSheet("color: gray;")
+        info_label.setWordWrap(True)
+        fileLabelLayout.addWidget(info_label)
         layout.addLayout(fileLabelLayout)
 
         # Notes
@@ -400,6 +408,7 @@ class TrainerUploadDialog(QDialog):
         self.notesEdit = QTextEdit()
         self.notesEdit.setPlaceholderText(tr("Anything else to add..."))
         self.notesEdit.setMaximumHeight(100)
+        self.notesEdit.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
         notesLayout.addWidget(self.notesEdit)
         layout.addLayout(notesLayout)
 
@@ -422,10 +431,11 @@ class TrainerUploadDialog(QDialog):
         layout.addLayout(buttonLayout)
 
     def browse_file(self):
+        default_dir = settings.get("downloadPath", "")
         file_path, _ = QFileDialog.getOpenFileName(
             self,
             tr("Select a trainer file"),
-            "",
+            default_dir,
             tr("All Files (*)")
         )
         if file_path:

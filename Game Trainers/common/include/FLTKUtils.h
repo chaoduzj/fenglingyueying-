@@ -211,6 +211,12 @@ void change_language(const std::string &lang, Fl_Group *group)
             auto label_it = lang_translations->second.find(key);
             if (label_it != lang_translations->second.end())
             {
+                if (child->tooltip())
+                {
+                    child->tooltip(label_it->second.c_str());
+                    continue;
+                }
+
                 // Update the label with the translated text
                 child->copy_label(label_it->second.c_str());
                 child->labelsize(font_size);
@@ -686,6 +692,19 @@ Fl_Button *create_info_button(
     return info_button;
 }
 
+Fl_Box *create_info_hover(
+    std::string info_text,
+    Fl_PNG_Image *info_img)
+{
+    Fl_Box *info_hover = new Fl_Box(0, 0, 0, 0);
+    info_hover->box(FL_NO_BOX);
+    info_hover->image(info_img);
+    info_hover->tooltip(info_text.c_str());
+    tr(info_hover, info_text);
+
+    return info_hover;
+}
+
 Fl_Check_Button *place_toggle_widget(
     Fl_Flex *parent_flex,
     Trainer *trainer,
@@ -696,7 +715,7 @@ Fl_Check_Button *place_toggle_widget(
     const char *input_min = nullptr,
     const char *input_max = nullptr,
     int input_type = FL_INT_INPUT,
-    Fl_Button *info_button = nullptr)
+    Fl_Widget *info_button = nullptr)
 {
     Fl_Flex *toggle_flex = new Fl_Flex(0, 0, 0, 0, Fl_Flex::HORIZONTAL);
     toggle_flex->gap(UI_OPTION_GAP);
@@ -747,7 +766,7 @@ Fl_Button *place_apply_widget(
     const char *input_min = nullptr,
     const char *input_max = nullptr,
     int input_type = FL_INT_INPUT,
-    Fl_Button *info_button = nullptr)
+    Fl_Widget *info_button = nullptr)
 {
     Fl_Flex *apply_flex = new Fl_Flex(0, 0, 0, 0, Fl_Flex::HORIZONTAL);
     apply_flex->gap(UI_OPTION_GAP);

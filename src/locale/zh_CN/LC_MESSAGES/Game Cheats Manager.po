@@ -453,6 +453,9 @@ msgstr "修改器文件："
 msgid "Select a trainer file"
 msgstr "选择修改器文件"
 
+msgid "If the trainer consists of multiple files, please compress them into a single archive (zip/rar/7z) before uploading"
+msgstr "如果修改器包含多个文件，请在上传前将其压缩为单个压缩包 (zip/rar/7z)"
+
 msgid "Additional Notes:"
 msgstr "备注："
 

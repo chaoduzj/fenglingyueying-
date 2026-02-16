@@ -33,8 +33,8 @@ class TrainerManagementDialog(QDialog):
         self.tabWidget.addTab(self.createGCMTab(), "GCM")
         self.tabWidget.addTab(self.createFlingTab(), tr("FLiNG"))
         self.tabWidget.addTab(self.createXiaoXingTab(), tr("XiaoXing"))
-        self.tabWidget.addTab(self.createWemodTab(), "WeMod")
         self.tabWidget.addTab(self.createCETab(), "Cheat Engine")
+        self.tabWidget.addTab(self.createWemodTab(), "WeMod")
         self.tabWidget.addTab(self.createCevoTab(), "Cheat Evolution")
 
     def closeEvent(self, event):
@@ -245,110 +245,6 @@ class TrainerManagementDialog(QDialog):
         column2.addStretch(1)
         return xiaoXingTab
 
-    def createWemodTab(self):
-        wemodTab = QWidget()
-        layout = QVBoxLayout()
-        layout.setContentsMargins(0, 15, 0, 0)
-        wemodTab.setLayout(layout)
-        officialLink = QLabel(tr("Official Website: ") + '<a href="https://www.wemod.com" style="text-decoration: none; color: #0078D4;">https://www.wemod.com</a>')
-        officialLink.setOpenExternalLinks(True)
-        layout.addWidget(officialLink)
-
-        columns = QHBoxLayout()
-        columns.setContentsMargins(30, 20, 30, 20)
-        columns.setSpacing(40)
-        layout.addLayout(columns)
-
-        column1 = QVBoxLayout()
-        columns.addLayout(column1, stretch=2)
-
-        logoPixmap = QPixmap(resource_path("assets/wemod.png"))
-        scaledLogoPixmap = logoPixmap.scaled(130, 130, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation)
-        logoLabel = QLabel()
-        logoLabel.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        logoLabel.setPixmap(scaledLogoPixmap)
-        column1.addWidget(logoLabel)
-
-        column2 = QVBoxLayout()
-        column2.setSpacing(15)
-        column2.addStretch(1)
-        columns.addLayout(column2, stretch=3)
-        columns.setAlignment(column2, Qt.AlignmentFlag.AlignHCenter)
-
-        # WeMod installation path
-        installLayout = QVBoxLayout()
-        installLayout.setSpacing(2)
-        column2.addLayout(installLayout)
-
-        installLabelLayout = QHBoxLayout()
-        installLabelLayout.setSpacing(3)
-        installLayout.addLayout(installLabelLayout)
-        installLabelLayout.addWidget(QLabel(tr("WeMod installation path:")))
-        self.weModResetButton = CustomButton(tr('Reset to default'))
-        self.weModResetButton.setStyleSheet("padding: 3;")
-        font = self.weModResetButton.font()
-        font.setPointSize(8)
-        self.weModResetButton.setFont(font)
-        self.weModResetButton.clicked.connect(self.resetWemodPath)
-        installLabelLayout.addWidget(self.weModResetButton)
-        installLabelLayout.addStretch(1)
-
-        installPathLayout = QHBoxLayout()
-        installPathLayout.setSpacing(5)
-        installLayout.addLayout(installPathLayout)
-        self.weModInstallLineEdit = QLineEdit()
-        self.weModInstallLineEdit.setReadOnly(True)
-        installPathLayout.addWidget(self.weModInstallLineEdit)
-        installPathButton = CustomButton("...")
-        installPathButton.clicked.connect(self.selectWeModPath)
-        installPathLayout.addWidget(installPathButton)
-
-        # Version selection
-        versionLayout = QVBoxLayout()
-        versionLayout.setSpacing(2)
-        column2.addLayout(versionLayout)
-        versionLayout.addWidget(QLabel(tr("Installed WeMod Versions:")))
-        self.versionCombo = QComboBox()
-        versionLayout.addWidget(self.versionCombo)
-
-        # Patch method selection
-        patchLayout = QVBoxLayout()
-        patchLayout.setSpacing(2)
-        column2.addLayout(patchLayout)
-        patchLayout.addWidget(QLabel(tr("Patch Method:")))
-        self.patchCombo = QComboBox()
-        self.patchCombo.addItems(patch_methods.keys())
-        self.patchCombo.setCurrentText(list(patch_methods.keys())[0])
-        patchLayout.addWidget(self.patchCombo)
-
-        # Unlock WeMod pro
-        self.weModProCheckbox = QCheckBox(tr("Activate WeMod Pro"))
-        column2.addWidget(self.weModProCheckbox)
-
-        # Disable auto update
-        self.disableUpdateCheckbox = QCheckBox(tr("Disable WeMod Auto Update"))
-        column2.addWidget(self.disableUpdateCheckbox)
-
-        # Delete all other WeMod versions
-        self.delOtherVersionsCheckbox = QCheckBox(tr("Delete All Other WeMod Versions"))
-        column2.addWidget(self.delOtherVersionsCheckbox)
-
-        # Apply button
-        applyButtonLayout = QHBoxLayout()
-        applyButtonLayout.setContentsMargins(0, 0, 10, 10)
-        applyButtonLayout.addStretch(1)
-        layout.addLayout(applyButtonLayout)
-        self.weModApplyButton = CustomButton(tr("Apply"))
-        self.weModApplyButton.setFixedWidth(100)
-        self.weModApplyButton.clicked.connect(self.applyWeModCustomization)
-        applyButtonLayout.addWidget(self.weModApplyButton)
-
-        self.weModInstallLineEdit.setText(settings["weModPath"])
-        self.findWeModVersions(settings["weModPath"])
-
-        column2.addStretch(1)
-        return wemodTab
-
     def createCETab(self):
         ceTab = QWidget()
         layout = QVBoxLayout()
@@ -454,6 +350,110 @@ class TrainerManagementDialog(QDialog):
 
         column2.addStretch(1)
         return ceTab
+
+    def createWemodTab(self):
+        wemodTab = QWidget()
+        layout = QVBoxLayout()
+        layout.setContentsMargins(0, 15, 0, 0)
+        wemodTab.setLayout(layout)
+        officialLink = QLabel(tr("Official Website: ") + '<a href="https://www.wemod.com" style="text-decoration: none; color: #0078D4;">https://www.wemod.com</a>')
+        officialLink.setOpenExternalLinks(True)
+        layout.addWidget(officialLink)
+
+        columns = QHBoxLayout()
+        columns.setContentsMargins(30, 20, 30, 20)
+        columns.setSpacing(40)
+        layout.addLayout(columns)
+
+        column1 = QVBoxLayout()
+        columns.addLayout(column1, stretch=2)
+
+        logoPixmap = QPixmap(resource_path("assets/wemod.png"))
+        scaledLogoPixmap = logoPixmap.scaled(130, 130, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation)
+        logoLabel = QLabel()
+        logoLabel.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        logoLabel.setPixmap(scaledLogoPixmap)
+        column1.addWidget(logoLabel)
+
+        column2 = QVBoxLayout()
+        column2.setSpacing(15)
+        column2.addStretch(1)
+        columns.addLayout(column2, stretch=3)
+        columns.setAlignment(column2, Qt.AlignmentFlag.AlignHCenter)
+
+        # WeMod installation path
+        installLayout = QVBoxLayout()
+        installLayout.setSpacing(2)
+        column2.addLayout(installLayout)
+
+        installLabelLayout = QHBoxLayout()
+        installLabelLayout.setSpacing(3)
+        installLayout.addLayout(installLabelLayout)
+        installLabelLayout.addWidget(QLabel(tr("WeMod installation path:")))
+        self.weModResetButton = CustomButton(tr('Reset to default'))
+        self.weModResetButton.setStyleSheet("padding: 3;")
+        font = self.weModResetButton.font()
+        font.setPointSize(8)
+        self.weModResetButton.setFont(font)
+        self.weModResetButton.clicked.connect(self.resetWemodPath)
+        installLabelLayout.addWidget(self.weModResetButton)
+        installLabelLayout.addStretch(1)
+
+        installPathLayout = QHBoxLayout()
+        installPathLayout.setSpacing(5)
+        installLayout.addLayout(installPathLayout)
+        self.weModInstallLineEdit = QLineEdit()
+        self.weModInstallLineEdit.setReadOnly(True)
+        installPathLayout.addWidget(self.weModInstallLineEdit)
+        installPathButton = CustomButton("...")
+        installPathButton.clicked.connect(self.selectWeModPath)
+        installPathLayout.addWidget(installPathButton)
+
+        # Version selection
+        versionLayout = QVBoxLayout()
+        versionLayout.setSpacing(2)
+        column2.addLayout(versionLayout)
+        versionLayout.addWidget(QLabel(tr("Installed WeMod Versions:")))
+        self.versionCombo = QComboBox()
+        versionLayout.addWidget(self.versionCombo)
+
+        # Patch method selection
+        patchLayout = QVBoxLayout()
+        patchLayout.setSpacing(2)
+        column2.addLayout(patchLayout)
+        patchLayout.addWidget(QLabel(tr("Patch Method:")))
+        self.patchCombo = QComboBox()
+        self.patchCombo.addItems(patch_methods.keys())
+        self.patchCombo.setCurrentText(list(patch_methods.keys())[0])
+        patchLayout.addWidget(self.patchCombo)
+
+        # Unlock WeMod pro
+        self.weModProCheckbox = QCheckBox(tr("Activate WeMod Pro"))
+        column2.addWidget(self.weModProCheckbox)
+
+        # Disable auto update
+        self.disableUpdateCheckbox = QCheckBox(tr("Disable WeMod Auto Update"))
+        column2.addWidget(self.disableUpdateCheckbox)
+
+        # Delete all other WeMod versions
+        self.delOtherVersionsCheckbox = QCheckBox(tr("Delete All Other WeMod Versions"))
+        column2.addWidget(self.delOtherVersionsCheckbox)
+
+        # Apply button
+        applyButtonLayout = QHBoxLayout()
+        applyButtonLayout.setContentsMargins(0, 0, 10, 10)
+        applyButtonLayout.addStretch(1)
+        layout.addLayout(applyButtonLayout)
+        self.weModApplyButton = CustomButton(tr("Apply"))
+        self.weModApplyButton.setFixedWidth(100)
+        self.weModApplyButton.clicked.connect(self.applyWeModCustomization)
+        applyButtonLayout.addWidget(self.weModApplyButton)
+
+        self.weModInstallLineEdit.setText(settings["weModPath"])
+        self.findWeModVersions(settings["weModPath"])
+
+        column2.addStretch(1)
+        return wemodTab
 
     def createCevoTab(self):
         cevoTab = QWidget()

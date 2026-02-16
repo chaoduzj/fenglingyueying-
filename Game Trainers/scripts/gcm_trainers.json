@@ -37,10 +37,22 @@
         "version": "2025.11.27"
     },
     {
+        "game_name": "Inotia 4",
+        "origin": "gcm",
+        "gcm_url": "GCM/GCM Trainers/Inotia 4 Trainer.exe",
+        "version": "2026.2.8"
+    },
+    {
         "game_name": "Just Shapes & Beats",
         "origin": "gcm",
         "gcm_url": "GCM/GCM Trainers/Just Shapes & Beats Trainer.exe",
-        "version": "2025.11.29"
+        "version": "2026.2.8"
+    },
+    {
+        "game_name": "Outland",
+        "origin": "gcm",
+        "gcm_url": "GCM/GCM Trainers/Outland Trainer.exe",
+        "version": "2026.2.8"
     },
     {
         "game_name": "Plants vs. Zombies: GOTY Edition",
