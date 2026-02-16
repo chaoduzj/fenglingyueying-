@@ -364,6 +364,9 @@ msgstr "正在检查修改器更新"
 msgid "Check trainer updates failed"
 msgstr "检查修改器更新失败"
 
+msgid "Announcement"
+msgstr "公告"
+
 msgid "Warning"
 msgstr "警告"
 
@@ -377,6 +380,9 @@ msgstr ""
 "严禁倒卖，软件开发者保留追究违反者法律责任的权利。\n"
 "如果您是通过非官方购买方式获得本软件，请立即举报卖家。\n"
 "以下为官方链接。"
+
+msgid "Official Website:"
+msgstr "官方网站:"
 
 msgid "Bilibili:"
 msgstr "B站作者主页:"
@@ -516,11 +522,29 @@ msgstr "自动更新小幸数据"
 msgid "Update XiaoXing trainers automatically"
 msgstr "自动更新小幸修改器"
 
-msgid "WeMod installation path:"
-msgstr "WeMod 安装路径："
+msgid "Cheat Table Sources: "
+msgstr "CT 表来源："
+
+msgid "Cheat Engine installation path:"
+msgstr "Cheat Engine 安装路径："
 
 msgid "Reset to default"
 msgstr "恢复默认"
+
+msgid "Add Simplified Chinese"
+msgstr "添加简体中文"
+
+msgid "Enable Search for Cheat Tables"
+msgstr "允许搜索 CT 表"
+
+msgid "Update Cheat Table data automatically"
+msgstr "自动更新 CT 表数据"
+
+msgid "Update Cheat Tables automatically"
+msgstr "自动更新 CT 表"
+
+msgid "WeMod installation path:"
+msgstr "WeMod 安装路径："
 
 msgid "Installed WeMod Versions:"
 msgstr "已安装的 WeMod 版本："
@@ -536,24 +560,6 @@ msgstr "禁用 WeMod 自动更新"
 
 msgid "Delete All Other WeMod Versions"
 msgstr "删除所有其他 WeMod 版本"
-
-msgid "Cheat Table Sources: "
-msgstr "CT 表来源："
-
-msgid "Cheat Engine installation path:"
-msgstr "Cheat Engine 安装路径："
-
-msgid "Add Simplified Chinese"
-msgstr "添加简体中文"
-
-msgid "Enable Search for Cheat Tables"
-msgstr "允许搜索 CT 表"
-
-msgid "Update Cheat Table data automatically"
-msgstr "自动更新 CT 表数据"
-
-msgid "Update Cheat Tables automatically"
-msgstr "自动更新 CT 表"
 
 msgid "Cheat Evolution installation path:"
 msgstr "Cheat Evolution 安装路径："

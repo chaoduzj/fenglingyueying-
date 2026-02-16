@@ -364,6 +364,9 @@ msgstr "Checking for trainer updates"
 msgid "Check trainer updates failed"
 msgstr "Check trainer updates failed"
 
+msgid "Announcement"
+msgstr "Announcement"
+
 msgid "Warning"
 msgstr "Warning"
 
@@ -377,6 +380,9 @@ msgstr ""
 "Resale is strictly prohibited, and developers reserve the right to pursue legal responsibility against the violators.\n"
 "If you have paid for this software unofficially, please report the seller immediately.\n"
 "Below are official links."
+
+msgid "Official Website:"
+msgstr "Official Website:"
 
 msgid "Bilibili:"
 msgstr "Bilibili:"
@@ -453,8 +459,8 @@ msgstr "Trainer File:"
 msgid "Select a trainer file"
 msgstr "Select a trainer file"
 
-msgid "If the trainer consists of multiple files, please compress them into a single archive (zip/rar/7z) before uploading."
-msgstr "If the trainer consists of multiple files, please compress them into a single archive (zip/rar/7z) before uploading."
+msgid "If the trainer consists of multiple files, please compress them into a single archive (zip/rar/7z) before uploading"
+msgstr "If the trainer consists of multiple files, please compress them into a single archive (zip/rar/7z) before uploading"
 
 msgid "Additional Notes:"
 msgstr "Additional Notes:"
@@ -516,11 +522,29 @@ msgstr "Update XiaoXing data automatically"
 msgid "Update XiaoXing trainers automatically"
 msgstr "Update XiaoXing trainers automatically"
 
-msgid "WeMod installation path:"
-msgstr "WeMod installation path:"
+msgid "Cheat Table Sources: "
+msgstr "Cheat Table Sources: "
+
+msgid "Cheat Engine installation path:"
+msgstr "Cheat Engine installation path:"
 
 msgid "Reset to default"
 msgstr "Reset to default"
+
+msgid "Add Simplified Chinese"
+msgstr "Add Simplified Chinese"
+
+msgid "Enable Search for Cheat Tables"
+msgstr "Enable Search for Cheat Tables"
+
+msgid "Update Cheat Table data automatically"
+msgstr "Update Cheat Table data automatically"
+
+msgid "Update Cheat Tables automatically"
+msgstr "Update Cheat Tables automatically"
+
+msgid "WeMod installation path:"
+msgstr "WeMod installation path:"
 
 msgid "Installed WeMod Versions:"
 msgstr "Installed WeMod Versions:"
@@ -536,24 +560,6 @@ msgstr "Disable WeMod Auto Update"
 
 msgid "Delete All Other WeMod Versions"
 msgstr "Delete All Other WeMod Versions"
-
-msgid "Cheat Table Sources: "
-msgstr "Cheat Table Sources: "
-
-msgid "Cheat Engine installation path:"
-msgstr "Cheat Engine installation path:"
-
-msgid "Add Simplified Chinese"
-msgstr "Add Simplified Chinese"
-
-msgid "Enable Search for Cheat Tables"
-msgstr "Enable Search for Cheat Tables"
-
-msgid "Update Cheat Table data automatically"
-msgstr "Update Cheat Table data automatically"
-
-msgid "Update Cheat Tables automatically"
-msgstr "Update Cheat Tables automatically"
 
 msgid "Cheat Evolution installation path:"
 msgstr "Cheat Evolution installation path:"

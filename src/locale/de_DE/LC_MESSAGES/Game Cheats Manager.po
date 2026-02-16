@@ -364,6 +364,9 @@ msgstr "Suche nach Trainer-Updates"
 msgid "Check trainer updates failed"
 msgstr "Prüfung auf Trainer-Updates fehlgeschlagen"
 
+msgid "Announcement"
+msgstr "Ankündigung"
+
 msgid "Warning"
 msgstr "Warnung"
 
@@ -377,6 +380,9 @@ msgstr ""
 "Der Weiterverkauf ist strengstens untersagt, und die Entwickler behalten sich das Recht vor, rechtliche Schritte gegen Zuwiderhandelnde einzuleiten.\n"
 "Wenn du diese Software inoffiziell bezahlt hast, melde den Verkäufer bitte umgehend.\n"
 "Unten findest du die offiziellen Links."
+
+msgid "Official Website:"
+msgstr "Offizielle Website:"
 
 msgid "Bilibili:"
 msgstr "Bilibili:"
@@ -516,11 +522,29 @@ msgstr "XiaoXing-Daten automatisch aktualisieren"
 msgid "Update XiaoXing trainers automatically"
 msgstr "XiaoXing-Trainer automatisch aktualisieren"
 
-msgid "WeMod installation path:"
-msgstr "WeMod-Installationspfad:"
+msgid "Cheat Table Sources: "
+msgstr "Cheat-Table-Quellen: "
+
+msgid "Cheat Engine installation path:"
+msgstr "Cheat Engine-Installationspfad:"
 
 msgid "Reset to default"
 msgstr "Auf Standard zurücksetzen"
+
+msgid "Add Simplified Chinese"
+msgstr "Vereinfachtes Chinesisch hinzufügen"
+
+msgid "Enable Search for Cheat Tables"
+msgstr "Suche nach Cheat Tables aktivieren"
+
+msgid "Update Cheat Table data automatically"
+msgstr "Cheat-Table-Daten automatisch aktualisieren"
+
+msgid "Update Cheat Tables automatically"
+msgstr "Cheat Tables automatisch aktualisieren"
+
+msgid "WeMod installation path:"
+msgstr "WeMod-Installationspfad:"
 
 msgid "Installed WeMod Versions:"
 msgstr "Installierte WeMod-Versionen:"
@@ -536,24 +560,6 @@ msgstr "WeMod Auto-Update deaktivieren"
 
 msgid "Delete All Other WeMod Versions"
 msgstr "Alle anderen WeMod-Versionen löschen"
-
-msgid "Cheat Table Sources: "
-msgstr "Cheat-Table-Quellen: "
-
-msgid "Cheat Engine installation path:"
-msgstr "Cheat Engine-Installationspfad:"
-
-msgid "Add Simplified Chinese"
-msgstr "Vereinfachtes Chinesisch hinzufügen"
-
-msgid "Enable Search for Cheat Tables"
-msgstr "Suche nach Cheat Tables aktivieren"
-
-msgid "Update Cheat Table data automatically"
-msgstr "Cheat-Table-Daten automatisch aktualisieren"
-
-msgid "Update Cheat Tables automatically"
-msgstr "Cheat Tables automatisch aktualisieren"
 
 msgid "Cheat Evolution installation path:"
 msgstr "Cheat Evolution-Installationspfad:"
