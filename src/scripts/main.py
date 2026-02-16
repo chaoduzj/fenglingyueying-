@@ -45,6 +45,7 @@ class GameCheatsManager(QMainWindow):
 
         # Version and links
         self.appVersion = "2.4.0"
+        self.websiteLink = "https://gamezonelabs.com"
         self.githubLink = "https://github.com/dyang886/Game-Cheats-Manager"
         self.bilibiliLink = "https://space.bilibili.com/256673766"
 
@@ -232,6 +233,11 @@ class GameCheatsManager(QMainWindow):
             dialog = CopyRightWarning(self)
             dialog.show()
 
+        # Check for server announcements
+        self.announcementFetcher = AnnouncementFetchWorker()
+        self.announcementFetcher.announcementFetched.connect(self.show_announcement)
+        self.announcementFetcher.start()
+
         # Check for software update
         if settings['checkAppUpdate']:
             self.versionFetcher = VersionFetchWorker('GCM')
@@ -251,6 +257,11 @@ class GameCheatsManager(QMainWindow):
     def closeEvent(self, event):
         super().closeEvent(event)
         os._exit(0)
+
+    def show_announcement(self, data):
+        dialog = AnnouncementDialog(data, self)
+        dialog.show()
+        self.announcementFetcher.quit()
 
     def start_update(self, version):
         try:
@@ -752,7 +763,7 @@ class GameCheatsManager(QMainWindow):
         else:
             self.trainer_manage_window = TrainerManagementDialog(self)
             self.trainer_manage_window.show()
-    
+
     def open_trainer_upload(self):
         if self.trainer_upload_window is not None and self.trainer_upload_window.isVisible():
             self.trainer_upload_window.raise_()

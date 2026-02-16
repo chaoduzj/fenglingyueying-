@@ -78,6 +78,7 @@ def load_settings():
         "launchAppOnStartup": False,
         "showWarning": True,
         "autoUpdateTranslations": True,
+        "lastSeenAnnouncementId": "",
 
         # Trainer management configs
         "enableGCM": True,

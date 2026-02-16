@@ -10,6 +10,7 @@ class CustomButton(QPushButton):
     def __init__(self, text, parent=None):
         super(CustomButton, self).__init__(text, parent)
         self.setCursor(Qt.CursorShape.PointingHandCursor)
+        self._cursor_overridden = False
 
     def setEnabled(self, enabled):
         super().setEnabled(enabled)
@@ -37,10 +38,18 @@ class CustomButton(QPushButton):
         super().enterEvent(event)
         QApplication.restoreOverrideCursor()
         QApplication.setOverrideCursor(self.cursor().shape())
+        self._cursor_overridden = True
 
     def leaveEvent(self, event):
         super().leaveEvent(event)
         QApplication.restoreOverrideCursor()
+        self._cursor_overridden = False
+
+    def hideEvent(self, event):
+        if self._cursor_overridden:
+            QApplication.restoreOverrideCursor()
+            self._cursor_overridden = False
+        super().hideEvent(event)
 
 
 class StatusMessageWidget(QWidget):

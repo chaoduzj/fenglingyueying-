@@ -13,6 +13,38 @@ from config import *
 from threads.download_base_thread import DownloadBaseThread
 
 
+class AnnouncementFetchWorker(QThread):
+    announcementFetched = pyqtSignal(dict)
+    fetchFailed = pyqtSignal()
+
+    def run(self):
+        try:
+            signed_url = DownloadBaseThread.get_signed_download_url("GCM/Data/announcement.json")
+            if not signed_url:
+                print("Error: Failed to get signed URL for announcement.json")
+                self.fetchFailed.emit()
+                return
+
+            response = requests.get(signed_url, timeout=10)
+            response.raise_for_status()
+            data = response.json()
+
+            announcements = data.get("announcements", [])
+            if not announcements:
+                return
+
+            # Find the newest announcement (last in the list)
+            newest = announcements[-1]
+            announcement_id = newest.get("id")
+
+            if announcement_id and announcement_id != settings.get("lastSeenAnnouncementId"):
+                self.announcementFetched.emit(newest)
+
+        except Exception as e:
+            print(f"Error fetching announcement: {e}")
+            self.fetchFailed.emit()
+
+
 class VersionFetchWorker(QThread):
     versionFetched = pyqtSignal(str)
     fetchFailed = pyqtSignal()

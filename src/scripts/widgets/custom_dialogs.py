@@ -11,6 +11,72 @@ from widgets.custom_widgets import CustomButton
 from threads.other_threads import VersionFetchWorker, TrainerUploadWorker
 
 
+class AnnouncementDialog(QDialog):
+    def __init__(self, announcement_data, parent=None):
+        super().__init__(parent)
+        self.announcement_id = announcement_data.get("id", "")
+
+        self.setWindowTitle(tr("Announcement"))
+        self.setWindowIcon(QIcon(resource_path("assets/logo.ico")))
+        self.setMinimumWidth(850)
+
+        layout = QVBoxLayout()
+        layout.setSpacing(15)
+        layout.setContentsMargins(25, 20, 25, 20)
+        self.setLayout(layout)
+
+        # Determine display language
+        lang = settings.get("language")
+        if lang in ["zh_CN", "zh_TW"]:
+            title = announcement_data.get("title_zh", announcement_data.get("title_en", ""))
+            message = announcement_data.get("message_zh", announcement_data.get("message_en", ""))
+        else:
+            title = announcement_data.get("title_en", announcement_data.get("title_zh", ""))
+            message = announcement_data.get("message_en", announcement_data.get("message_zh", ""))
+
+        # Title
+        titleLabel = QLabel(title)
+        titleFont = self.font()
+        titleFont.setPointSize(18)
+        titleFont.setBold(True)
+        titleLabel.setFont(titleFont)
+        titleLabel.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        layout.addWidget(titleLabel)
+
+        # Message body
+        messageLabel = QLabel(message)
+        messageLabel.setWordWrap(True)
+        messageLabel.setTextFormat(Qt.TextFormat.RichText)
+        messageLabel.setOpenExternalLinks(True)
+        messageFont = self.font()
+        messageFont.setPointSize(11)
+        messageLabel.setFont(messageFont)
+        layout.addWidget(messageLabel)
+
+        # OK button
+        okButton = CustomButton("OK")
+        okButton.clicked.connect(self.accept)
+        buttonLayout = QHBoxLayout()
+        buttonLayout.addStretch(1)
+        buttonLayout.addWidget(okButton)
+        buttonLayout.addStretch(1)
+        layout.addLayout(buttonLayout)
+
+        self.setFixedSize(self.sizeHint())
+
+    def _mark_seen(self):
+        settings["lastSeenAnnouncementId"] = self.announcement_id
+        apply_settings(settings)
+
+    def accept(self):
+        self._mark_seen()
+        super().accept()
+
+    def closeEvent(self, event):
+        self._mark_seen()
+        super().closeEvent(event)
+
+
 class CopyRightWarning(QDialog):
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -40,6 +106,15 @@ class CopyRightWarning(QDialog):
         linksLayout = QVBoxLayout()
         linksLayout.setSpacing(10)
         layout.addLayout(linksLayout)
+
+        websiteUrl = self.parent().websiteLink
+        websiteText = tr('Official Website:')
+        websiteText = f'{websiteText} <a href="{websiteUrl}" style="text-decoration: none; color: #305CDE;">{websiteUrl}</a>'
+        websiteLabel = QLabel(websiteText)
+        websiteLabel.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        websiteLabel.setTextFormat(Qt.TextFormat.RichText)
+        websiteLabel.setOpenExternalLinks(True)
+        linksLayout.addWidget(websiteLabel)
 
         githubUrl = self.parent().githubLink
         githubText = f'GitHub: <a href="{githubUrl}" style="text-decoration: none; color: #305CDE;">{githubUrl}</a>'
@@ -291,6 +366,15 @@ class AboutDialog(QDialog):
         linksLayout = QVBoxLayout()
         linksLayout.setSpacing(10)
         aboutLayout.addLayout(linksLayout)
+
+        websiteUrl = self.parent().websiteLink
+        websiteText = tr('Official Website:')
+        websiteText = f'{websiteText} <a href="{websiteUrl}" style="text-decoration: none; color: #305CDE;">{websiteUrl}</a>'
+        websiteLabel = QLabel(websiteText)
+        websiteLabel.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        websiteLabel.setTextFormat(Qt.TextFormat.RichText)
+        websiteLabel.setOpenExternalLinks(True)
+        linksLayout.addWidget(websiteLabel)
 
         githubUrl = self.parent().githubLink
         githubText = f'GitHub: <a href="{githubUrl}" style="text-decoration: none; color: #305CDE;">{githubUrl}</a>'
