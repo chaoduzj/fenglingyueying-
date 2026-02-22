@@ -8,33 +8,64 @@ English | [简体中文](./README_CN.md) | [繁體中文](./README_TW.md)
     <img src="src/assets/logo.png" alt="Game Cheats Manager logo" width="250" />
 </div>
 
-Game Cheats Manager is a one-stop solution for gamers to manage their trainers for single-player games efficiently. It allows users to browse, download, and manage all their trainers from one convenient location. Each trainer, typically a standalone executable, can be launched or deleted directly through the app, simplifying your gaming experience by keeping everything organized and accessible.
+**Please visit our official website [https://gamezonelabs.com](https://gamezonelabs.com) for more info.**
 
-## Usage
+Stop hunting through sketchy websites and managing endless browser tabs. **Game Cheats Manager (GCM)** brings single-player game trainers from multiple sources into one clean, open-source dashboard. Search in English or Chinese, download with one click, and let the app handle the rest.
 
-1. **Browse Trainers**: In the left column, use the search bar or browse the list to find downloaded trainers. Double-click or click on the `Launch` button to launch a trainer; click on the `Delete` button to delete a trainer.
-2. **Download Trainers**: In the right column, search with keywords and press `Enter` to get a list of available trainers. Double-click the desired match to download it directly. The trainer download path is displayed at the bottom of the right column, you can change it by clicking `...` on the right.
-3. **Trainer Management**: The `Trainer Management` panel provides you with all the settings for each trainer source in one place. You can find settings like automatically updating trainers and trainer search data, or changing the download server, etc.
-4. **Options**: The `Options` menu bar consists of the following functionalities:
-   1. **Settings**: Adjust settings like themes and languages.
-   2. **Import Trainers**: Select trainers that you want to import from the file selection window. Imported trainers are unable to auto-update.
-   3. **Open Trainer Download Path**: View the trainer download folder.
-   4. **Add Paths to Whitelist**: Add the trainer download path to the Windows Defender whitelist. You can do it manually if you have installed other antivirus software.
-   5. **About**: View app version and project-related links.
+---
+
+## Core Features
+
+### Multiple Sources, One App
+Get access to the most trusted trainers in the community without dealing with dead links:
+* **Fling Trainers:** The industry standard.
+* **XiaoXing Trainers:** Specialized in Asia-focused titles with advanced features.
+* **Cheat Tables:** A vast repository of community-created tables for Cheat Engine.
+* **GCM Trainers:** Personally curated, open-source trainers for niche titles.
+* **Community Uploaded Trainers:** Trainers submitted directly by our users. Whether you've created your own or found one missing from our main sources, these are manually reviewed for safety before becoming available to everyone.
+
+### Instant Bilingual Search
+Type a game name in English or Chinese to see instant results. Data syncs locally across all sources so you can filter by source or game without lag.
+
+### Double-Click to Download
+Found your trainer? Double-click it. GCM handles the download, unzips the files, tags the version, and organizes it into a named folder—all while protecting against duplicates.
+
+### Auto-Update on Every Launch
+Game updates break trainers fast. GCM checks for updates silently in the background every time you launch the app, ensuring your library is always current.
+
+### Windows Defender Integration
+Because trainers modify game memory, they often trigger false-positive antivirus alerts. GCM includes a one-click whitelist helper to safely add your trainer folders to Windows Defender exclusions.
+
+### Anti-Cheat Smart Alerts
+For single-player games that still utilize anti-cheat, GCM provides step-by-step bypass instructions immediately after your download finishes.
+
+### Community Powered
+Created your own trainer or found one we missed? Upload it directly through the app. After a manual safety review, your contribution goes live to the entire community.
+
+---
 
 ## Installation
 
-1. **Download the Installer**: Navigate to the [latest release](https://github.com/dyang886/Game-Cheats-Manager/releases) and download the installer for Windows (64-bit).
-2. **Run the Installer**: Execute the downloaded file and follow the on-screen instructions to install Game Cheats Manager.
-3. **Launch the Application**: Open Game Cheats Manager from your applications folder or start menu.
+1. Navigate to our [Latest Release](https://github.com/dyang886/Game-Cheats-Manager/releases) page.
+2. Download the latest Windows (64-bit) installer.
+3. Run the installer and follow the on-screen instructions.
+4. Launch GCM and start gaming!
+
+---
+
+## Advanced Usage & Options
+
+While GCM is designed to be plug-and-play, you have full control over your experience via the in-app menus:
+
+* **Trainer Management:** Enable/Disable each source, configure trainer and data file auto-updates, or switch download servers.
+* **Local Imports:** Already have a folder full of trainers? Import them directly into GCM *(Note: auto-update is not supported for manual imports)*.
+* **Custom Paths:** Change where your trainers are saved and easily open your download directory from the app.
+* **Customization:** Adjust app themes, languages, and view your project-related links.
+
+---
 
 ## Support
 
-For issues, feature requests, or contributions, please visit the [GitHub repository](https://github.com/dyang886/Game-Cheats-Manager).
+For issues, feature requests, or contributions, please visit the [Issues](https://github.com/dyang886/Game-Cheats-Manager/issues) page or join our community via Discord/QQ (links at the top of the page). 
 
-Below are funding options:
-
-|                            WeChat                            |                          Alipay                          |                          QQ                          |
-| :----------------------------------------------------------: | :------------------------------------------------------: | :--------------------------------------------------: |
-| <img src="src/assets/wechat.png" alt="WeChat Pay" width="200" /> | <img src="src/assets/alipay.png" alt="Alipay" width="200" /> | <img src="src/assets/qq.png" alt="QQ Pay" width="200" /> |
-
+*Note: All trainers are intended strictly for single-player use.*

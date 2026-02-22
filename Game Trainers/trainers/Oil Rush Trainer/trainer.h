@@ -33,6 +33,11 @@ public:
     }
 
 private:
+    // Hook Overview: Hijacks the engine's globally shared Sync_Component_Value read instruction (Unigine_x86.dll+90336) to intercept all resource updates.
+    // Pointer Traversal: Dynamically traverses static pointer chains inside the code cave (7 levels for Oil, 3 for Upgrades) to find the player's exact HUD values.
+    // Filtering: Identifies player resources by matching the current object's value against the HUD value and verifying the Team ID is 0.
+    // State Management (-1 Safeguard): Compares the user's target cheat value to -1; if it matches, it safely skips execution to preserve original memory and prevent register corruption.
+    // Memory Hijack: Forcefully overwrites the entity's real resource base with the custom target value and updates eax to instantly sync the visual UI mirror.
     inline bool setMasterResources(int targetOil, int targetAbilityPoints)
     {
         // 1. If both are -1, safely kill the hook and exit.
