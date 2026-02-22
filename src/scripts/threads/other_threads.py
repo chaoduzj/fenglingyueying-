@@ -373,7 +373,7 @@ class WeModCustomization(QThread):
 
         # Terminate if WeMod is running
         if self.is_program_running(weModExeName):
-            self.message.emit(tr("WeMod is currently running,\nplease close the application first"), "error")
+            self.message.emit(tr("Wand is currently running,\nplease close the application first"), "error")
             self.finished.emit()
             return
 
@@ -424,9 +424,9 @@ class WeModCustomization(QThread):
             # Clean up
             shutil.rmtree(WEMOD_TEMP_DIR)
             if patch_success:
-                self.message.emit(tr("WeMod Pro activated"), "success")
+                self.message.emit(tr("Wand Pro activated"), "success")
             else:
-                self.message.emit(tr("Failed to activate WeMod Pro"), "error")
+                self.message.emit(tr("Failed to activate Wand Pro"), "error")
 
         else:
             if os.path.exists(asar_bak):
@@ -434,7 +434,7 @@ class WeModCustomization(QThread):
                     os.remove(asar)
                 os.rename(asar_bak, asar)
 
-            self.message.emit(tr("WeMod Pro disabled"), "success")
+            self.message.emit(tr("Wand Pro disabled"), "success")
 
         # ===========================================================================
         # Disable auto update
@@ -444,15 +444,15 @@ class WeModCustomization(QThread):
             if self.parent().disableUpdateCheckbox.isChecked():
                 if os.path.exists(updateExe):
                     os.rename(updateExe, updateExe_backup)
-                    self.message.emit(tr("WeMod auto update disabled"), "success")
+                    self.message.emit(tr("Wand auto update disabled"), "success")
             else:
                 if os.path.exists(updateExe_backup):
                     os.rename(updateExe_backup, updateExe)
-                    self.message.emit(tr("WeMod auto update enabled"), "success")
+                    self.message.emit(tr("Wand auto update enabled"), "success")
                 elif not os.path.exists(updateExe):
-                    self.message.emit(tr("Failed to enable WeMod auto update,\nplease try reinstalling WeMod"), "error")
+                    self.message.emit(tr("Failed to enable Wand auto update,\nplease try reinstalling Wand"), "error")
         except Exception as e:
-            self.message.emit(tr("Failed to process WeMod update file:") + f"\n{str(e)}", "error")
+            self.message.emit(tr("Failed to process Wand update file:") + f"\n{str(e)}", "error")
 
         # ===========================================================================
         # Delete other version folders
@@ -462,9 +462,9 @@ class WeModCustomization(QThread):
                     folder_path = os.path.join(self.weModInstallPath, f"app-{version}")
                     try:
                         shutil.rmtree(folder_path)
-                        self.message.emit(tr("Deleted WeMod version: ") + version, "success")
+                        self.message.emit(tr("Deleted Wand version: ") + version, "success")
                     except Exception as e:
-                        self.message.emit(tr("Failed to delete WeMod version: ") + version, "error")
+                        self.message.emit(tr("Failed to delete Wand version: ") + version, "error")
 
         self.finished.emit()
 

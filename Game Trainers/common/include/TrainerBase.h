@@ -680,6 +680,73 @@ protected:
         return true;
     }
 
+    inline bool createNamedHookByOffset(
+        const wchar_t *moduleName,
+        const std::string &name,
+        uintptr_t offset,
+        size_t overwriteLen,
+        size_t codeSize,
+        std::function<std::vector<BYTE>(uintptr_t codeCaveAddr, uintptr_t hookAddr, const std::vector<BYTE> &originalBytes)> buildFunc)
+    {
+        uintptr_t modBase = 0;
+        size_t modSize = 0;
+        if (!getModuleInfo(moduleName, modBase, modSize))
+        {
+            std::cerr << "[!] Could not find module for hook '" << name << "'.\n";
+            return false;
+        }
+
+        uintptr_t hookAddr = modBase + offset;
+
+        // Read original bytes
+        std::vector<BYTE> originalBytes(overwriteLen);
+        if (!ReadProcessMemory(hProcess, (LPCVOID)hookAddr, originalBytes.data(), overwriteLen, nullptr))
+        {
+            std::cerr << "[!] Failed to read original bytes for hook '" << name << "'.\n";
+            return false;
+        }
+
+        // Allocate near memory
+        LPVOID nearMem = allocNearAddress(hookAddr, codeSize);
+        if (!nearMem) return false;
+
+        // Build injection code
+        uintptr_t codeCaveAddr = reinterpret_cast<uintptr_t>(nearMem);
+        std::vector<BYTE> code = buildFunc(codeCaveAddr, hookAddr, originalBytes);
+
+        if (code.empty()) {
+            VirtualFreeEx(hProcess, nearMem, 0, MEM_RELEASE);
+            return false;
+        }
+
+        // Write code to nearMem
+        SIZE_T written = 0;
+        WriteProcessMemory(hProcess, nearMem, code.data(), code.size(), &written);
+        FlushInstructionCache(hProcess, nearMem, code.size());
+
+        // Overwrite the original instructions with a JMP
+        std::vector<BYTE> patch(overwriteLen, 0x90);
+        patch[0] = 0xE9; 
+        int32_t rel = static_cast<int32_t>(codeCaveAddr - (hookAddr + 5));
+        std::memcpy(&patch[1], &rel, 4);
+
+        WriteProcessMemory(hProcess, reinterpret_cast<LPVOID>(hookAddr), patch.data(), patch.size(), nullptr);
+        FlushInstructionCache(hProcess, reinterpret_cast<LPCVOID>(hookAddr), patch.size());
+
+        HookInfo hi;
+        hi.hookName = name;
+        hi.hookAddress = hookAddr;
+        hi.overwriteLen = overwriteLen;
+        hi.active = true;
+        hi.originalBytes = originalBytes;
+        hi.allocatedMem = nearMem;
+        hi.allocSize = codeSize;
+        hooks[name] = hi;
+
+        std::cout << "[+] Hook '" << name << "' created at offset 0x" << std::hex << offset << std::dec << std::endl;
+        return true;
+    }
+
     /***********************************************************************
      * createPointerToggle
      *    - name: Unique string name, e.g., "HealthToggle"

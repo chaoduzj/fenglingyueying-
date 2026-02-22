@@ -97,12 +97,6 @@ msgstr "Neue Version gefunden: {old_version} ➜ {new_version}"
 msgid "Would you like to update now?"
 msgstr "Möchtest du jetzt aktualisieren?"
 
-msgid "Yes"
-msgstr "Ja"
-
-msgid "No"
-msgstr "Nein"
-
 msgid "Update Check Failed"
 msgstr "Update-Prüfung fehlgeschlagen"
 
@@ -162,6 +156,12 @@ msgstr "Ursprüngliche Trainer löschen"
 
 msgid "Do you want to delete the original trainer files?"
 msgstr "Möchtest du die ursprünglichen Trainer-Dateien löschen?"
+
+msgid "Yes"
+msgstr "Ja"
+
+msgid "No"
+msgstr "Nein"
 
 msgid "Failed to delete original trainer: "
 msgstr "Ursprünglicher Trainer konnte nicht gelöscht werden: "
@@ -315,10 +315,10 @@ msgid "Upload failed: "
 msgstr "Upload fehlgeschlagen: "
 
 msgid ""
-"WeMod is currently running,\n"
+"Wand is currently running,\n"
 "please close the application first"
 msgstr ""
-"WeMod läuft gerade,\n"
+"Wand läuft gerade,\n"
 "bitte schließe die Anwendung zuerst"
 
 msgid "Failed to patch file:"
@@ -327,36 +327,36 @@ msgstr "Datei konnte nicht gepatcht werden:"
 msgid "Failed to extract file:"
 msgstr "Datei konnte nicht extrahiert werden:"
 
-msgid "WeMod Pro activated"
-msgstr "WeMod Pro aktiviert"
+msgid "Wand Pro activated"
+msgstr "Wand Pro aktiviert"
 
-msgid "Failed to activate WeMod Pro"
-msgstr "WeMod Pro konnte nicht aktiviert werden"
+msgid "Failed to activate Wand Pro"
+msgstr "Wand Pro konnte nicht aktiviert werden"
 
-msgid "WeMod Pro disabled"
-msgstr "WeMod Pro deaktiviert"
+msgid "Wand Pro disabled"
+msgstr "Wand Pro deaktiviert"
 
-msgid "WeMod auto update disabled"
-msgstr "WeMod Auto-Update deaktiviert"
+msgid "Wand auto update disabled"
+msgstr "Wand Auto-Update deaktiviert"
 
-msgid "WeMod auto update enabled"
-msgstr "WeMod Auto-Update aktiviert"
+msgid "Wand auto update enabled"
+msgstr "Wand Auto-Update aktiviert"
 
 msgid ""
-"Failed to enable WeMod auto update,\n"
-"please try reinstalling WeMod"
+"Failed to enable Wand auto update,\n"
+"please try reinstalling Wand"
 msgstr ""
-"WeMod Auto-Update konnte nicht aktiviert werden,\n"
-"bitte versuche WeMod neu zu installieren"
+"Wand Auto-Update konnte nicht aktiviert werden,\n"
+"bitte versuche Wand neu zu installieren"
 
-msgid "Failed to process WeMod update file:"
-msgstr "WeMod Update-Datei konnte nicht verarbeitet werden:"
+msgid "Failed to process Wand update file:"
+msgstr "Wand Update-Datei konnte nicht verarbeitet werden:"
 
-msgid "Deleted WeMod version: "
-msgstr "WeMod-Version gelöscht: "
+msgid "Deleted Wand version: "
+msgstr "Wand-Version gelöscht: "
 
-msgid "Failed to delete WeMod version: "
-msgstr "WeMod-Version konnte nicht gelöscht werden: "
+msgid "Failed to delete Wand version: "
+msgstr "Wand-Version konnte nicht gelöscht werden: "
 
 msgid "Checking for trainer updates"
 msgstr "Suche nach Trainer-Updates"
@@ -438,8 +438,11 @@ msgstr "Laden fehlgeschlagen"
 msgid "Contact Info (Optional):"
 msgstr "Kontaktdaten (Optional):"
 
-msgid "Email, Social Media, etc."
-msgstr "E-Mail, Soziale Medien usw."
+msgid "Email"
+msgstr "E-Mail"
+
+msgid "If you provide your Game-Zone Labs account email and your trainer is approved, a badge will be added to your account"
+msgstr "Wenn Sie Ihre Game-Zone Labs-Konto-E-Mail angeben und Ihr Trainer genehmigt wird, erhalten Sie ein Abzeichen auf Ihrem Konto"
 
 msgid "Trainer Name:"
 msgstr "Trainer-Name:"
@@ -479,6 +482,9 @@ msgstr "Bitte wähle eine gültige Datei aus."
 
 msgid "Please provide a trainer name."
 msgstr "Bitte gib einen Trainer-Namen an."
+
+msgid "Close"
+msgstr "Schließen"
 
 msgid "FLiNG"
 msgstr "FLiNG"
@@ -543,23 +549,23 @@ msgstr "Cheat-Table-Daten automatisch aktualisieren"
 msgid "Update Cheat Tables automatically"
 msgstr "Cheat Tables automatisch aktualisieren"
 
-msgid "WeMod installation path:"
-msgstr "WeMod-Installationspfad:"
+msgid "Wand installation path:"
+msgstr "Wand-Installationspfad:"
 
-msgid "Installed WeMod Versions:"
-msgstr "Installierte WeMod-Versionen:"
+msgid "Installed Wand Versions:"
+msgstr "Installierte Wand-Versionen:"
 
 msgid "Patch Method:"
 msgstr "Patch-Methode:"
 
-msgid "Activate WeMod Pro"
-msgstr "WeMod Pro aktivieren"
+msgid "Activate Wand Pro"
+msgstr "Wand Pro aktivieren"
 
-msgid "Disable WeMod Auto Update"
-msgstr "WeMod Auto-Update deaktivieren"
+msgid "Disable Wand Auto Update"
+msgstr "Wand Auto-Update deaktivieren"
 
-msgid "Delete All Other WeMod Versions"
-msgstr "Alle anderen WeMod-Versionen löschen"
+msgid "Delete All Other Wand Versions"
+msgstr "Alle anderen Wand-Versionen löschen"
 
 msgid "Cheat Evolution installation path:"
 msgstr "Cheat Evolution-Installationspfad:"
@@ -567,8 +573,8 @@ msgstr "Cheat Evolution-Installationspfad:"
 msgid "Activate PRO"
 msgstr "PRO aktivieren"
 
-msgid "Please select WeMod installation path"
-msgstr "Bitte wähle den WeMod-Installationspfad"
+msgid "Please select Wand installation path"
+msgstr "Bitte wähle den Wand-Installationspfad"
 
 msgid "Please select Cheat Engine installation path"
 msgstr "Bitte wähle den Cheat Engine-Installationspfad"
@@ -576,8 +582,8 @@ msgstr "Bitte wähle den Cheat Engine-Installationspfad"
 msgid "Cheat Engine is installed"
 msgstr "Cheat Engine ist installiert"
 
-msgid "WeMod not installed"
-msgstr "WeMod ist nicht installiert"
+msgid "Wand not installed"
+msgstr "Wand ist nicht installiert"
 
 msgid "To proceed with adding translation files, administrator rights are needed. A User Account Control (UAC) prompt will appear for permission."
 msgstr "Um die Übersetzungsdateien hinzuzufügen, werden Administratorrechte benötigt. Es erscheint eine Benutzerkontensteuerung (UAC), um die Berechtigung zu bestätigen."

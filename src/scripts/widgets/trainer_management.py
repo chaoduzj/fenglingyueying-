@@ -34,7 +34,7 @@ class TrainerManagementDialog(QDialog):
         self.tabWidget.addTab(self.createFlingTab(), tr("FLiNG"))
         self.tabWidget.addTab(self.createXiaoXingTab(), tr("XiaoXing"))
         self.tabWidget.addTab(self.createCETab(), "Cheat Engine")
-        self.tabWidget.addTab(self.createWemodTab(), "WeMod")
+        self.tabWidget.addTab(self.createWemodTab(), "Wand")
         self.tabWidget.addTab(self.createCevoTab(), "Cheat Evolution")
 
     def closeEvent(self, event):
@@ -356,7 +356,7 @@ class TrainerManagementDialog(QDialog):
         layout = QVBoxLayout()
         layout.setContentsMargins(0, 15, 0, 0)
         wemodTab.setLayout(layout)
-        officialLink = QLabel(tr("Official Website: ") + '<a href="https://www.wemod.com" style="text-decoration: none; color: #0078D4;">https://www.wemod.com</a>')
+        officialLink = QLabel(tr("Official Website: ") + '<a href="https://wand.com" style="text-decoration: none; color: #0078D4;">https://wand.com</a>')
         officialLink.setOpenExternalLinks(True)
         layout.addWidget(officialLink)
 
@@ -368,7 +368,7 @@ class TrainerManagementDialog(QDialog):
         column1 = QVBoxLayout()
         columns.addLayout(column1, stretch=2)
 
-        logoPixmap = QPixmap(resource_path("assets/wemod.png"))
+        logoPixmap = QPixmap(resource_path("assets/wand.png"))
         scaledLogoPixmap = logoPixmap.scaled(130, 130, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation)
         logoLabel = QLabel()
         logoLabel.setAlignment(Qt.AlignmentFlag.AlignCenter)
@@ -389,7 +389,7 @@ class TrainerManagementDialog(QDialog):
         installLabelLayout = QHBoxLayout()
         installLabelLayout.setSpacing(3)
         installLayout.addLayout(installLabelLayout)
-        installLabelLayout.addWidget(QLabel(tr("WeMod installation path:")))
+        installLabelLayout.addWidget(QLabel(tr("Wand installation path:")))
         self.weModResetButton = CustomButton(tr('Reset to default'))
         self.weModResetButton.setStyleSheet("padding: 3;")
         font = self.weModResetButton.font()
@@ -413,7 +413,7 @@ class TrainerManagementDialog(QDialog):
         versionLayout = QVBoxLayout()
         versionLayout.setSpacing(2)
         column2.addLayout(versionLayout)
-        versionLayout.addWidget(QLabel(tr("Installed WeMod Versions:")))
+        versionLayout.addWidget(QLabel(tr("Installed Wand Versions:")))
         self.versionCombo = QComboBox()
         versionLayout.addWidget(self.versionCombo)
 
@@ -428,15 +428,15 @@ class TrainerManagementDialog(QDialog):
         patchLayout.addWidget(self.patchCombo)
 
         # Unlock WeMod pro
-        self.weModProCheckbox = QCheckBox(tr("Activate WeMod Pro"))
+        self.weModProCheckbox = QCheckBox(tr("Activate Wand Pro"))
         column2.addWidget(self.weModProCheckbox)
 
         # Disable auto update
-        self.disableUpdateCheckbox = QCheckBox(tr("Disable WeMod Auto Update"))
+        self.disableUpdateCheckbox = QCheckBox(tr("Disable Wand Auto Update"))
         column2.addWidget(self.disableUpdateCheckbox)
 
         # Delete all other WeMod versions
-        self.delOtherVersionsCheckbox = QCheckBox(tr("Delete All Other WeMod Versions"))
+        self.delOtherVersionsCheckbox = QCheckBox(tr("Delete All Other Wand Versions"))
         column2.addWidget(self.delOtherVersionsCheckbox)
 
         # Apply button
@@ -535,7 +535,7 @@ class TrainerManagementDialog(QDialog):
     # ===========================================================================
     def selectWeModPath(self):
         initialPath = self.weModInstallLineEdit.text() or os.path.expanduser("~")
-        directory = QFileDialog.getExistingDirectory(self, tr("Please select WeMod installation path"), initialPath)
+        directory = QFileDialog.getExistingDirectory(self, tr("Please select Wand installation path"), initialPath)
         if directory:
             settings["weModPath"] = os.path.normpath(directory)
             self.weModInstallLineEdit.setText(settings["weModPath"])
@@ -578,7 +578,7 @@ class TrainerManagementDialog(QDialog):
         self.weModVersions = []
         if not os.path.exists(weModPath):
             self.versionCombo.clear()
-            self.versionCombo.addItem(tr("WeMod not installed"))
+            self.versionCombo.addItem(tr("Wand not installed"))
             self.weModApplyButton.setDisabled(True)
             return
 
@@ -591,7 +591,7 @@ class TrainerManagementDialog(QDialog):
 
         if not self.weModVersions:
             self.versionCombo.clear()
-            self.versionCombo.addItem(tr("WeMod not installed"))
+            self.versionCombo.addItem(tr("Wand not installed"))
             self.weModApplyButton.setDisabled(True)
             return
 

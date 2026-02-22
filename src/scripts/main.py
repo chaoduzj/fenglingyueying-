@@ -1,16 +1,12 @@
-import asyncio
 import ctypes
 import os
-from pathlib import Path
 from queue import Queue
 import shutil
 import stat
 import subprocess
 import sys
 
-from desktop_notifier import Button, DesktopNotifier, Urgency
-import qasync
-from PyQt6.QtCore import QTimer
+from PyQt6.QtCore import Qt, QTimer
 from PyQt6.QtGui import QAction, QColor, QFont, QFontDatabase, QIcon
 from PyQt6.QtWidgets import QApplication, QFileDialog, QGridLayout, QHBoxLayout, QLabel, QLineEdit, QListWidgetItem, QMainWindow, QMessageBox, QStatusBar, QVBoxLayout, QWidget
 from tendo import singleton
@@ -44,7 +40,7 @@ class GameCheatsManager(QMainWindow):
         self.setMinimumSize(680, 520)
 
         # Version and links
-        self.appVersion = "2.4.0"
+        self.appVersion = "2.4.1"
         self.websiteLink = "https://gamezonelabs.com"
         self.githubLink = "https://github.com/dyang886/Game-Cheats-Manager"
         self.bilibiliLink = "https://space.bilibili.com/256673766"
@@ -241,8 +237,8 @@ class GameCheatsManager(QMainWindow):
         # Check for software update
         if settings['checkAppUpdate']:
             self.versionFetcher = VersionFetchWorker('GCM')
-            self.versionFetcher.versionFetched.connect(lambda latest_version: asyncio.get_event_loop().create_task(self.send_notification(True, latest_version)))
-            self.versionFetcher.fetchFailed.connect(lambda: asyncio.get_event_loop().create_task(self.send_notification(False)))
+            self.versionFetcher.versionFetched.connect(lambda latest_version: self.send_notification(True, latest_version))
+            self.versionFetcher.fetchFailed.connect(lambda: self.send_notification(False))
             self.versionFetcher.start()
 
         # Update database, trainer update
@@ -276,29 +272,35 @@ class GameCheatsManager(QMainWindow):
         except subprocess.SubprocessError:
             QMessageBox.critical(self, tr("Failure"), tr("Failed to update application."))
 
-    async def send_notification(self, success, latest_version=0):
-        notifier = DesktopNotifier(app_name="Game Cheats Manager", app_icon=Path(resource_path("assets/logo.ico")))
+    def send_notification(self, success, latest_version=0):
+        # Keep a reference to prevent garbage collection
+        self._active_toast = None
 
         if success and latest_version > self.appVersion:
-            await notifier.send(
-                title=tr('Update Available'),
-                message=tr('New version found: {old_version} ➜ {new_version}').format(
-                    old_version=self.appVersion,
-                    new_version=latest_version
-                ) + '\n' + tr('Would you like to update now?'),
-                urgency=Urgency.Normal,
-                buttons=[
-                    Button(title=tr("Yes"), on_pressed=lambda: self.start_update(latest_version)),
-                    Button(title=tr("No"))
-                ],
+            title = tr('Update Available')
+            message = tr('New version found: {old_version} ➜ {new_version}').format(
+                old_version=self.appVersion,
+                new_version=latest_version
+            ) + '\n' + tr('Would you like to update now?')
+
+            self._active_toast = ToastNotification(
+                title=title,
+                message=message,
+                notification_type="update",
             )
+            self._active_toast.action_accepted.connect(lambda: self.start_update(latest_version))
+            self._active_toast.show_notification()
 
         elif not success:
-            await notifier.send(
-                title=tr('Update Check Failed'),
-                message=tr('Failed to check for software update. You can navigate to `Options` ➜ `About` to check for updates manually.'),
-                urgency=Urgency.Normal
+            title = tr('Update Check Failed')
+            message = tr('Failed to check for software update. You can navigate to `Options` ➜ `About` to check for updates manually.')
+
+            self._active_toast = ToastNotification(
+                title=title,
+                message=message,
+                notification_type="error",
             )
+            self._active_toast.show_notification()
 
         self.versionFetcher.quit()
 
@@ -775,8 +777,6 @@ class GameCheatsManager(QMainWindow):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    loop = qasync.QEventLoop(app)
-    asyncio.set_event_loop(loop)
 
     # Load the selected font
     primary_font_path = font_config[settings["language"]]
@@ -789,11 +789,9 @@ if __name__ == "__main__":
     mainWin = GameCheatsManager()
     mainWin.show()
 
-    # Center window
     qr = mainWin.frameGeometry()
     cp = mainWin.screen().availableGeometry().center()
     qr.moveCenter(cp)
     mainWin.move(qr.topLeft())
 
-    with loop:
-        sys.exit(loop.run_forever())
+    sys.exit(app.exec())

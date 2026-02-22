@@ -5,8 +5,12 @@ obj/
 .venv/
 *.sln
 *.ps1
-upload_trainers.py
 MonoBridge.dll
 GCMInjection.dll
 IL2CPP.dll
 trainers/**/*.ttf
+upload_trainers.py
+fetch_trainers.py
+user_trainers.json
+user_trainers.xlsx
+User Trainers/

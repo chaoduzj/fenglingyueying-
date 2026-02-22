@@ -6,13 +6,6 @@
         "version": "2025.11.27"
     },
     {
-        "game_name": "Core Keeper",
-        "origin": "other",
-        "official_url": "https://github.com/RussDev7/CoreKeepersWorkshop",
-        "gcm_url": "GCM/GCM Trainers/Core Keeper Trainer.zip",
-        "version": "2025.8.3"
-    },
-    {
         "game_name": "DREDGE",
         "origin": "gcm",
         "gcm_url": "GCM/GCM Trainers/DREDGE Trainer.exe",
@@ -49,6 +42,12 @@
         "version": "2026.2.8"
     },
     {
+        "game_name": "Oil Rush",
+        "origin": "gcm",
+        "gcm_url": "GCM/GCM Trainers/Oil Rush Trainer.exe",
+        "version": "2026.2.21"
+    },
+    {
         "game_name": "Outland",
         "origin": "gcm",
         "gcm_url": "GCM/GCM Trainers/Outland Trainer.exe",
@@ -71,5 +70,12 @@
         "origin": "gcm",
         "gcm_url": "GCM/GCM Trainers/Wizard of Legend 2 Trainer.exe",
         "version": "2025.11.27"
+    },
+    {
+        "game_name": "Core Keeper",
+        "origin": "other",
+        "official_url": "https://github.com/RussDev7/CoreKeepersWorkshop",
+        "gcm_url": "GCM/GCM Trainers/Core Keeper Trainer.zip",
+        "version": "2025.8.3"
     }
 ]

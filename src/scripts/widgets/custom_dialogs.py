@@ -437,8 +437,16 @@ class TrainerUploadDialog(QDialog):
         contactLayout.setSpacing(5)
         contactLayout.addWidget(QLabel(tr("Contact Info (Optional):")))
         self.contactEdit = QLineEdit()
-        self.contactEdit.setPlaceholderText(tr("Email, Social Media, etc."))
+        self.contactEdit.setPlaceholderText(tr("Email"))
         contactLayout.addWidget(self.contactEdit)
+
+        contact_info_label = QLabel(tr("If you provide your Game-Zone Labs account email and your trainer is approved, a badge will be added to your account"))
+        contact_info_font = contact_info_label.font()
+        contact_info_font.setPointSize(9)
+        contact_info_label.setFont(contact_info_font)
+        contact_info_label.setStyleSheet("color: gray;")
+        contact_info_label.setWordWrap(True)
+        contactLayout.addWidget(contact_info_label)
         layout.addLayout(contactLayout)
 
         # Trainer Name
@@ -502,6 +510,8 @@ class TrainerUploadDialog(QDialog):
         self.progressBar.setValue(0)
         self.progressBar.setVisible(False)
         layout.addWidget(self.progressBar)
+
+        layout.addStretch()
 
         # Buttons
         buttonLayout = QHBoxLayout()

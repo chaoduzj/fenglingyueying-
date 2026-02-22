@@ -84,12 +84,12 @@ def load_settings():
         "enableGCM": True,
         "autoUpdateGCMData": True,
         "autoUpdateGCMTrainers": True,
-        "flingDownloadServer": "official",
+        "flingDownloadServer": "gcm",
         "removeFlingBgMusic": True,
         "autoUpdateFlingData": True,
         "autoUpdateFlingTrainers": True,
         "enableXiaoXing": True,
-        "unlockXiaoXing": False,
+        "unlockXiaoXing": True,
         "autoUpdateXiaoXingData": True,
         "autoUpdateXiaoXingTrainers": True,
         "weModPath": wemod_install_path,
@@ -164,10 +164,10 @@ def ensure_trainer_download_path_is_valid():
 
 
 def findWeModInstallPath():
-    install_path = os.path.join(os.environ["LOCALAPPDATA"], "WeMod")
+    install_path = os.path.join(os.environ["LOCALAPPDATA"], "Wand")
     if os.path.exists(install_path):
         return install_path
-    return os.path.join(os.environ["LOCALAPPDATA"], "Wand")
+    return os.path.join(os.environ["LOCALAPPDATA"], "WeMod")
 
 
 def findCEInstallPath():

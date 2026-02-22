@@ -1,14 +1,13 @@
 beautifulsoup4
 cloudscraper
-desktop-notifier
 fuzzywuzzy
+packaging
 pinyin
 polib
 psutil
 PyQt6==6.9.1
 python-dotenv
 python-Levenshtein
-qasync
 requests
 tendo
 zhon

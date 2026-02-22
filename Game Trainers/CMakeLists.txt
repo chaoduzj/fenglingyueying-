@@ -16,6 +16,7 @@ set(TRAINER_ARCHITECTURES
     "Heavy Weapon Trainer:x86"
     "Inotia 4 Trainer:x64"
     "Just Shapes & Beats Trainer:x64"
+    "Oil Rush Trainer:x86"
     "Outland Trainer:x86"
     "Plants vs. Zombies_GOTY Edition Trainer:x86"
     "Plants vs. Zombies_Replanted Trainer:x64"

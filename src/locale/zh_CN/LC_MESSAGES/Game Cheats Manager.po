@@ -97,12 +97,6 @@ msgstr "发现新版本：{old_version} ➜ {new_version}"
 msgid "Would you like to update now?"
 msgstr "是否立即更新？"
 
-msgid "Yes"
-msgstr "是"
-
-msgid "No"
-msgstr "否"
-
 msgid "Update Check Failed"
 msgstr "检查更新失败"
 
@@ -162,6 +156,12 @@ msgstr "删除原始修改器"
 
 msgid "Do you want to delete the original trainer files?"
 msgstr "是否要删除原始修改器文件？"
+
+msgid "Yes"
+msgstr "是"
+
+msgid "No"
+msgstr "否"
 
 msgid "Failed to delete original trainer: "
 msgstr "无法删除原始修改器："
@@ -315,10 +315,10 @@ msgid "Upload failed: "
 msgstr "上传失败："
 
 msgid ""
-"WeMod is currently running,\n"
+"Wand is currently running,\n"
 "please close the application first"
 msgstr ""
-"WeMod 正在运行中，\n"
+"Wand 正在运行中，\n"
 "请先关闭该应用程序"
 
 msgid "Failed to patch file:"
@@ -327,36 +327,36 @@ msgstr "修补文件失败："
 msgid "Failed to extract file:"
 msgstr "提取文件失败："
 
-msgid "WeMod Pro activated"
-msgstr "WeMod 专业版已激活"
+msgid "Wand Pro activated"
+msgstr "Wand 专业版已激活"
 
-msgid "Failed to activate WeMod Pro"
-msgstr "WeMod 专业版激活失败"
+msgid "Failed to activate Wand Pro"
+msgstr "Wand 专业版激活失败"
 
-msgid "WeMod Pro disabled"
-msgstr "WeMod 专业版已禁用"
+msgid "Wand Pro disabled"
+msgstr "Wand 专业版已禁用"
 
-msgid "WeMod auto update disabled"
-msgstr "WeMod 自动更新已禁用"
+msgid "Wand auto update disabled"
+msgstr "Wand 自动更新已禁用"
 
-msgid "WeMod auto update enabled"
-msgstr "WeMod 自动更新已启用"
+msgid "Wand auto update enabled"
+msgstr "Wand 自动更新已启用"
 
 msgid ""
-"Failed to enable WeMod auto update,\n"
-"please try reinstalling WeMod"
+"Failed to enable Wand auto update,\n"
+"please try reinstalling Wand"
 msgstr ""
-"无法启用 WeMod 自动更新，\n"
-"请尝试重新安装 WeMod"
+"无法启用 Wand 自动更新，\n"
+"请尝试重新安装 Wand"
 
-msgid "Failed to process WeMod update file:"
-msgstr "无法处理 WeMod 更新文件："
+msgid "Failed to process Wand update file:"
+msgstr "无法处理 Wand 更新文件："
 
-msgid "Deleted WeMod version: "
-msgstr "已删除 WeMod 版本："
+msgid "Deleted Wand version: "
+msgstr "已删除 Wand 版本："
 
-msgid "Failed to delete WeMod version: "
-msgstr "删除 WeMod 版本失败："
+msgid "Failed to delete Wand version: "
+msgstr "删除 Wand 版本失败："
 
 msgid "Checking for trainer updates"
 msgstr "正在检查修改器更新"
@@ -438,8 +438,11 @@ msgstr "加载失败"
 msgid "Contact Info (Optional):"
 msgstr "联系方式（选填）："
 
-msgid "Email, Social Media, etc."
-msgstr "邮箱、社交媒体等"
+msgid "Email"
+msgstr "电子邮箱"
+
+msgid "If you provide your Game-Zone Labs account email and your trainer is approved, a badge will be added to your account"
+msgstr "如果您填写 Game-Zone 实验室 账号邮箱，且上传的修改器通过审核，您的账号将获得一枚徽章"
 
 msgid "Trainer Name:"
 msgstr "修改器名称："
@@ -479,6 +482,9 @@ msgstr "请选择一个有效的文件。"
 
 msgid "Please provide a trainer name."
 msgstr "请提供修改器名称。"
+
+msgid "Close"
+msgstr "关闭"
 
 msgid "FLiNG"
 msgstr "风灵月影"
@@ -543,23 +549,23 @@ msgstr "自动更新 CT 表数据"
 msgid "Update Cheat Tables automatically"
 msgstr "自动更新 CT 表"
 
-msgid "WeMod installation path:"
-msgstr "WeMod 安装路径："
+msgid "Wand installation path:"
+msgstr "Wand 安装路径："
 
-msgid "Installed WeMod Versions:"
-msgstr "已安装的 WeMod 版本："
+msgid "Installed Wand Versions:"
+msgstr "已安装的 Wand 版本："
 
 msgid "Patch Method:"
 msgstr "激活方式："
 
-msgid "Activate WeMod Pro"
-msgstr "激活 WeMod 专业版"
+msgid "Activate Wand Pro"
+msgstr "激活 Wand 专业版"
 
-msgid "Disable WeMod Auto Update"
-msgstr "禁用 WeMod 自动更新"
+msgid "Disable Wand Auto Update"
+msgstr "禁用 Wand 自动更新"
 
-msgid "Delete All Other WeMod Versions"
-msgstr "删除所有其他 WeMod 版本"
+msgid "Delete All Other Wand Versions"
+msgstr "删除所有其他 Wand 版本"
 
 msgid "Cheat Evolution installation path:"
 msgstr "Cheat Evolution 安装路径："
@@ -567,8 +573,8 @@ msgstr "Cheat Evolution 安装路径："
 msgid "Activate PRO"
 msgstr "激活 PRO"
 
-msgid "Please select WeMod installation path"
-msgstr "请选择 WeMod 安装路径"
+msgid "Please select Wand installation path"
+msgstr "请选择 Wand 安装路径"
 
 msgid "Please select Cheat Engine installation path"
 msgstr "请选择 Cheat Engine 安装路径"
@@ -576,8 +582,8 @@ msgstr "请选择 Cheat Engine 安装路径"
 msgid "Cheat Engine is installed"
 msgstr "已安装 Cheat Engine"
 
-msgid "WeMod not installed"
-msgstr "未安装 WeMod"
+msgid "Wand not installed"
+msgstr "未安装 Wand"
 
 msgid "To proceed with adding translation files, administrator rights are needed. A User Account Control (UAC) prompt will appear for permission."
 msgstr "若要添加翻译文件，需要管理员权限。请留意将弹出的用户帐户控制（UAC）提示。"
