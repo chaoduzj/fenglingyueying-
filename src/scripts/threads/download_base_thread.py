@@ -23,7 +23,7 @@ class DownloadBaseThread(QThread):
     messageBox = pyqtSignal(str, str, str)
     finished = pyqtSignal(int)
 
-    trainer_urls = []  # [{"game_name": str, "trainer_name": str, "origin": str, "url": download url, "version": YYYY.MM.DD},]
+    trainer_urls = []  # [{"game_name": str, "trainer_name": str, "origin": str, "author": str, "custom_name": str, "url": download url, "version": YYYY.MM.DD},]
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36",
         "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
@@ -230,44 +230,66 @@ class DownloadBaseThread(QThread):
 
         return None
 
-    def translate_trainer(self, trainerName, origin):
+    def translate_trainer(self, trainer):
+        """
+        Dynamically builds the trainer name based on author, origin, and custom names.
+        Expects a dictionary: {"game_name": ..., "origin": ..., "author": ..., "custom_name": ..., "custom_name_en": ..., "custom_name_zh": ...}
+        """
         PREFIX_MAP = {
             "zh": {
-                "fling_main": "[风灵]",
-                "fling_archive": "[风灵]",
-                "xiaoxing": "[小幸]",
-                "the_cheat_script": "[CT]",
-                "ct_other": "[CT]",
-                "gcm": "[GCM]",
-                "other": "[其他]"
+                "fling_main": "风灵",
+                "fling_archive": "风灵",
+                "xiaoxing": "小幸",
+                "the_cheat_script": "CT",
+                "ct_other": "CT",
+                "gcm": "GCM",
+                "other": "其他"
             },
             "en": {
-                "fling_main": "[FL]",
-                "fling_archive": "[FL]",
-                "xiaoxing": "[XX]",
-                "the_cheat_script": "[CT]",
-                "ct_other": "[CT]",
-                "gcm": "[GCM]",
-                "other": "[OT]"
+                "fling_main": "FL",
+                "fling_archive": "FL",
+                "xiaoxing": "XX",
+                "the_cheat_script": "CT",
+                "ct_other": "CT",
+                "gcm": "GCM",
+                "other": "OT"
             }
         }
 
         try:
-            if settings["language"] in ["zh_CN", "zh_TW"] and not settings["enSearchResults"]:
-                # Target language is Chinese
-                lang_key = "zh"
-                lang_map = PREFIX_MAP[lang_key]
-                prefix = lang_map.get(origin, "")
-                best_match = self.find_best_trainer_match(trainerName, lang_key)
-                trainerName = f"{prefix}《{best_match or trainerName}》修改器"
+            game_name = trainer.get("game_name", "")
+            origin = trainer.get("origin", "other")
+            author = trainer.get("author", "")
+            custom_name = trainer.get("custom_name", "")
+            custom_name_en = trainer.get("custom_name_en", "")
+            custom_name_zh = trainer.get("custom_name_zh", "")
 
+            # 1. Determine Target Language
+            if settings["language"] in ["zh_CN", "zh_TW"] and not settings["enSearchResults"]:
+                lang_key = "zh"
             else:
-                # Target language is English
                 lang_key = "en"
-                lang_map = PREFIX_MAP[lang_key]
-                prefix = lang_map.get(origin, "")
-                best_match = self.find_best_trainer_match(trainerName, lang_key)
-                trainerName = f"{prefix} {best_match or trainerName} Trainer".strip()
+
+            # 2. Determine Prefix (Author > Built-in Origin Map)
+            if author:
+                prefix = f"[{author}]"
+            else:
+                source_str = PREFIX_MAP[lang_key].get(origin, PREFIX_MAP[lang_key]["other"])
+                prefix = f"[{source_str}]" if source_str else ""
+
+            # 3. Translate Game Name
+            best_match = self.find_best_trainer_match(game_name, lang_key)
+            translated_game_name = best_match or game_name
+
+            # 4. Construct Final Name
+            if lang_key == "zh":
+                # Prioritize Chinese custom name, fallback to generic custom name, finally generic modifier
+                suffix = custom_name_zh or custom_name or "修改器"
+                trainerName = f"{prefix}《{translated_game_name}》{suffix}"
+            else:
+                # Prioritize English custom name, fallback to generic custom name, finally generic modifier
+                suffix = custom_name_en or custom_name or "Trainer"
+                trainerName = f"{prefix} {translated_game_name} {suffix}".strip()
 
         except Exception as e:
             print(f"An error occurred while translating trainer name: {str(e)}")

@@ -37,10 +37,10 @@ class GameCheatsManager(QMainWindow):
 
         self.setWindowTitle("Game Cheats Manager")
         self.setWindowIcon(QIcon(resource_path("assets/logo.ico")))
-        self.setMinimumSize(680, 520)
+        self.setMinimumSize(700, 520)
 
         # Version and links
-        self.appVersion = "2.4.1"
+        self.appVersion = "2.4.2"
         self.websiteLink = "https://gamezonelabs.com"
         self.githubLink = "https://github.com/dyang886/Game-Cheats-Manager"
         self.bilibiliLink = "https://space.bilibili.com/256673766"

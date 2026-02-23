@@ -79,7 +79,7 @@ class DownloadDisplayThread(DownloadBaseThread):
         self.message.emit(tr("Translating search results..."), None)
         with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
             futures = {
-                executor.submit(self.translate_trainer, trainer["game_name"], trainer["origin"]): trainer
+                executor.submit(self.translate_trainer, trainer): trainer
                 for trainer in DownloadBaseThread.trainer_urls
             }
 
@@ -103,8 +103,8 @@ class DownloadDisplayThread(DownloadBaseThread):
 
         self.message.emit("", "clear")
         for count, trainer in enumerate(DownloadBaseThread.trainer_urls, start=1):
-            self.message.emit(f"{count}. {trainer["trainer_name"]}", None)
-            print(f"{count}. {trainer["game_name"]} | {trainer["trainer_name"]} | {trainer["url"]}")
+            self.message.emit(f"{count}. {trainer['trainer_name']}", None)
+            print(f"{count}. {trainer['game_name']} | {trainer['trainer_name']} | {trainer['url']}")
 
         self.finished.emit(0)
 
@@ -175,20 +175,30 @@ class DownloadDisplayThread(DownloadBaseThread):
                             "game_name": gameName,
                             "trainer_name": None,
                             "origin": "fling_archive",
-                            "url": url
+                            "author": "",
+                            "custom_name": "",
+                            "custom_name_en": "",
+                            "custom_name_zh": "",
+                            "url": url,
+                            "version": ""
                         })
 
             elif settings["flingDownloadServer"] == "gcm":
                 for trainer in archiveData:
-                    gameName = trainer['game_name']
-                    url = trainer['gcm_url']
+                    gameName = trainer.get('game_name')
+                    url = trainer.get('gcm_url')
 
-                    if self.keyword_match(keywordList, gameName):
+                    if gameName and self.keyword_match(keywordList, gameName):
                         DownloadBaseThread.trainer_urls.append({
                             "game_name": gameName,
                             "trainer_name": None,
                             "origin": "fling_archive",
-                            "url": url
+                            "author": "",
+                            "custom_name": "",
+                            "custom_name_en": "",
+                            "custom_name_zh": "",
+                            "url": url,
+                            "version": ""
                         })
 
         except Exception as e:
@@ -228,20 +238,29 @@ class DownloadDisplayThread(DownloadBaseThread):
                                         "game_name": gameName,
                                         "trainer_name": None,
                                         "origin": "fling_main",
-                                        "url": url
+                                        "author": "",
+                                        "custom_name": "",
+                                        "custom_name_en": "",
+                                        "custom_name_zh": "",
+                                        "url": url,
+                                        "version": ""
                                     })
 
             elif settings["flingDownloadServer"] == "gcm":
                 for trainer in mainSiteData:
-                    gameName = trainer['game_name']
-                    url = trainer['gcm_url']
-                    version = trainer['version']
+                    gameName = trainer.get('game_name')
+                    url = trainer.get('gcm_url')
+                    version = trainer.get('version', '')
 
-                    if self.keyword_match(keywordList, gameName):
+                    if gameName and self.keyword_match(keywordList, gameName):
                         DownloadBaseThread.trainer_urls.append({
                             "game_name": gameName,
                             "trainer_name": None,
                             "origin": "fling_main",
+                            "author": "",
+                            "custom_name": "",
+                            "custom_name_en": "",
+                            "custom_name_zh": "",
                             "url": url,
                             "version": version
                         })
@@ -265,15 +284,19 @@ class DownloadDisplayThread(DownloadBaseThread):
 
         try:
             for trainer in xiaoXingData:
-                gameName = trainer['game_name']
-                url = trainer['gcm_url']
-                version = trainer['version']
+                gameName = trainer.get('game_name')
+                url = trainer.get('gcm_url')
+                version = trainer.get('version', '')
 
                 if gameName and self.keyword_match(keywordList, gameName):
                     DownloadBaseThread.trainer_urls.append({
                         "game_name": gameName,
                         "trainer_name": None,
                         "origin": "xiaoxing",
+                        "author": "",
+                        "custom_name": "",
+                        "custom_name_en": "",
+                        "custom_name_zh": "",
                         "url": url,
                         "version": version
                     })
@@ -297,16 +320,24 @@ class DownloadDisplayThread(DownloadBaseThread):
 
         try:
             for trainer in CTData:
-                gameName = trainer['game_name']
-                url = trainer['gcm_url']
-                version = trainer['version']
-                origin = trainer['origin']
+                gameName = trainer.get('game_name')
+                url = trainer.get('gcm_url')
+                version = trainer.get('version', '')
+                origin = trainer.get('origin')
+                author = trainer.get('author', '')
+                custom_name = trainer.get('custom_name', '')
+                custom_name_en = trainer.get('custom_name_en', '')
+                custom_name_zh = trainer.get('custom_name_zh', '')
 
                 if gameName and self.keyword_match(keywordList, gameName):
                     DownloadBaseThread.trainer_urls.append({
                         "game_name": gameName,
                         "trainer_name": None,
                         "origin": origin,  # could be "the_cheat_script" or "ct_other"
+                        "author": author,
+                        "custom_name": custom_name,
+                        "custom_name_en": custom_name_en,
+                        "custom_name_zh": custom_name_zh,
                         "url": url,
                         "version": version
                     })
@@ -330,16 +361,24 @@ class DownloadDisplayThread(DownloadBaseThread):
 
         try:
             for trainer in GCMData:
-                gameName = trainer['game_name']
-                url = trainer['gcm_url']
-                version = trainer['version']
-                origin = trainer['origin']
+                gameName = trainer.get('game_name')
+                url = trainer.get('gcm_url')
+                version = trainer.get('version', '')
+                origin = trainer.get('origin')
+                author = trainer.get('author', '')
+                custom_name = trainer.get('custom_name', '')
+                custom_name_en = trainer.get('custom_name_en', '')
+                custom_name_zh = trainer.get('custom_name_zh', '')
 
                 if gameName and self.keyword_match(keywordList, gameName):
                     DownloadBaseThread.trainer_urls.append({
                         "game_name": gameName,
                         "trainer_name": None,
-                        "origin": origin,  # could be "gcm" or "other"
+                        "origin": origin,  # could be "gcm", "other", or "ct_other"
+                        "author": author,
+                        "custom_name": custom_name,
+                        "custom_name_en": custom_name_en,
+                        "custom_name_zh": custom_name_zh,
                         "url": url,
                         "version": version
                     })

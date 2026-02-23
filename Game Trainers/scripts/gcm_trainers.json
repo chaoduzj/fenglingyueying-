@@ -74,8 +74,37 @@
     {
         "game_name": "Core Keeper",
         "origin": "other",
+        "author": "RussDev7",
+        "custom_name": "Workshop",
         "official_url": "https://github.com/RussDev7/CoreKeepersWorkshop",
-        "gcm_url": "GCM/GCM Trainers/Core Keeper Trainer.zip",
+        "gcm_url": "GCM/GCM Trainers/Core Keeper Workshop.zip",
         "version": "2025.8.3"
+    },
+    {
+        "game_name": "Unrailed 2: Back on Track",
+        "origin": "ct_other",
+        "author": "一起抢工作Singaplus",
+        "official_url": "https://ocnokiy7h00u.feishu.cn/wiki/TFj9wUigPiJCUPkkhKMclo5xnoc",
+        "gcm_url": "GCM/GCM Trainers/Unrailed2 v-763-7d7e4db.ct",
+        "version": "2026.2.17"
+    },
+    {
+        "game_name": "Elden Ring Nightreign",
+        "origin": "other",
+        "author": "GBrain",
+        "custom_name": "遗物修改助手",
+        "official_url": "https://space.bilibili.com/58332755",
+        "gcm_url": "GCM/GCM Trainers/黑夜君临：遗物修改助手.exe",
+        "version": "2026.2.2"
+    },
+    {
+        "game_name": "Diablo II: Resurrected",
+        "origin": "other",
+        "author": "DoZerg",
+        "custom_name_en": "Character Editor",
+        "custom_name_zh": "角色编辑器",
+        "official_url": "https://github.com/daidodo/diablo_edit",
+        "gcm_url": "GCM/GCM Trainers/Diablo Edit2.exe",
+        "version": "2024.9.23"
     }
 ]

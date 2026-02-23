@@ -13,4 +13,5 @@ upload_trainers.py
 fetch_trainers.py
 user_trainers.json
 user_trainers.xlsx
+completed_trainers.txt
 User Trainers/
