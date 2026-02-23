@@ -7,7 +7,8 @@
 <div align="center">
     <img src="src/assets/logo.png" alt="Game Cheats Manager logo" width="250" />
 </div>
-**获取更多信息，请访问我们的官方网站 https://gamezonelabs.com。**
+
+**获取更多信息，请访问我们的官方网站 [https://gamezonelabs.com](https://gamezonelabs.com)。**
 
 告别在各类可疑网站中苦苦寻觅，也无需再管理无数的浏览器标签页。**Game Cheats Manager (GCM)** 将来自多个平台的单机游戏修改器汇集到一个干净整洁且开源的面板中。支持中英文双语搜索，一键下载，剩下的全部交给应用自动处理。
 
