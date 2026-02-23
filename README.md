@@ -8,7 +8,7 @@ English | [简体中文](./README_CN.md) | [繁體中文](./README_TW.md)
     <img src="src/assets/logo.png" alt="Game Cheats Manager logo" width="250" />
 </div>
 
-**Please visit our official website [https://gamezonelabs.com](https://gamezonelabs.com) for more info.**
+**Please visit our official website https://gamezonelabs.com for more info.**
 
 Stop hunting through sketchy websites and managing endless browser tabs. **Game Cheats Manager (GCM)** brings single-player game trainers from multiple sources into one clean, open-source dashboard. Search in English or Chinese, download with one click, and let the app handle the rest.
 
