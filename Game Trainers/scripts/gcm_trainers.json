@@ -106,5 +106,98 @@
         "official_url": "https://github.com/daidodo/diablo_edit",
         "gcm_url": "GCM/GCM Trainers/Diablo Edit2.exe",
         "version": "2024.9.23"
+    },
+    {
+        "game_name": "Forza Horizon 5",
+        "origin": "other",
+        "author": "Merika",
+        "official_url": "https://www.merika.dev/trainers/fh5",
+        "gcm_url": "GCM/GCM Trainers/Merikas_FH5_Trainer_v685_421.exe",
+        "version": "2025.7.21"
+    },
+    {
+        "game_name": "Spore",
+        "origin": "other",
+        "author": "KelSat",
+        "gcm_url": "GCM/GCM Trainers/Spore_V1.0_Plus_31_Trainer.exe",
+        "version": "2026.2.23"
+    },
+    {
+        "game_name": "Watch Dogs",
+        "origin": "other",
+        "author": "笑淫淫",
+        "official_url": "https://dl.3dmgame.com/patch/47695.html",
+        "gcm_url": "GCM/GCM Trainers/Watch Dogs Trainer by 笑淫淫.zip",
+        "version": "2014.6.22"
+    },
+    {
+        "game_name": "XCOM: Enemy Within",
+        "origin": "other",
+        "author": "MrAntiFun",
+        "official_url": "https://mrantifun.net/threads/xcom-enemy-unknown-trainer.22039/",
+        "gcm_url": "GCM/GCM Trainers/Xcom Enemy Within V1.0.0.9040 Trainer.exe",
+        "version": "2021.3.27"
+    },
+    {
+        "game_name": "Need for Speed: Hot Pursuit",
+        "origin": "other",
+        "author": "Geri",
+        "official_url": "http://www.szemelyesintegracio.hu/cheats/38-pc-game-cheats",
+        "gcm_url": "GCM/GCM Trainers/nfs11_plus3_trainer.exe",
+        "version": "2026.2.23"
+    },
+    {
+        "game_name": "theHunter: Call of the Wild",
+        "origin": "other",
+        "author": "Marco Stel",
+        "gcm_url": "GCM/GCM Trainers/thcotwv2891297+17tr.exe",
+        "version": "2024.12.6"
+    },
+    {
+        "game_name": "Little Nightmares 2",
+        "origin": "other",
+        "author": "游音寂影",
+        "official_url": "http://bilibeili.ysepan.com/",
+        "gcm_url": "GCM/GCM Trainers/xiaoxiaoemenggaoq.exe",
+        "version": "2026.2.23"
+    },
+    {
+        "game_name": "Dungeon of the Endless",
+        "origin": "other",
+        "author": "MrAntiFun",
+        "official_url": "https://mrantifun.net/threads/dungeon-of-the-endless-trainer.6108/",
+        "gcm_url": "GCM/GCM Trainers/Dungeon of the Endless V1.1.5 Trainer.exe",
+        "version": "2015.11.21"
+    },
+    {
+        "game_name": "Three Kingdom: The Journey",
+        "origin": "other",
+        "author": "ギナ",
+        "official_url": "https://space.bilibili.com/31947",
+        "gcm_url": "GCM/GCM Trainers/Three Kingdom_The Journey Trainer.zip",
+        "version": "2026.2.23"
+    },
+    {
+        "game_name": "Nioh 2",
+        "origin": "other",
+        "author": "KoKo君",
+        "gcm_url": "GCM/GCM Trainers/Nioh2 Script 1.28.02.exe",
+        "version": "2022.2.20"
+    },
+    {
+        "game_name": "Absolum",
+        "origin": "other",
+        "author": "badenj",
+        "official_url": "https://pd.qq.com/qqweb/qunpro/share?_wv=3&_wwv=128&appChannel=share&inviteCode=2irWICeLFPY&businessType=9",
+        "gcm_url": "GCM/GCM Trainers/Absolum 3 Version Trainer.zip",
+        "version": "2025.10.13"
+    },
+    {
+        "game_name": "Blue Alert",
+        "origin": "other",
+        "author": "蓝警网",
+        "official_url": "https://www.stateofwar.cn/",
+        "gcm_url": "GCM/GCM Trainers/Blue Alert V8.6.3.zip",
+        "version": "2026.2.23"
     }
 ]

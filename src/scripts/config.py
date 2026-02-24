@@ -72,6 +72,7 @@ def load_settings():
         "downloadPath": os.path.join(os.environ["APPDATA"], "GCM Trainers"),
         "language": app_locale,
         "theme": "dark",
+        "safePath": True,
         "enSearchResults": False,
         "sortByOrigin": True,
         "checkAppUpdate": True,

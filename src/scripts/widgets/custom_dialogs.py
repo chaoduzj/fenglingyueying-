@@ -196,6 +196,11 @@ class SettingsDialog(QDialog):
         self.checkAppUpdateCheckbox.setChecked(settings["checkAppUpdate"])
         settingsWidgetsLayout.addWidget(self.checkAppUpdateCheckbox)
 
+        # Legacy compatibility mode (Safe ASCII Launch)
+        self.safePathCheckbox = QCheckBox(tr("Use safe launch path (may fix trainers unable to launch)"))
+        self.safePathCheckbox.setChecked(settings["safePath"])
+        settingsWidgetsLayout.addWidget(self.safePathCheckbox)
+
         # Always show english
         self.alwaysEnCheckbox = QCheckBox(tr("Always show search results in English"))
         self.alwaysEnCheckbox.setChecked(settings["enSearchResults"])
@@ -246,6 +251,7 @@ class SettingsDialog(QDialog):
 
         settings["theme"] = theme_options[self.themeCombo.currentText()]
         settings["language"] = language_options[self.languageCombo.currentText()]
+        settings["safePath"] = self.safePathCheckbox.isChecked()
         settings["enSearchResults"] = self.alwaysEnCheckbox.isChecked()
         settings["sortByOrigin"] = self.sortByOriginCheckbox.isChecked()
         settings["checkAppUpdate"] = self.checkAppUpdateCheckbox.isChecked()
@@ -502,6 +508,14 @@ class TrainerUploadDialog(QDialog):
         self.notesEdit.setMaximumHeight(100)
         self.notesEdit.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
         notesLayout.addWidget(self.notesEdit)
+
+        notes_info_label = QLabel(tr("Trainer testing QQ group: 186859946, feel free to join and help verify the trainers you upload"))
+        notes_info_font = notes_info_label.font()
+        notes_info_font.setPointSize(9)
+        notes_info_label.setFont(notes_info_font)
+        notes_info_label.setStyleSheet("color: gray;")
+        notes_info_label.setWordWrap(True)
+        notesLayout.addWidget(notes_info_label)
         layout.addLayout(notesLayout)
 
         # Progress Bar

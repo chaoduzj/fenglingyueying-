@@ -1,10 +1,13 @@
 import ctypes
+from ctypes import wintypes
+import hashlib
 import os
 from queue import Queue
 import shutil
 import stat
 import subprocess
 import sys
+import tempfile
 
 from PyQt6.QtCore import Qt, QTimer
 from PyQt6.QtGui import QAction, QColor, QFont, QFontDatabase, QIcon
@@ -40,7 +43,7 @@ class GameCheatsManager(QMainWindow):
         self.setMinimumSize(700, 520)
 
         # Version and links
-        self.appVersion = "2.4.2"
+        self.appVersion = "2.4.3"
         self.websiteLink = "https://gamezonelabs.com"
         self.githubLink = "https://github.com/dyang886/Game-Cheats-Manager"
         self.bilibiliLink = "https://space.bilibili.com/256673766"
@@ -223,6 +226,7 @@ class GameCheatsManager(QMainWindow):
         self.fileDialogButton.clicked.connect(self.change_path)
 
         self.show_cheats()
+        self.cleanup_launch_junctions()
 
         # Show warning pop up
         if settings["showWarning"]:
@@ -251,6 +255,7 @@ class GameCheatsManager(QMainWindow):
     # Core functions
     # ===========================================================================
     def closeEvent(self, event):
+        self.cleanup_launch_junctions()
         super().closeEvent(event)
         os._exit(0)
 
@@ -393,14 +398,86 @@ class GameCheatsManager(QMainWindow):
                     self.flingListBox.addItem(trainerName)
                     self.trainers[trainerName] = exe_file_path
 
+    def cleanup_launch_junctions(self):
+        temp_dir = tempfile.gettempdir()
+        try:
+            for item in os.listdir(temp_dir):
+                if item.startswith("GCM_Launch_"):
+                    junction_path = os.path.join(temp_dir, item)
+                    try:
+                        subprocess.run(f'rmdir "{junction_path}"', shell=True, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                    except Exception:
+                        pass
+        except Exception as e:
+            print(f"Error during junction cleanup: {e}")
+
+    def get_ascii_launch_path(self, original_exe_path):
+        # 1. Check if the entire path is already purely ASCII
+        try:
+            original_exe_path.encode('ascii')
+            return original_exe_path
+        except UnicodeEncodeError:
+            pass
+
+        # 2. Try Windows Short Path (8.3 format)
+        _GetShortPathNameW = ctypes.windll.kernel32.GetShortPathNameW
+        _GetShortPathNameW.argtypes = [wintypes.LPCWSTR, wintypes.LPWSTR, wintypes.DWORD]
+        _GetShortPathNameW.restype = wintypes.DWORD
+
+        output_buf_size = _GetShortPathNameW(original_exe_path, None, 0)
+        if output_buf_size > 0:
+            output_buf = ctypes.create_unicode_buffer(output_buf_size)
+            _GetShortPathNameW(original_exe_path, output_buf, output_buf_size)
+            short_path = output_buf.value
+            try:
+                short_path.encode('ascii')
+                return short_path
+            except UnicodeEncodeError:
+                pass
+
+        # 3. Ultimate Fallback: Unique Directory Junction in %TEMP%
+        temp_dir = tempfile.gettempdir()
+        exe_dir = os.path.dirname(original_exe_path)
+        original_exe_name = os.path.basename(original_exe_path)
+
+        # Create a short, stable hash of the directory path to prevent collisions
+        # e.g., "GCM_Launch_8a4f9b2c"
+        path_hash = hashlib.md5(exe_dir.encode('utf-8')).hexdigest()[:8]
+        junction_dir = os.path.join(temp_dir, f"GCM_Launch_{path_hash}")
+
+        # Remove old junction if it exists
+        if os.path.exists(junction_dir):
+            try:
+                subprocess.run(f'rmdir "{junction_dir}"', shell=True, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            except Exception:
+                pass
+
+        # If it doesn't exist (or was successfully removed), create the new junction
+        if not os.path.exists(junction_dir):
+            try:
+                command = f'mklink /J "{junction_dir}" "{exe_dir}"'
+                subprocess.run(command, shell=True, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            except Exception as e:
+                print(f"Failed to create ASCII junction fallback: {e}")
+                return original_exe_path
+
+        return os.path.join(junction_dir, original_exe_name)
+
     def launch_trainer(self):
         try:
             selection = self.flingListBox.currentRow()
             if selection != -1:
                 trainerName = self.flingListBox.item(selection).text()
-                trainerPath = os.path.normpath(self.trainers[trainerName])
+                originalPath = os.path.normpath(self.trainers[trainerName])
+
+                # Get a safe ASCII path to prevent legacy trainers from crashing
+                if settings["safePath"]:
+                    trainerPath = self.get_ascii_launch_path(originalPath)
+                else:
+                    trainerPath = originalPath
+                print(f"Trainer launch path: {trainerPath}")
                 trainerDir = os.path.dirname(trainerPath)
-                trainerExt = os.path.splitext(trainerPath)[1].lower()
+                trainerExt = os.path.splitext(originalPath)[1].lower()
 
                 # Use "runas" for exe files (run as admin), "open" for other files (use default app)
                 verb = "runas" if trainerExt == ".exe" else "open"

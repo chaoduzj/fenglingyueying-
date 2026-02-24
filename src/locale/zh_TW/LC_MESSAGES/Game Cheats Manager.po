@@ -402,6 +402,9 @@ msgstr "開機自啟"
 msgid "Check for software update at startup"
 msgstr "軟體啟動時檢查更新"
 
+msgid "Use safe launch path (may fix trainers unable to launch)"
+msgstr "使用安全啟動路徑（可能修復修改器無法啟動的問題）"
+
 msgid "Always show search results in English"
 msgstr "始終以英文顯示搜尋結果"
 
@@ -470,6 +473,9 @@ msgstr "備註："
 
 msgid "Anything else to add..."
 msgstr "其他補充說明..."
+
+msgid "Trainer testing QQ group: 186859946, feel free to join and help verify the trainers you upload"
+msgstr "修改器測試QQ群：186859946，歡迎加入並協助驗證您上傳的修改器"
 
 msgid "Upload"
 msgstr "上傳"

@@ -47,9 +47,9 @@ class DownloadTrainersThread(DownloadBaseThread):
             result = self.download_fling(selected_trainer)
         elif origin == "xiaoxing":
             result = self.download_xiaoxing(selected_trainer)
-        elif origin == "the_cheat_script" or origin == "ct_other":
+        elif origin in ["the_cheat_script", "ct_other"]:
             result = self.download_ct(selected_trainer)
-        elif origin == "gcm" or origin == "other":
+        elif origin in ["gcm", "other"]:
             result = self.download_gcm(selected_trainer)
 
         try:
@@ -407,6 +407,29 @@ class DownloadTrainersThread(DownloadBaseThread):
 
         return False
 
+    def handle_multi_version_archive(self, extractedContentPath, trainerName_display):
+        temp_contents = os.listdir(extractedContentPath)
+
+        # Check if there are any executables (.exe, .ct, .cetrainer) in the root folder
+        has_executable_in_root = any(
+            file.lower().endswith((".exe", ".ct", ".cetrainer"))
+            for file in temp_contents
+            if os.path.isfile(os.path.join(extractedContentPath, file))
+        )
+
+        folders = [item for item in temp_contents if os.path.isdir(os.path.join(extractedContentPath, item))]
+
+        if not has_executable_in_root and len(folders) > 0:
+            for folder_name in folders:
+                source_path = os.path.join(extractedContentPath, folder_name)
+                # Add folder name as suffix
+                safe_folder_name = self.symbol_replacement(folder_name.strip())
+                destination_path = os.path.join(self.trainerDownloadPath, f"{trainerName_display} {safe_folder_name}")
+                self.src_dst.append({"src": source_path, "dst": destination_path})
+            return True
+
+        return False
+
     def process_pattern_to_hex_and_mask(self, pattern_str):
         hex_bytes = []
         mask_bytes = []
@@ -533,11 +556,17 @@ class DownloadTrainersThread(DownloadBaseThread):
         if self.update_entry:
             shutil.rmtree(selected_trainer['trainer_dir'])
 
-        destination_path = os.path.join(self.trainerDownloadPath, trainerName_display)
-        self.src_dst.append({"src": extractedContentPath if extracted else trainerTemp, "dst": destination_path if extracted else os.path.join(destination_path, os.path.basename(trainerTemp))})
+        if extracted:
+            # If the archive contains multiple version folders, split them up into multiple dest folders
+            if not self.handle_multi_version_archive(extractedContentPath, trainerName_display):
+                destination_path = os.path.join(self.trainerDownloadPath, trainerName_display)
+                self.src_dst.append({"src": extractedContentPath, "dst": destination_path})
+        else:
+            destination_path = os.path.join(self.trainerDownloadPath, trainerName_display)
+            self.src_dst.append({"src": trainerTemp, "dst": os.path.join(destination_path, os.path.basename(trainerTemp))})
 
         return True
-    
+
     def download_ct(self, selected_trainer):
         if self.update_entry:
             trainerName_display = selected_trainer["trainer_name"]
@@ -586,7 +615,13 @@ class DownloadTrainersThread(DownloadBaseThread):
         if self.update_entry:
             shutil.rmtree(selected_trainer['trainer_dir'])
 
-        destination_path = os.path.join(self.trainerDownloadPath, trainerName_display)
-        self.src_dst.append({"src": extractedContentPath if extracted else trainerTemp, "dst": destination_path if extracted else os.path.join(destination_path, os.path.basename(trainerTemp))})
+        if extracted:
+            # If the archive contains multiple version folders, split them up into multiple dest folders
+            if not self.handle_multi_version_archive(extractedContentPath, trainerName_display):
+                destination_path = os.path.join(self.trainerDownloadPath, trainerName_display)
+                self.src_dst.append({"src": extractedContentPath, "dst": destination_path})
+        else:
+            destination_path = os.path.join(self.trainerDownloadPath, trainerName_display)
+            self.src_dst.append({"src": trainerTemp, "dst": os.path.join(destination_path, os.path.basename(trainerTemp))})
 
         return True

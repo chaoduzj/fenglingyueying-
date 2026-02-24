@@ -402,6 +402,9 @@ msgstr "App beim Systemstart ausführen"
 msgid "Check for software update at startup"
 msgstr "Beim Start nach Software-Updates suchen"
 
+msgid "Use safe launch path (may fix trainers unable to launch)"
+msgstr "Sicheren Startpfad verwenden (kann Probleme beim Starten von Trainern beheben)"
+
 msgid "Always show search results in English"
 msgstr "Suchergebnisse immer auf Englisch anzeigen"
 
@@ -470,6 +473,9 @@ msgstr "Zusätzliche Anmerkungen:"
 
 msgid "Anything else to add..."
 msgstr "Sonstige Ergänzungen..."
+
+msgid "Trainer testing QQ group: 186859946, feel free to join and help verify the trainers you upload"
+msgstr "Trainer-Test QQ-Gruppe: 186859946, tritt gerne bei und hilf dabei, die von dir hochgeladenen Trainer zu überprüfen"
 
 msgid "Upload"
 msgstr "Hochladen"
