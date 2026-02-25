@@ -323,7 +323,6 @@ class DownloadDisplayThread(DownloadBaseThread):
                 gameName = trainer.get('game_name')
                 url = trainer.get('gcm_url')
                 version = trainer.get('version', '')
-                origin = trainer.get('origin')
                 author = trainer.get('author', '')
                 custom_name = trainer.get('custom_name', '')
                 custom_name_en = trainer.get('custom_name_en', '')
@@ -333,7 +332,7 @@ class DownloadDisplayThread(DownloadBaseThread):
                     DownloadBaseThread.trainer_urls.append({
                         "game_name": gameName,
                         "trainer_name": None,
-                        "origin": origin,  # could be "the_cheat_script" or "ct_other"
+                        "origin": "the_cheat_script",
                         "author": author,
                         "custom_name": custom_name,
                         "custom_name_en": custom_name_en,

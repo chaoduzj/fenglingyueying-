@@ -38,6 +38,7 @@ class UpdateTrainers(DownloadBaseThread):
             origin_to_file = {
                 "gcm": "gcm_trainers.json" if (self.auto_check and settings["autoUpdateGCMTrainers"]) or not self.auto_check else None,
                 "other": "gcm_trainers.json" if (self.auto_check and settings["autoUpdateGCMTrainers"]) or not self.auto_check else None,
+                "ct_other": "gcm_trainers.json" if (self.auto_check and settings["autoUpdateGCMTrainers"]) or not self.auto_check else None,
                 "fling_main": "fling_main.json" if (self.auto_check and settings["autoUpdateFlingTrainers"]) or not self.auto_check else None,
                 "xiaoxing": "xiaoxing.json" if (self.auto_check and settings["autoUpdateXiaoXingTrainers"]) or not self.auto_check else None,
                 "the_cheat_script": "cheat_table.json" if (self.auto_check and settings["autoUpdateCTTrainers"]) or not self.auto_check else None
@@ -47,8 +48,15 @@ class UpdateTrainers(DownloadBaseThread):
                 return None
             database = self.load_json_content(origin_database)
 
+            # For other/ct_other origins, match by gcm_url to handle multiple trainers for the same game
+            stored_gcm_url = info.get('gcm_url')
+
             for entry in database:
                 if entry['game_name'] == game_name:
+                    if origin in ["other", "ct_other"]:
+                        if not stored_gcm_url or entry.get('gcm_url') != stored_gcm_url:
+                            continue
+
                     new_version = entry['version']
                     gcm_url = entry['gcm_url']
                     if current_version and new_version != current_version:
