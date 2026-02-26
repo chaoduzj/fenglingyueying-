@@ -8,6 +8,7 @@ import stat
 import subprocess
 import sys
 import tempfile
+import winreg
 
 from PyQt6.QtCore import Qt, QTimer
 from PyQt6.QtGui import QAction, QColor, QFont, QFontDatabase, QIcon
@@ -43,7 +44,7 @@ class GameCheatsManager(QMainWindow):
         self.setMinimumSize(700, 520)
 
         # Version and links
-        self.appVersion = "2.4.3"
+        self.appVersion = "2.4.4"
         self.websiteLink = "https://gamezonelabs.com"
         self.githubLink = "https://github.com/dyang886/Game-Cheats-Manager"
         self.bilibiliLink = "https://space.bilibili.com/256673766"
@@ -463,6 +464,52 @@ class GameCheatsManager(QMainWindow):
 
         return os.path.join(junction_dir, original_exe_name)
 
+    def is_cheat_engine_available(self, ext):
+        # 1. Check Windows 10/11 UserChoice (When user selects "Always use this app")
+        try:
+            with winreg.OpenKey(winreg.HKEY_CURRENT_USER, rf"Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\{ext}\UserChoice") as key:
+                prog_id, _ = winreg.QueryValueEx(key, "ProgId")
+
+            with winreg.OpenKey(winreg.HKEY_CLASSES_ROOT, rf"{prog_id}\shell\open\command") as cmd_key:
+                command, _ = winreg.QueryValueEx(cmd_key, "")
+
+            if command and "cheatengine" in command.lower().replace(" ", ""):
+                return True
+        except (FileNotFoundError, OSError):
+            pass
+
+        # 2. Check Standard ProgID
+        try:
+            with winreg.OpenKey(winreg.HKEY_CLASSES_ROOT, ext) as key:
+                prog_id, _ = winreg.QueryValueEx(key, "")
+
+            with winreg.OpenKey(winreg.HKEY_CLASSES_ROOT, rf"{prog_id}\shell\open\command") as cmd_key:
+                command, _ = winreg.QueryValueEx(cmd_key, "")
+
+            if command and "cheatengine" in command.lower().replace(" ", ""):
+                return True
+        except (FileNotFoundError, OSError):
+            pass
+
+        return False
+
+    def prompt_cheat_engine_install(self):
+        msg_box = QMessageBox(self)
+        msg_box.setIcon(QMessageBox.Icon.Warning)
+        msg_box.setWindowTitle(tr("Cheat Engine Required"))
+        msg_box.setText(
+            tr("Cheat Engine may not be installed on your system.") + "<br><br>" +
+            tr(".ct/.cetrainer files require Cheat Engine to run.") + " " +
+            tr("Please download and install Cheat Engine, then make sure to open the file with Cheat Engine.") + "<br><br>" +
+            tr("Note: The official Cheat Engine installer contains promotional software bundles. Make sure to skip them during installation.") + "<br><br>" +
+            tr("Download from:") + ' <a href="https://www.cheatengine.org">https://www.cheatengine.org</a>'
+        )
+        msg_box.setTextFormat(Qt.TextFormat.RichText)
+        msg_box.setStandardButtons(QMessageBox.StandardButton.Ok)
+        ok_button = msg_box.button(QMessageBox.StandardButton.Ok)
+        ok_button.setText("OK")
+        msg_box.exec()
+
     def launch_trainer(self):
         try:
             selection = self.flingListBox.currentRow()
@@ -478,6 +525,10 @@ class GameCheatsManager(QMainWindow):
                 print(f"Trainer launch path: {trainerPath}")
                 trainerDir = os.path.dirname(trainerPath)
                 trainerExt = os.path.splitext(originalPath)[1].lower()
+
+                # Check if Cheat Engine is installed before launching .ct/.cetrainer files
+                if trainerExt in [".ct", ".cetrainer"] and not self.is_cheat_engine_available(trainerExt):
+                    self.prompt_cheat_engine_install()
 
                 # Use "runas" for exe files (run as admin), "open" for other files (use default app)
                 verb = "runas" if trainerExt == ".exe" else "open"

@@ -103,6 +103,24 @@ msgstr "Update-Prüfung fehlgeschlagen"
 msgid "Failed to check for software update. You can navigate to `Options` ➜ `About` to check for updates manually."
 msgstr "Die Suche nach einem Software-Update ist fehlgeschlagen. Du kannst unter `Optionen` ➜ `Über` manuell nach Updates suchen."
 
+msgid "Cheat Engine Required"
+msgstr "Cheat Engine erforderlich"
+
+msgid "Cheat Engine may not be installed on your system."
+msgstr "Cheat Engine ist möglicherweise nicht auf Ihrem System installiert."
+
+msgid ".ct/.cetrainer files require Cheat Engine to run."
+msgstr ".ct- und .cetrainer-Dateien benötigen Cheat Engine, um ausgeführt zu werden."
+
+msgid "Please download and install Cheat Engine, then make sure to open the file with Cheat Engine."
+msgstr "Bitte laden Sie Cheat Engine herunter und installieren Sie es. Stellen Sie anschließend sicher, dass die Datei mit Cheat Engine geöffnet wird."
+
+msgid "Note: The official Cheat Engine installer contains promotional software bundles. Make sure to skip them during installation."
+msgstr "Hinweis: Das offizielle Installationsprogramm von Cheat Engine enthält gebündelte Werbesoftware. Achten Sie darauf, diese Zusatzangebote während der Installation abzulehnen."
+
+msgid "Download from:"
+msgstr "Download unter:"
+
 msgid "Delete trainer"
 msgstr "Trainer löschen"
 
@@ -473,6 +491,9 @@ msgstr "Zusätzliche Anmerkungen:"
 
 msgid "Anything else to add..."
 msgstr "Sonstige Ergänzungen..."
+
+msgid "Please make sure the trainer you are about to upload is tested to be safe and functional."
+msgstr "Bitte stellen Sie sicher, dass der Trainer, den Sie hochladen möchten, getestet, sicher und funktionsfähig ist."
 
 msgid "Trainer testing QQ group: 186859946, feel free to join and help verify the trainers you upload"
 msgstr "Trainer-Test QQ-Gruppe: 186859946, tritt gerne bei und hilf dabei, die von dir hochgeladenen Trainer zu überprüfen"

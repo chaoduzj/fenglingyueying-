@@ -103,6 +103,24 @@ msgstr "Update Check Failed"
 msgid "Failed to check for software update. You can navigate to `Options` ➜ `About` to check for updates manually."
 msgstr "Failed to check for software update. You can navigate to `Options` ➜ `About` to check for updates manually."
 
+msgid "Cheat Engine Required"
+msgstr "Cheat Engine Required"
+
+msgid "Cheat Engine may not be installed on your system."
+msgstr "Cheat Engine may not be installed on your system."
+
+msgid ".ct/.cetrainer files require Cheat Engine to run."
+msgstr ".ct/.cetrainer files require Cheat Engine to run."
+
+msgid "Please download and install Cheat Engine, then make sure to open the file with Cheat Engine."
+msgstr "Please download and install Cheat Engine, then make sure to open the file with Cheat Engine."
+
+msgid "Note: The official Cheat Engine installer contains promotional software bundles. Make sure to skip them during installation."
+msgstr "Note: The official Cheat Engine installer contains promotional software bundles. Make sure to skip them during installation."
+
+msgid "Download from:"
+msgstr "Download from:"
+
 msgid "Delete trainer"
 msgstr "Delete trainer"
 
@@ -473,6 +491,9 @@ msgstr "Additional Notes:"
 
 msgid "Anything else to add..."
 msgstr "Anything else to add..."
+
+msgid "Please make sure the trainer you are about to upload is tested to be safe and functional."
+msgstr "Please make sure the trainer you are about to upload is tested to be safe and functional."
 
 msgid "Trainer testing QQ group: 186859946, feel free to join and help verify the trainers you upload"
 msgstr "Trainer testing QQ group: 186859946, feel free to join and help verify the trainers you upload"

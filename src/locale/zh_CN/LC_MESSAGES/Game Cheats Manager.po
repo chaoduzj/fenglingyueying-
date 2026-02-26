@@ -103,6 +103,24 @@ msgstr "检查更新失败"
 msgid "Failed to check for software update. You can navigate to `Options` ➜ `About` to check for updates manually."
 msgstr "无法检查软件更新，请移至 `选项` ➜ `关于` 以手动检查更新。"
 
+msgid "Cheat Engine Required"
+msgstr "需要安装 Cheat Engine"
+
+msgid "Cheat Engine may not be installed on your system."
+msgstr "您的系统上可能尚未安装 Cheat Engine。"
+
+msgid ".ct/.cetrainer files require Cheat Engine to run."
+msgstr ".ct 和 .cetrainer 文件需要依赖 Cheat Engine 才能运行。"
+
+msgid "Please download and install Cheat Engine, then make sure to open the file with Cheat Engine."
+msgstr "请下载并安装 Cheat Engine，然后请确保使用 Cheat Engine 打开该文件。"
+
+msgid "Note: The official Cheat Engine installer contains promotional software bundles. Make sure to skip them during installation."
+msgstr "注意：Cheat Engine 官方安装程序内包含捆绑的推广软件。在安装过程中请注意跳过/拒绝这些捆绑内容。"
+
+msgid "Download from:"
+msgstr "下载地址："
+
 msgid "Delete trainer"
 msgstr "删除修改器"
 
@@ -473,6 +491,9 @@ msgstr "备注："
 
 msgid "Anything else to add..."
 msgstr "其他补充说明..."
+
+msgid "Please make sure the trainer you are about to upload is tested to be safe and functional."
+msgstr "请确保您上传的修改器已经过测试，安全且可正常使用。"
 
 msgid "Trainer testing QQ group: 186859946, feel free to join and help verify the trainers you upload"
 msgstr "修改器测试Q群：186859946，欢迎加入并协助验证您上传的修改器"

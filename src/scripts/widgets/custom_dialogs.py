@@ -509,7 +509,10 @@ class TrainerUploadDialog(QDialog):
         self.notesEdit.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
         notesLayout.addWidget(self.notesEdit)
 
-        notes_info_label = QLabel(tr("Trainer testing QQ group: 186859946, feel free to join and help verify the trainers you upload"))
+        notes_info_label = QLabel(
+            tr("Please make sure the trainer you are about to upload is tested to be safe and functional.") + "\n" +
+            tr("Trainer testing QQ group: 186859946, feel free to join and help verify the trainers you upload")
+        )
         notes_info_font = notes_info_label.font()
         notes_info_font.setPointSize(9)
         notes_info_label.setFont(notes_info_font)
