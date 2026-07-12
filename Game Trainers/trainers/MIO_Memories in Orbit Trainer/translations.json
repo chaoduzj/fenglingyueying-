@@ -1,0 +1,38 @@
+{
+    "en_US": {
+        "English": "English",
+        "Please run the game first.": "Please run the game first.",
+        "Failed to activate.": "Failed to activate.",
+        "Failed to activate/deactivate.": "Failed to activate/deactivate.",
+        "Process Name:": "Process Name:",
+        "Process ID:": "Process ID:",
+        "MIO: Memories in Orbit Trainer": "MIO: Memories in Orbit Trainer",
+        "Apply": "Apply",
+        "Infinite Health": "Infinite Health",
+        "Unlimited Modifier Allocation": "Unlimited Modifier Allocation",
+        "Infinite Jumps": "Infinite Jumps",
+        "Infinite Stamina": "Infinite Stamina",
+        "Movement Speed Multiplier": "Movement Speed Multiplier",
+        "Set Nacre Droplets": "Set Nacre Droplets",
+        "Set Crystallized Nacre": "Set Crystallized Nacre",
+        "Set Old Core": "Set Old Core"
+    },
+    "zh_CN": {
+        "简体中文": "简体中文",
+        "Please run the game first.": "请先运行游戏。",
+        "Failed to activate.": "激活失败。",
+        "Failed to activate/deactivate.": "激活/停用失败。",
+        "Process Name:": "进程名称：",
+        "Process ID:": "进程 ID:",
+        "MIO: Memories in Orbit Trainer": "《秘奥：秘宇奥忆》修改器",
+        "Apply": "应用",
+        "Infinite Health": "无限生命",
+        "Unlimited Modifier Allocation": "无限调整原件分配",
+        "Infinite Jumps": "无限跳跃",
+        "Infinite Stamina": "无限体力",
+        "Movement Speed Multiplier": "移动速度倍率",
+        "Set Nacre Droplets": "设置母贝液滴",
+        "Set Crystallized Nacre": "设置母贝结晶",
+        "Set Old Core": "设置老旧核心"
+    }
+}

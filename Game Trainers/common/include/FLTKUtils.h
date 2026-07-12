@@ -1,6 +1,7 @@
 #include <nlohmann/json.hpp>
 #include <fstream>
 #include <shlobj.h>
+#include <cstdlib>
 #include <FL/Fl_Table.H>
 
 using json = nlohmann::json;
@@ -312,28 +313,16 @@ void clean_up(Fl_Window *window, Trainer *trainer)
     uncheck_all_checkbuttons(window);
 }
 
+// Numeric "a < b" via strtold (handles decimals/negatives and saturates instead of throwing on
+// overflow, so out-of-range input still clamps); lexicographic fallback if a side isn't a number.
 bool compareNumericStrings(const std::string &a, const std::string &b)
 {
-    // Handle negative numbers
-    if (a[0] == '-' && b[0] != '-')
-        return true; // Negative is less than positive
-    if (a[0] != '-' && b[0] == '-')
-        return false; // Positive is greater than negative
-    if (a[0] == '-' && b[0] == '-')
-        return compareNumericStrings(b.substr(1), a.substr(1)); // Reverse comparison for negatives
-
-    // Remove leading zeros
-    std::string a_trim = a;
-    std::string b_trim = b;
-    a_trim.erase(0, a_trim.find_first_not_of('0'));
-    b_trim.erase(0, b_trim.find_first_not_of('0'));
-
-    // Compare by length
-    if (a_trim.size() != b_trim.size())
-        return a_trim.size() < b_trim.size();
-
-    // Compare lexicographically if lengths are equal
-    return a_trim < b_trim;
+    char *ea = nullptr, *eb = nullptr;
+    long double va = std::strtold(a.c_str(), &ea);
+    long double vb = std::strtold(b.c_str(), &eb);
+    if (ea == a.c_str() || eb == b.c_str())
+        return a < b;
+    return va < vb;
 }
 
 void set_input_values(Fl_Input *input, std::string def, std::string min, std::string max)

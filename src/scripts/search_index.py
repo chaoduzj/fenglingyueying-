@@ -28,7 +28,7 @@ CH_MIN_SYLLABLES = 3         # min Chinese query syllables for token matching
 CH_MIN_SHARED = 3            # min syllables shared with the target
 CH_COVERAGE = 0.8            # shared / shorter-side must reach this (containment, not partial overlap)
 
-_PUNCTUATION = (string.punctuation + zhon.hanzi.punctuation).replace('&', '')
+_PUNCTUATION = (string.punctuation + zhon.hanzi.punctuation).replace('&', '').replace('+', '')
 _ROMAN_MAP = [
     (1000, 'M'), (900, 'CM'), (500, 'D'), (400, 'CD'), (100, 'C'), (90, 'XC'),
     (50, 'L'), (40, 'XL'), (10, 'X'), (9, 'IX'), (5, 'V'), (4, 'IV'), (1, 'I'),

@@ -54,6 +54,12 @@
         "version": "2026.6.1"
     },
     {
+        "game_name": "MIO: Memories in Orbit",
+        "origin": "gcm",
+        "gcm_url": "GCM/GCM Trainers/MIO_Memories in Orbit Trainer.exe",
+        "version": "2026.7.12"
+    },
+    {
         "game_name": "Oil Rush",
         "origin": "gcm",
         "gcm_url": "GCM/GCM Trainers/Oil Rush Trainer.exe",
@@ -828,7 +834,7 @@
         "author": "简简单单2022",
         "official_url": "https://bbs.3dmgame.com/thread-6653672-1-1.html",
         "gcm_url": "GCM/GCM Trainers/Long Yin Li Zhi Zhuan Trainer [JianJianDanDan2022].ct",
-        "version": "2026.4.28"
+        "version": "2026.6.12"
     },
     {
         "game_name": "Loot of Baal",
@@ -1055,7 +1061,7 @@
         "author": "LHY1339",
         "official_url": "https://github.com/LHY1339/cheat_ready_or_not",
         "gcm_url": "GCM/GCM Trainers/Ready or Not Trainer [LHY1339].exe",
-        "version": "2026.6.14"
+        "version": "2026.7.7"
     },
     {
         "game_name": "Backrooms: Extractions",
@@ -1674,7 +1680,7 @@
         "author": "简简单单2022",
         "official_url": "https://bbs.3dmgame.com/thread-6660842-1-1.html",
         "gcm_url": "GCM/GCM Trainers/Crimson Desert Trainer [JianJianDanDan2022].ct",
-        "version": "2026.5.12"
+        "version": "2026.7.4"
     },
     {
         "game_name": "Cubic Cosmos",
@@ -2628,7 +2634,7 @@
         "author": "Qiuzy",
         "official_url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3716563703",
         "gcm_url": "GCM/GCM Trainers/Magical Princess Trainer [Qiuzy].ct",
-        "version": "2026.5.7"
+        "version": "2026.6.27"
     },
     {
         "game_name": "Megabonk",
@@ -2877,6 +2883,7 @@
         "origin": "other",
         "author": "jx666",
         "gcm_url": "GCM/GCM Trainers/Isekai Big Dick Trainer [jx666].zip",
+        "extension": "none",
         "version": "2026.5.24"
     },
     {
@@ -2913,6 +2920,7 @@
         "origin": "other",
         "author": "jx666",
         "gcm_url": "GCM/GCM Trainers/The Lewd Ordeals of a Way-Too-Easy Genius Elf Trainer [jx666].zip",
+        "extension": "none",
         "version": "2026.5.24"
     },
     {
@@ -3084,6 +3092,7 @@
         "origin": "other",
         "author": "jx666",
         "gcm_url": "GCM/GCM Trainers/God's Blessing On That Desire World! Trainer [jx666].zip",
+        "extension": "none",
         "version": "2026.5.27"
     },
     {
@@ -3130,6 +3139,7 @@
         "origin": "other",
         "author": "jx666",
         "gcm_url": "GCM/GCM Trainers/Yakuza Rogue EX_Hikari Ayukawa Trainer [jx666].zip",
+        "extension": "none",
         "version": "2026.6.4"
     },
     {
@@ -3268,6 +3278,7 @@
         "origin": "other",
         "author": "jx666",
         "gcm_url": "GCM/GCM Trainers/Black Gold - Shining Town Trainer [jx666].zip",
+        "extension": "none",
         "version": "2026.6.10"
     },
     {
@@ -3299,6 +3310,7 @@
         "origin": "other",
         "author": "jx666",
         "gcm_url": "GCM/GCM Trainers/Rina's Undercover Train Operation Trainer [jx666].zip",
+        "extension": "none",
         "version": "2026.6.12"
     },
     {
@@ -3314,7 +3326,7 @@
         "origin": "other",
         "author": "夜间的孤独",
         "official_url": "https://bbs.3dmgame.com/thread-6677433-1-1.html",
-        "gcm_url": "GCM/GCM Trainers/Romestead Trainer [YeJianDeGuDu].exe",
+        "gcm_url": "GCM/GCM Trainers/Romestead Trainer [YeJianDeGuDu].zip",
         "version": "2026.6.6"
     },
     {
@@ -3464,6 +3476,7 @@
         "origin": "other",
         "author": "jx666",
         "gcm_url": "GCM/GCM Trainers/Glamour Kaleidoscope Trainer [jx666].zip",
+        "extension": "none",
         "version": "2026.6.16"
     },
     {
@@ -3500,6 +3513,7 @@
         "origin": "other",
         "author": "jx666",
         "gcm_url": "GCM/GCM Trainers/Immortal Joan_Cyber Revolution Trainer [jx666].zip",
+        "extension": "none",
         "version": "2026.6.15"
     },
     {
@@ -3515,6 +3529,7 @@
         "origin": "other",
         "author": "jx666",
         "gcm_url": "GCM/GCM Trainers/Love Confessions on the Adventure Trainer [jx666].zip",
+        "extension": "none",
         "version": "2026.6.18"
     },
     {
@@ -3577,6 +3592,7 @@
         "origin": "other",
         "author": "jx666",
         "gcm_url": "GCM/GCM Trainers/Succubus Successor_Delilah's Juicy Journey Trainer [jx666].zip",
+        "extension": "none",
         "version": "2026.6.26"
     },
     {
@@ -3656,5 +3672,340 @@
         "official_url": "https://bbs.3dmgame.com/thread-6674888-1-1.html",
         "gcm_url": "GCM/GCM Trainers/Magicraft Trainer [3DM].ct",
         "version": "2026.5.23"
+    },
+    {
+        "game_name": "Assassin's Creed II",
+        "origin": "other",
+        "author": "hex",
+        "official_url": "https://www.nexusmods.com/assassinscreedii/mods/189",
+        "gcm_url": "GCM/GCM Trainers/Assassin's Creed II Trainer [hex].exe",
+        "version": "2025.4.6"
+    },
+    {
+        "game_name": "Assassin's Creed Brotherhood",
+        "origin": "other",
+        "author": "hex",
+        "official_url": "https://www.nexusmods.com/assassinscreedbrotherhood/mods/222",
+        "gcm_url": "GCM/GCM Trainers/Assassin's Creed Brotherhood Trainer [hex].exe",
+        "version": "2025.4.6"
+    },
+    {
+        "game_name": "Assassin's Creed Revelations",
+        "origin": "other",
+        "author": "hex",
+        "official_url": "https://www.nexusmods.com/assassinscreedrevelations/mods/161",
+        "gcm_url": "GCM/GCM Trainers/Assassin's Creed Revelations Trainer [hex].exe",
+        "version": "2025.4.5"
+    },
+    {
+        "game_name": "Assassin's Creed IV: Black Flag",
+        "origin": "other",
+        "author": "hex",
+        "official_url": "https://www.nexusmods.com/assassinscreedivblackflag/mods/704",
+        "gcm_url": "GCM/GCM Trainers/Assassin's Creed IV_Black Flag Trainer [hex].exe",
+        "version": "2025.4.2"
+    },
+    {
+        "game_name": "Assassin's Creed Rogue",
+        "origin": "other",
+        "author": "hex",
+        "official_url": "https://www.nexusmods.com/assassinscreedrogue/mods/324",
+        "gcm_url": "GCM/GCM Trainers/Assassin's Creed Rogue Trainer [hex].exe",
+        "version": "2025.4.1"
+    },
+    {
+        "game_name": "Assassin's Creed Liberation Remastered",
+        "origin": "other",
+        "author": "hex",
+        "official_url": "https://www.nexusmods.com/assassinscreedliberationhd/mods/10",
+        "gcm_url": "GCM/GCM Trainers/Assassin's Creed Liberation Remastered Trainer [hex].exe",
+        "version": "2025.4.5"
+    },
+    {
+        "game_name": "Assassin's Creed",
+        "origin": "other",
+        "author": "hex",
+        "official_url": "https://www.nexusmods.com/assassinscreed/mods/110",
+        "gcm_url": "GCM/GCM Trainers/Assassin's Creed Trainer [hex].exe",
+        "version": "2025.4.7"
+    },
+    {
+        "game_name": "Assassin's Creed Syndicate",
+        "origin": "other",
+        "author": "hex",
+        "official_url": "https://www.nexusmods.com/assassinscreedsyndicate/mods/170",
+        "gcm_url": "GCM/GCM Trainers/Assassin's Creed Syndicate Trainer [hex].exe",
+        "version": "2025.12.17"
+    },
+    {
+        "game_name": "Batman: Arkham Asylum",
+        "origin": "other",
+        "author": "Burmass",
+        "gcm_url": "GCM/GCM Trainers/Batman_Arkham Asylum Trainer [Burmass].exe",
+        "version": "2026.7.3"
+    },
+    {
+        "game_name": "Forza Horizon 5",
+        "origin": "other",
+        "gcm_url": "GCM/GCM Trainers/Forza Horizon 5 Trainer.exe",
+        "version": "2026.7.3"
+    },
+    {
+        "game_name": "Constance",
+        "origin": "ct_other",
+        "author": "Patka",
+        "official_url": "https://fearlessrevolution.com/viewtopic.php?t=37383",
+        "gcm_url": "GCM/GCM Trainers/Constance Trainer [Patka].ct",
+        "version": "2025.11.29"
+    },
+    {
+        "game_name": "Forza Horizon 4/5",
+        "origin": "other",
+        "author": "ForzaMods",
+        "official_url": "https://github.com/ForzaMods/Forza-Mods-AIO",
+        "gcm_url": "GCM/GCM Trainers/Forza Horizon 4_5 Trainer [ForzaMods].exe",
+        "version": "2024.12.31"
+    },
+    {
+        "game_name": "Killer is Dead",
+        "origin": "other",
+        "author": "MrAntiFun",
+        "official_url": "https://mrantifun.net/threads/killer-is-dead-trainer.647/",
+        "gcm_url": "GCM/GCM Trainers/Killer is Dead Trainer [MrAntiFun].exe",
+        "version": "2014.5.27"
+    },
+    {
+        "game_name": "Loafing Town",
+        "origin": "other",
+        "author": "Sherlock",
+        "gcm_url": "GCM/GCM Trainers/Loafing Town Trainer [Sherlock].exe",
+        "version": "2026.7.3"
+    },
+    {
+        "game_name": "Metro: Last Light Redux",
+        "origin": "other",
+        "author": "MrAntiFun",
+        "official_url": "https://mrantifun.net/threads/metro-last-light-redux-trainer.1704/",
+        "gcm_url": "GCM/GCM Trainers/Metro_Last Light Redux Trainer [MrAntiFun].exe",
+        "version": "2019.1.18"
+    },
+    {
+        "game_name": "Monster Hunter Rise",
+        "origin": "ct_other",
+        "author": "Marcus101RR",
+        "official_url": "https://www.nexusmods.com/monsterhunterrise/mods/21, https://bbs.3dmgame.com/thread-6259865-1-1.html",
+        "gcm_url": "GCM/GCM Trainers/Monster Hunter Rise Trainer [Marcus101RR].zip",
+        "version": "2024.1.26"
+    },
+    {
+        "game_name": "Overlewd",
+        "origin": "ct_other",
+        "author": "Send",
+        "official_url": "https://fearlessrevolution.com/viewtopic.php?t=30187",
+        "gcm_url": "GCM/GCM Trainers/Overlewd Trainer [Send].ct",
+        "version": "2026.1.1"
+    },
+    {
+        "game_name": "Chinese Paladin: Sword and Fairy",
+        "origin": "other",
+        "author": "熊伟",
+        "custom_name_en": "Save Editor",
+        "custom_name_zh": "存档编辑器",
+        "gcm_url": "GCM/GCM Trainers/Chinese Paladin_Sword and Fairy Save Editor [XiongWei].exe",
+        "version": "2026.6.30"
+    },
+    {
+        "game_name": "The Binding of Isaac: Repentance",
+        "origin": "ct_other",
+        "author": "snowmelt",
+        "gcm_url": "GCM/GCM Trainers/The Binding of Isaac_Repentance Trainer [snowmelt].ct",
+        "version": "2026.6.29"
+    },
+    {
+        "game_name": "The Binding of Isaac",
+        "origin": "ct_other",
+        "author": "Cannon",
+        "official_url": "https://fearlessrevolution.com/viewtopic.php?t=10029",
+        "gcm_url": "GCM/GCM Trainers/The Binding of Isaac Trainer [Cannon].ct",
+        "version": "2019.8.16"
+    },
+    {
+        "game_name": "Ghost of Tsushima",
+        "origin": "ct_other",
+        "author": "cfemen",
+        "official_url": "https://fearlessrevolution.com/viewtopic.php?t=29221",
+        "gcm_url": "GCM/GCM Trainers/Ghost of Tsushima Trainer [cfemen].zip",
+        "version": "2024.6.28"
+    },
+    {
+        "game_name": "Crusaders Quest: Hero Town",
+        "origin": "other",
+        "author": "芝士log",
+        "official_url": "https://www.bilibili.com/video/BV19DJP6pE1Q",
+        "gcm_url": "GCM/GCM Trainers/Crusaders Quest_Hero Town Trainer [ZhiShiLog].exe",
+        "version": "2026.6.14"
+    },
+    {
+        "game_name": "It Takes Two",
+        "origin": "other",
+        "gcm_url": "GCM/GCM Trainers/It Takes Two Trainer.exe",
+        "version": "2026.6.28"
+    },
+    {
+        "game_name": "Stickman Strikes: Conquer Fantasy World",
+        "origin": "ct_other",
+        "author": "GD9bbSt",
+        "official_url": "https://tieba.baidu.com/p/9892176513",
+        "gcm_url": "GCM/GCM Trainers/Stickman Strikes_Conquer Fantasy World Trainer [GD9bbSt].ct",
+        "version": "2025.7.22"
+    },
+    {
+        "game_name": "Guns, Gore and Cannoli",
+        "origin": "other",
+        "author": "Abolfazl.k",
+        "gcm_url": "GCM/GCM Trainers/Guns, Gore and Cannoli Trainer [Abolfazl.k].exe",
+        "version": "2020.1.15"
+    },
+    {
+        "game_name": "Sangokushi Sousouden",
+        "origin": "other",
+        "author": "Puluo",
+        "official_url": "http://www.xycq.org.cn/forum/viewthread.php?tid=309778&page=1#pid4090397",
+        "gcm_url": "GCM/GCM Trainers/Sangokushi Sousouden Trainer [PuLuo].exe",
+        "version": "2024.1.18"
+    },
+    {
+        "game_name": "Banished",
+        "origin": "other",
+        "author": "MrAntiFun",
+        "official_url": "https://mrantifun.net/threads/banished-trainer.155/",
+        "gcm_url": "GCM/GCM Trainers/Banished Trainer [MrAntiFun].exe",
+        "version": "2018.10.21"
+    },
+    {
+        "game_name": "As Far As The Eye",
+        "origin": "other",
+        "author": "chenchen40k",
+        "gcm_url": "GCM/GCM Trainers/As Far As The Eye Trainer [chenchen40k].zip",
+        "extension": "none",
+        "version": "2026.7.8"
+    },
+    {
+        "game_name": "Cinderia",
+        "origin": "ct_other",
+        "author": "简简单单2022",
+        "official_url": "https://bbs.3dmgame.com/thread-6663394-1-1.html",
+        "gcm_url": "GCM/GCM Trainers/Cinderia Trainer [JianJianDanDan2022].ct",
+        "version": "2026.4.3"
+    },
+    {
+        "game_name": "Dragon Quest Monsters: The Dark Prince",
+        "origin": "ct_other",
+        "author": "DrummerIX",
+        "official_url": "https://fearlessrevolution.com/viewtopic.php?t=31226",
+        "gcm_url": "GCM/GCM Trainers/Dragon Quest Monsters_The Dark Prince Trainer [DrummerIX].zip",
+        "version": "2024.10.19"
+    },
+    {
+        "game_name": "Deadly Days: Roadtrip",
+        "origin": "ct_other",
+        "author": "Sianz",
+        "official_url": "https://fearlessrevolution.com/viewtopic.php?t=36606",
+        "gcm_url": "GCM/GCM Trainers/Deadly Days_Roadtrip Trainer [Sianz].ct",
+        "version": "2025.9.24"
+    },
+    {
+        "game_name": "Euro Truck Simulator 2",
+        "origin": "other",
+        "author": "xX_Morda_Xx",
+        "official_url": "https://www.playground.ru/euro_truck_simulator_2/cheat/euro_truck_simulator_2_trejner_11_1_60_1_0s_upd_20_06_2026_xx_morda_xx-1813454",
+        "gcm_url": "GCM/GCM Trainers/Euro Truck Simulator 2 Trainer [xX_Morda_Xx].exe",
+        "version": "2026.6.20"
+    },
+    {
+        "game_name": "Global Rescue",
+        "origin": "ct_other",
+        "author": "简简单单2022",
+        "official_url": "https://bbs.3dmgame.com/thread-6670603-1-1.html",
+        "gcm_url": "GCM/GCM Trainers/Global Rescue Trainer [JianJianDanDan2022].ct",
+        "version": "2026.5.2"
+    },
+    {
+        "game_name": "Lost Castle 2",
+        "origin": "other",
+        "author": "恨你不见",
+        "custom_name_en": "Soul Stone Generator",
+        "custom_name_zh": "灵魂石生成器",
+        "official_url": "https://www.bilibili.com/video/BV1jJTw6XEWG",
+        "gcm_url": "GCM/GCM Trainers/Lost Castle 2 Soul Stone Generator [HenNiBuJian].exe",
+        "version": "2026.6.30"
+    },
+    {
+        "game_name": "NTR Soccer",
+        "origin": "other",
+        "author": "jx666",
+        "gcm_url": "GCM/GCM Trainers/NTR Soccer Trainer [jx666].zip",
+        "extension": "none",
+        "version": "2026.7.4"
+    },
+    {
+        "game_name": "The Invincible",
+        "origin": "ct_other",
+        "author": "Zanzer",
+        "official_url": "https://fearlessrevolution.com/viewtopic.php?t=26319",
+        "gcm_url": "GCM/GCM Trainers/The Invincible Trainer [Zanzer].ct",
+        "version": "2023.11.7"
+    },
+    {
+        "game_name": "V-LOVER!",
+        "origin": "ct_other",
+        "author": "faqqq",
+        "gcm_url": "GCM/GCM Trainers/V-LOVER! Trainer [faqqq].ct",
+        "version": "2026.7.5"
+    },
+    {
+        "game_name": "Xanadu Next",
+        "origin": "ct_other",
+        "gcm_url": "GCM/GCM Trainers/Xanadu Next Trainer.ct",
+        "version": "2026.7.9"
+    },
+    {
+        "game_name": "Palworld",
+        "origin": "other",
+        "author": "Alanz",
+        "gcm_url": "GCM/GCM Trainers/Palworld Trainer [Alanz].zip",
+        "version": "2026.7.8"
+    },
+    {
+        "game_name": "The Binding of Isaac: Repentance+",
+        "origin": "ct_other",
+        "author": "LeiYu",
+        "gcm_url": "GCM/GCM Trainers/The Binding of Isaac_Repentance+ Trainer [LeiYu].ct",
+        "version": "2026.7.4"
+    },
+    {
+        "game_name": "Baldur's Gate 3",
+        "origin": "other",
+        "author": "chenstack",
+        "custom_name_en": "Data Query & Edit Tool",
+        "custom_name_zh": "数据查询修改工具",
+        "official_url": "https://www.chenstack.cn/2023/08/09/baldursgate3/",
+        "gcm_url": "GCM/GCM Trainers/Baldur's Gate 3 Data Query & Edit Tool [chenstack].exe",
+        "version": "2026.4.6"
+    },
+    {
+        "game_name": "Shattered Pixel Dungeon",
+        "origin": "other",
+        "author": "泇影",
+        "gcm_url": "GCM/GCM Trainers/Shattered Pixel Dungeon Trainer [JiaYing].exe",
+        "version": "2026.7.9"
+    },
+    {
+        "game_name": "Dying Light",
+        "origin": "ct_other",
+        "author": "IMIG",
+        "official_url": "https://www.nexusmods.com/dyinglight/mods/662",
+        "gcm_url": "GCM/GCM Trainers/Dying Light Trainer [IMIG].zip",
+        "version": "2025.8.27"
     }
 ]
