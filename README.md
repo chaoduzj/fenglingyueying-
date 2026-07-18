@@ -57,7 +57,7 @@ Created your own trainer or found one we missed? Upload it directly through the 
 
 While GCM is designed to be plug-and-play, you have full control over your experience via the in-app menus:
 
-* **Trainer Management:** Enable/Disable each source, configure trainer and data file auto-updates, or switch download servers.
+* **Trainer Management:** Enable/Disable each source and configure trainer and data file auto-updates.
 * **Local Imports:** Already have a folder full of trainers? Import them directly into GCM *(Note: auto-update is not supported for manual imports)*.
 * **Custom Paths:** Change where your trainers are saved and easily open your download directory from the app.
 * **Customization:** Adjust app themes, languages, and view your project-related links.

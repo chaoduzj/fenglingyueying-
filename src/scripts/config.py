@@ -14,6 +14,8 @@ from pypinyin import lazy_pinyin
 from secret_config import *
 
 
+APP_VERSION = "2.5.0-beta.8"
+
 # All resources in development mode are relative to `src` folder
 def resource_path(relative_path):
     # Pyinstaller
@@ -86,7 +88,6 @@ def load_settings():
         "enableGCM": True,
         "autoUpdateGCMData": True,
         "autoUpdateGCMTrainers": True,
-        "flingDownloadServer": "gcm",
         "removeFlingBgMusic": True,
         "autoUpdateFlingData": True,
         "autoUpdateFlingTrainers": True,
@@ -223,11 +224,6 @@ theme_options = {
     tr("Light"): "light"
 }
 
-server_options = {
-    tr("Official Site"): "official",
-    tr("GCM Server"): "gcm"
-}
-
 patch_methods = {
     tr("Yearly Subscription"): "yearly_sub",
     tr("Gifted Subscription"): "gifted_sub"
@@ -243,9 +239,6 @@ font_config = {
 ensure_trainer_download_path_is_valid()
 if settings["theme"] not in theme_options.values():
     settings["theme"] = "dark"
-    apply_settings(settings)
-if settings["flingDownloadServer"] not in server_options.values():
-    settings["flingDownloadServer"] = "official"
     apply_settings(settings)
 
 if settings["theme"] == "dark":

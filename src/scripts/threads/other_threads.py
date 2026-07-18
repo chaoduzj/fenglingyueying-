@@ -114,7 +114,7 @@ class PathChangeThread(QThread):
             self.error.emit(str(e))
 
 
-class FetchGCMSite(DownloadBaseThread):
+class FetchGCMData(DownloadBaseThread):
     message = pyqtSignal(str, str)
     update = pyqtSignal(str, str, str)
     finished = pyqtSignal(str)
@@ -142,7 +142,7 @@ class FetchGCMSite(DownloadBaseThread):
         self.finished.emit(statusWidgetName)
 
 
-class FetchFlingSite(DownloadBaseThread):
+class FetchFlingData(DownloadBaseThread):
     message = pyqtSignal(str, str)
     update = pyqtSignal(str, str, str)
     finished = pyqtSignal(str)
@@ -152,50 +152,28 @@ class FetchFlingSite(DownloadBaseThread):
 
     def run(self):
         statusWidgetName = "fling"
-        update_failed = tr("Update from FLiGN failed")
+        update_failed = tr("Update from FLiNG failed")
         try:
             update_message1 = tr("Updating data from FLiNG") + " (1/2)"
             update_failed1 = update_failed + " (1/2)"
             update_message2 = tr("Updating data from FLiNG") + " (2/2)"
             update_failed2 = update_failed + " (2/2)"
 
-            # Fling archive
             self.message.emit(statusWidgetName, update_message1)
-            if settings['flingDownloadServer'] == "official":
-                url = "https://archive.flingtrainer.com/"
-                content = self.get_webpage_content(url)
-                if not content:
-                    self.update.emit(statusWidgetName, update_failed1, "error")
-                    time.sleep(2)
-                else:
-                    self.save_html_content(content, "fling_archive.html")
+            url = "GCM/Data/fling_archive.json"
+            signed_url = self.get_signed_download_url(url)
+            file_path = signed_url and self.request_download(signed_url, DATABASE_PATH)
+            if not file_path:
+                self.update.emit(statusWidgetName, update_failed1, "error")
+                time.sleep(2)
 
-            elif settings['flingDownloadServer'] == "gcm":
-                url = "GCM/Data/fling_archive.json"
-                signed_url = self.get_signed_download_url(url)
-                file_path = signed_url and self.request_download(signed_url, DATABASE_PATH)
-                if not file_path:
-                    self.update.emit(statusWidgetName, update_failed1, "error")
-                    time.sleep(2)
-
-            # Fling main
             self.update.emit(statusWidgetName, update_message2, "load")
-            if settings['flingDownloadServer'] == "official":
-                url = "https://flingtrainer.com/all-trainers-a-z/"
-                content = self.get_webpage_content(url)
-                if not content:
-                    self.update.emit(statusWidgetName, update_failed2, "error")
-                    time.sleep(2)
-                else:
-                    self.save_html_content(content, "fling_main.html")
-
-            elif settings['flingDownloadServer'] == "gcm":
-                url = "GCM/Data/fling_main.json"
-                signed_url = self.get_signed_download_url(url)
-                file_path = signed_url and self.request_download(signed_url, DATABASE_PATH)
-                if not file_path:
-                    self.update.emit(statusWidgetName, update_failed2, "error")
-                    time.sleep(2)
+            url = "GCM/Data/fling_main.json"
+            signed_url = self.get_signed_download_url(url)
+            file_path = signed_url and self.request_download(signed_url, DATABASE_PATH)
+            if not file_path:
+                self.update.emit(statusWidgetName, update_failed2, "error")
+                time.sleep(2)
 
         except Exception:
             traceback.print_exc()
@@ -205,7 +183,7 @@ class FetchFlingSite(DownloadBaseThread):
         self.finished.emit(statusWidgetName)
 
 
-class FetchXiaoXingSite(DownloadBaseThread):
+class FetchXiaoXingData(DownloadBaseThread):
     message = pyqtSignal(str, str)
     update = pyqtSignal(str, str, str)
     finished = pyqtSignal(str)
@@ -233,7 +211,7 @@ class FetchXiaoXingSite(DownloadBaseThread):
         self.finished.emit(statusWidgetName)
 
 
-class FetchCTSite(DownloadBaseThread):
+class FetchCTData(DownloadBaseThread):
     message = pyqtSignal(str, str)
     update = pyqtSignal(str, str, str)
     finished = pyqtSignal(str)
@@ -527,65 +505,65 @@ class WeModCustomization(QThread):
         except Exception as e:
             self.message.emit(tr("Failed to patch file:") + f"\n{input_file}", "error")
 
-    def patch(self, enable_dev=False):
+    def load_patterns(self, enable_dev):
         if not PATCH_PATTERNS_ENDPOINT or not CLIENT_API_KEY:
-            print("Error: API endpoint or Client API Key is not configured.")
-            return False
+            print("Error: patch-patterns endpoint or API key is not configured.")
+            return None
 
-        headers = {
-            'x-api-key': CLIENT_API_KEY
-        }
+        headers = {'x-api-key': CLIENT_API_KEY}
         params = {
             'patchMethod': self.patchMethod,
-            'enableDev': 'true' if enable_dev else 'false'
+            'enableDev': 'true' if enable_dev else 'false',
+            'clientVersion': APP_VERSION,
         }
-
         response = None
         try:
             response = requests.get(PATCH_PATTERNS_ENDPOINT, headers=headers, params=params, timeout=15)
             response.raise_for_status()
-            patterns = response.json()
-            if not patterns:
-                response.status_code = -2
-                raise Exception("No patterns found in response")
-
+            return response.json()
         except Exception as e:
             print(f"Error fetching patch patterns: {str(e)}")
-            status_code = response.status_code if response else -1
+            status_code = response.status_code if response is not None else -1
             self.message.emit(tr("Internet request failed.") + f" {status_code}", "error")
+            return None
+
+    def patch(self, enable_dev=False):
+        entries = self.load_patterns(enable_dev)
+        if not entries:
+            print(f"No patch patterns for method '{self.patchMethod}'.")
             return False
 
-        # Mapping of patterns to files where they were found: {pattern key: file path}
-        lines = {key: None for key in patterns}
+        required_ok = True
+        applied = False
 
         try:
-            # Check files for matching patterns
-            for pattern in patterns:
+            for i, entry in enumerate(entries):
+                pattern, replacement = entry["pattern"], entry["replacement"]
+
+                target = None
                 for filename in os.listdir(WEMOD_TEMP_DIR):
-                    if filename.endswith('.js'):
-                        file_path = os.path.join(WEMOD_TEMP_DIR, filename)
-                        try:
-                            with open(file_path, 'r', encoding='utf-8') as file:
-                                content = file.read()
-                                if re.search(pattern, content):
-                                    print(f"Pattern {pattern} found in file {file_path}")
-                                    lines[pattern] = file_path
-                                    break
-                        except UnicodeDecodeError:
-                            continue
+                    if not filename.endswith('.js'):
+                        continue
+                    file_path = os.path.join(WEMOD_TEMP_DIR, filename)
+                    try:
+                        with open(file_path, 'r', encoding='utf-8') as file:
+                            content = file.read()
+                    except UnicodeDecodeError:
+                        continue
+                    if re.search(pattern, content):
+                        target = file_path
+                        break
 
-            # Process each file with matched patterns
-            if all(lines.values()):
-                print(f"js files patched using {self.patchMethod} method")
-                for pattern, file_path in lines.items():
-                    self.apply_patch(file_path, pattern, patterns[pattern])
-            else:
-                not_found = [pattern for pattern, file_path in lines.items() if file_path is None]
-                print(f"Patterns not found: {not_found}")
-                return False
-
+                if target:
+                    self.apply_patch(target, pattern, replacement)
+                    applied = True
+                    print(f"[{self.patchMethod}] patched entry {i} in {os.path.basename(target)}")
+                else:
+                    print(f"[{self.patchMethod}] entry {i} not found" + (" (required)" if entry.get("required") else ""))
+                    if entry.get("required"):
+                        required_ok = False
         except Exception as e:
             print(f"Error during {self.patchMethod} patching: {str(e)}")
             return False
 
-        return True
+        return required_ok and applied

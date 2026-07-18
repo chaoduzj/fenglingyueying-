@@ -19,12 +19,6 @@ msgstr "Dunkel"
 msgid "Light"
 msgstr "Hell"
 
-msgid "Official Site"
-msgstr "Offizielle Seite"
-
-msgid "GCM Server"
-msgstr "GCM-Server"
-
 msgid "Yearly Subscription"
 msgstr "Jahres-Abonnement"
 
@@ -208,6 +202,9 @@ msgstr "Pfade wurden erfolgreich zur Windows-Defender-Whitelist hinzugefügt."
 msgid "Failed to add paths to Windows Defender whitelist."
 msgstr "Pfade konnten nicht zur Windows-Defender-Whitelist hinzugefügt werden."
 
+msgid "Search keyword is too short, please enter at least 2 characters."
+msgstr "Suchbegriff ist zu kurz, bitte mindestens 2 Zeichen eingeben."
+
 msgid "Failed to translate, please update translation data."
 msgstr "Übersetzung fehlgeschlagen, bitte aktualisiere die Übersetzungsdaten."
 
@@ -219,9 +216,6 @@ msgstr "Suchergebnisse werden übersetzt..."
 
 msgid "No search results found."
 msgstr "Keine Suchergebnisse gefunden."
-
-msgid "Search keyword is too short, please enter at least 2 characters."
-msgstr "Suchbegriff ist zu kurz, bitte mindestens 2 Zeichen eingeben."
 
 msgid "An error occurred while searching for trainers: "
 msgstr "Ein Fehler ist beim Suchen nach Trainern aufgetreten: "
@@ -281,12 +275,6 @@ msgstr "Trainer existiert bereits, Download abgebrochen."
 msgid "Downloading..."
 msgstr "Lädt herunter..."
 
-msgid "Failed to find trainer download link."
-msgstr "Trainer-Download-Link konnte nicht gefunden werden."
-
-msgid "Failed to find trainer version."
-msgstr "Trainer-Version konnte nicht gefunden werden."
-
 msgid "Internet request failed."
 msgstr "Internet-Anfrage fehlgeschlagen."
 
@@ -311,8 +299,8 @@ msgstr "Update von GCM fehlgeschlagen"
 msgid "Updating data from GCM"
 msgstr "Daten von GCM werden aktualisiert"
 
-msgid "Update from FLiGN failed"
-msgstr "Update von FLiGN fehlgeschlagen"
+msgid "Update from FLiNG failed"
+msgstr "Update von FLiNG fehlgeschlagen"
 
 msgid "Updating data from FLiNG"
 msgstr "Daten von FLiNG werden aktualisiert"
@@ -541,17 +529,14 @@ msgstr "FLiNG"
 msgid "XiaoXing"
 msgstr "XiaoXing"
 
-msgid "Enable search for GCM and Other trainers"
-msgstr "Suche nach GCM- und anderen Trainern aktivieren"
+msgid "Enable search for GCM and Community trainers"
+msgstr "Suche nach GCM- und Community-Trainern aktivieren"
 
 msgid "Update GCM data automatically"
 msgstr "GCM-Daten automatisch aktualisieren"
 
-msgid "Update GCM and Other trainers automatically"
-msgstr "GCM- und andere Trainer automatisch aktualisieren"
-
-msgid "Download Server:"
-msgstr "Download-Server:"
+msgid "Update GCM and Community trainers automatically"
+msgstr "GCM- und Community-Trainer automatisch aktualisieren"
 
 msgid "Remove trainer background music"
 msgstr "Trainer-Hintergrundmusik entfernen"

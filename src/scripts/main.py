@@ -45,10 +45,9 @@ class GameCheatsManager(QMainWindow):
         self.setWindowIcon(QIcon(resource_path("assets/logo.ico")))
         self.setMinimumSize(700, 520)
 
-        # Version and links
-        self.appVersion = "2.5.0-beta.7"
+        # Links
         self.websiteLink = "https://gamezonelabs.com"
-        self.allTrainersLink = "https://gamezonelabs.com/products/game-cheats-manager/trainers"
+        self.allTrainersLink = "https://gamezonelabs.com/products/gcm/trainers"
         self.githubLink = "https://github.com/dyang886/Game-Cheats-Manager"
         self.bilibiliLink = "https://space.bilibili.com/256673766"
 
@@ -306,10 +305,10 @@ class GameCheatsManager(QMainWindow):
         # Keep a reference to prevent garbage collection
         self._active_toast = None
 
-        if success and latest_version > self.appVersion:
+        if success and latest_version > APP_VERSION:
             title = tr('Update Available')
             message = tr('New version found: {old_version} ➜ {new_version}').format(
-                old_version=self.appVersion,
+                old_version=APP_VERSION,
                 new_version=latest_version
             ) + '\n' + tr('Would you like to update now?')
 
@@ -697,7 +696,7 @@ class GameCheatsManager(QMainWindow):
     def fetch_gcm_data(self):
         if not self.currentlyUpdatingGCM:
             self.currentlyUpdatingGCM = True
-            fetch_gcm_site_thread = FetchGCMSite(self)
+            fetch_gcm_site_thread = FetchGCMData(self)
             fetch_gcm_site_thread.message.connect(self.on_status_load)
             fetch_gcm_site_thread.update.connect(self.on_status_update)
             fetch_gcm_site_thread.finished.connect(self.on_interval_finished)
@@ -706,16 +705,16 @@ class GameCheatsManager(QMainWindow):
     def fetch_fling_data(self):
         if not self.currentlyUpdatingFling:
             self.currentlyUpdatingFling = True
-            fetch_fling_site_thread = FetchFlingSite(self)
-            fetch_fling_site_thread.message.connect(self.on_status_load)
-            fetch_fling_site_thread.update.connect(self.on_status_update, Qt.ConnectionType.BlockingQueuedConnection)
-            fetch_fling_site_thread.finished.connect(self.on_interval_finished)
-            fetch_fling_site_thread.start()
+            fetch_fling_data_thread = FetchFlingData(self)
+            fetch_fling_data_thread.message.connect(self.on_status_load)
+            fetch_fling_data_thread.update.connect(self.on_status_update, Qt.ConnectionType.BlockingQueuedConnection)
+            fetch_fling_data_thread.finished.connect(self.on_interval_finished)
+            fetch_fling_data_thread.start()
 
     def fetch_xiaoxing_data(self):
         if not self.currentlyUpdatingXiaoXing:
             self.currentlyUpdatingXiaoXing = True
-            fetch_xiaoxing_site_thread = FetchXiaoXingSite(self)
+            fetch_xiaoxing_site_thread = FetchXiaoXingData(self)
             fetch_xiaoxing_site_thread.message.connect(self.on_status_load)
             fetch_xiaoxing_site_thread.update.connect(self.on_status_update)
             fetch_xiaoxing_site_thread.finished.connect(self.on_interval_finished)
@@ -724,7 +723,7 @@ class GameCheatsManager(QMainWindow):
     def fetch_ct_data(self):
         if not self.currentlyUpdatingCT:
             self.currentlyUpdatingCT = True
-            fetch_ct_site_thread = FetchCTSite(self)
+            fetch_ct_site_thread = FetchCTData(self)
             fetch_ct_site_thread.message.connect(self.on_status_load)
             fetch_ct_site_thread.update.connect(self.on_status_update)
             fetch_ct_site_thread.finished.connect(self.on_interval_finished)

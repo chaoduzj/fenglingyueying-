@@ -19,12 +19,6 @@ msgstr "深色"
 msgid "Light"
 msgstr "淺色"
 
-msgid "Official Site"
-msgstr "官方網站"
-
-msgid "GCM Server"
-msgstr "GCM 伺服器"
-
 msgid "Yearly Subscription"
 msgstr "年費訂閱"
 
@@ -208,6 +202,9 @@ msgstr "已成功將路徑添加到 Windows Defender 白名單。"
 msgid "Failed to add paths to Windows Defender whitelist."
 msgstr "無法將路徑添加到 Windows Defender 白名單。"
 
+msgid "Search keyword is too short, please enter at least 2 characters."
+msgstr "搜尋關鍵詞過短，請輸入至少 2 個字元。"
+
 msgid "Failed to translate, please update translation data."
 msgstr "翻譯失敗，請更新翻譯數據。"
 
@@ -219,9 +216,6 @@ msgstr "正在翻譯搜尋結果..."
 
 msgid "No search results found."
 msgstr "未找到相關修改器。"
-
-msgid "Search keyword is too short, please enter at least 2 characters."
-msgstr "搜尋關鍵詞過短，請輸入至少 2 個字元。"
 
 msgid "An error occurred while searching for trainers: "
 msgstr "搜尋修改器時出錯："
@@ -281,12 +275,6 @@ msgstr "修改器已存在，已中止下載。"
 msgid "Downloading..."
 msgstr "下載中..."
 
-msgid "Failed to find trainer download link."
-msgstr "獲取修改器下載連結失敗。"
-
-msgid "Failed to find trainer version."
-msgstr "獲取修改器版本失敗。"
-
 msgid "Internet request failed."
 msgstr "網路請求失敗。"
 
@@ -311,7 +299,7 @@ msgstr "更新 GCM 資料失敗"
 msgid "Updating data from GCM"
 msgstr "正在更新 GCM 資料"
 
-msgid "Update from FLiGN failed"
+msgid "Update from FLiNG failed"
 msgstr "更新風靈月影資料失敗"
 
 msgid "Updating data from FLiNG"
@@ -541,17 +529,14 @@ msgstr "風靈月影"
 msgid "XiaoXing"
 msgstr "小幸"
 
-msgid "Enable search for GCM and Other trainers"
-msgstr "允許搜尋 GCM 及其他修改器"
+msgid "Enable search for GCM and Community trainers"
+msgstr "允許搜尋 GCM 及社群修改器"
 
 msgid "Update GCM data automatically"
 msgstr "自動更新 GCM 資料"
 
-msgid "Update GCM and Other trainers automatically"
-msgstr "自動更新 GCM 及其他修改器"
-
-msgid "Download Server:"
-msgstr "下載伺服器："
+msgid "Update GCM and Community trainers automatically"
+msgstr "自動更新 GCM 及社群修改器"
 
 msgid "Remove trainer background music"
 msgstr "刪除修改器背景音樂"

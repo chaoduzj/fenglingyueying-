@@ -341,7 +341,7 @@ class AboutDialog(QDialog):
         versionLayout.addLayout(versionNumberLayout)
 
         currentVersionTextLabel = QLabel(tr("Current version: "))
-        self.currentVersionNumberLabel = QLabel(self.parent().appVersion)
+        self.currentVersionNumberLabel = QLabel(APP_VERSION)
         currentVersionLayout = QHBoxLayout()
         currentVersionLayout.setSpacing(3)
         currentVersionLayout.addStretch(1)
@@ -409,7 +409,7 @@ class AboutDialog(QDialog):
         self.worker.start()
 
     def update_version_labels(self, latest_version):
-        current_version = self.parent().appVersion
+        current_version = APP_VERSION
 
         if latest_version > current_version:
             self.currentVersionNumberLabel.setStyleSheet("color: red;")

@@ -35,27 +35,7 @@ class DownloadBaseThread(QThread):
 
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.html_content = ""
         self.downloaded_file_path = ""
-
-    def get_webpage_content(self, url, verify=True, use_cloudScraper=False):
-        if not self.is_internet_connected():
-            return ""
-
-        try:
-            if use_cloudScraper:
-                scraper = cloudscraper.create_scraper()
-                req = scraper.get(url, headers=self.headers, verify=verify)
-            else:
-                req = requests.get(url, headers=self.headers, verify=verify)
-            req.raise_for_status()
-        except Exception as e:
-            print(f"Error requesting {url}: {str(e)}")
-            return ""
-
-        self.html_content = req.text
-
-        return self.html_content
 
     def request_download(self, url, download_path, verify=True, use_cloudScraper=False):
         try:
@@ -358,25 +338,6 @@ class DownloadBaseThread(QThread):
             return None
 
         return trainerName
-
-    @staticmethod
-    def save_html_content(content, file_name, overwrite=True):
-        html_file = os.path.join(DATABASE_PATH, file_name)
-        mode = 'w' if overwrite else 'a'
-        with open(html_file, mode, encoding='utf-8') as file:
-            file.write(content)
-
-    @staticmethod
-    def load_html_content(file_name):
-        html_file = os.path.join(DATABASE_PATH, file_name)
-        if os.path.exists(html_file):
-            try:
-                with open(html_file, 'r', encoding='utf-8') as file:
-                    return file.read()
-            except Exception as e:
-                print(f"Error loading HTML content from {html_file}: {str(e)}")
-                return ""
-        return ""
 
     @staticmethod
     def load_json_content(file_name, from_database=True):

@@ -6,8 +6,6 @@ import subprocess
 import time
 import traceback
 
-from bs4 import BeautifulSoup
-
 from config import *
 from threads.download_base_thread import DownloadBaseThread
 
@@ -206,30 +204,7 @@ class DownloadTrainersThread(DownloadBaseThread):
         # Download trainer
         self.message.emit(tr("Downloading..."), "download")
         try:
-            targetUrl = selected_trainer["url"]
-
-            # Additional trainer file extraction for trainers from main site
-            if settings["flingDownloadServer"] == "official" and not self.update_entry:
-                if selected_trainer['origin'] == "fling_main":
-                    page_content = self.get_webpage_content(targetUrl)
-                    trainerPage = BeautifulSoup(page_content, 'html.parser')
-                    targetObj = trainerPage.find(lambda tag: tag.get('target') == '_self' and 'flingtrainer.com' in tag.get('href'))
-                    if not targetObj:
-                        raise Exception(tr("Failed to find trainer download link."))
-                    targetUrl = targetObj.get("href")
-                    div_entry = trainerPage.find('div', class_='entry')
-                    if div_entry:
-                        pattern = r'options.*game\s*version.*last\s*updated:\s*(\d{4}\.[0-1]?\d\.[0-3]?\d)'
-                        match = re.search(pattern, div_entry.get_text(separator=' ', strip=True), re.IGNORECASE)
-                        if match:
-                            version = match.group(1)
-                    if not version:
-                        raise Exception(tr("Failed to find trainer version."))
-                    selected_trainer["version"] = version
-
-            # Download trainers from gcm server
-            elif settings["flingDownloadServer"] == "gcm" or self.update_entry:
-                targetUrl = self.get_signed_download_url(targetUrl)
+            targetUrl = self.get_signed_download_url(selected_trainer["url"])
 
             trainerTemp = self.request_download(targetUrl, DOWNLOAD_TEMP_DIR)
             if not trainerTemp:

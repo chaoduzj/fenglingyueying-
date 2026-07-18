@@ -2,7 +2,7 @@ from packaging import version
 import subprocess
 import re
 
-from PyQt6.QtWidgets import QCheckBox, QComboBox, QDialog, QFileDialog, QHBoxLayout, QLabel, QLineEdit, QMessageBox, QSizePolicy, QTabWidget, QVBoxLayout, QWidget
+from PyQt6.QtWidgets import QCheckBox, QComboBox, QDialog, QFileDialog, QHBoxLayout, QLabel, QLineEdit, QMessageBox, QTabWidget, QVBoxLayout, QWidget
 from PyQt6.QtGui import QIcon, QPixmap
 from PyQt6.QtCore import Qt, QTimer
 
@@ -43,10 +43,6 @@ class TrainerManagementDialog(QDialog):
         while self.active_alerts:
             self.active_alerts[0].close()
 
-        oldFlingServer = settings["flingDownloadServer"]
-        newFlingServer = server_options[self.serverCombo.currentText()]
-        if oldFlingServer != newFlingServer:
-            self.parent().fetch_fling_data()
         oldEnableXiaoXing = settings["enableXiaoXing"]
         newEnableXiaoXing = self.enableXiaoXingCheckbox.isChecked()
         if not oldEnableXiaoXing and newEnableXiaoXing:
@@ -55,7 +51,6 @@ class TrainerManagementDialog(QDialog):
         settings["enableGCM"] = self.enableGCMCheckbox.isChecked()
         settings["autoUpdateGCMData"] = self.autoUpdateGCMDataCheckbox.isChecked()
         settings["autoUpdateGCMTrainers"] = self.autoUpdateGCMTrainersCheckbox.isChecked()
-        settings["flingDownloadServer"] = newFlingServer
         settings["removeFlingBgMusic"] = self.removeFlingBgMusicCheckbox.isChecked()
         settings["autoUpdateFlingData"] = self.autoUpdateFlingDataCheckbox.isChecked()
         settings["autoUpdateFlingTrainers"] = self.autoUpdateFlingTrainersCheckbox.isChecked()
@@ -67,13 +62,6 @@ class TrainerManagementDialog(QDialog):
         settings["autoUpdateCTData"] = self.autoUpdateCTDataCheckbox.isChecked()
         settings["autoUpdateCTTrainers"] = self.autoUpdateCTTrainersCheckbox.isChecked()
         apply_settings(settings)
-
-    @staticmethod
-    def find_settings_key(value, dict):
-        try:
-            return next(key for key, val in dict.items() if val == value)
-        except StopIteration:
-            return next(iter(dict.values()))
 
     def show_alert(self, message, alert_type):
         alert = AlertWidget(self, message, alert_type)
@@ -115,8 +103,8 @@ class TrainerManagementDialog(QDialog):
         columns.addLayout(column2, stretch=3)
         columns.setAlignment(column2, Qt.AlignmentFlag.AlignHCenter)
 
-        # Enable GCM and Other trainer
-        self.enableGCMCheckbox = QCheckBox(tr("Enable search for GCM and Other trainers"))
+        # Enable GCM and Community trainer
+        self.enableGCMCheckbox = QCheckBox(tr("Enable search for GCM and Community trainers"))
         self.enableGCMCheckbox.setChecked(settings["enableGCM"])
         column2.addWidget(self.enableGCMCheckbox)
 
@@ -126,7 +114,7 @@ class TrainerManagementDialog(QDialog):
         column2.addWidget(self.autoUpdateGCMDataCheckbox)
 
         # Auto update GCM trainers
-        self.autoUpdateGCMTrainersCheckbox = QCheckBox(tr("Update GCM and Other trainers automatically"))
+        self.autoUpdateGCMTrainersCheckbox = QCheckBox(tr("Update GCM and Community trainers automatically"))
         self.autoUpdateGCMTrainersCheckbox.setChecked(settings["autoUpdateGCMTrainers"])
         column2.addWidget(self.autoUpdateGCMTrainersCheckbox)
 
@@ -162,17 +150,6 @@ class TrainerManagementDialog(QDialog):
         column2.addStretch(1)
         columns.addLayout(column2, stretch=3)
         columns.setAlignment(column2, Qt.AlignmentFlag.AlignHCenter)
-
-        # Fling server selection
-        serverLayout = QVBoxLayout()
-        serverLayout.setSpacing(2)
-        column2.addLayout(serverLayout)
-        serverLayout.addWidget(QLabel(tr("Download Server:")))
-        self.serverCombo = QComboBox()
-        self.serverCombo.addItems(server_options.keys())
-        self.serverCombo.setCurrentText(self.find_settings_key(settings["flingDownloadServer"], server_options))
-        self.serverCombo.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
-        serverLayout.addWidget(self.serverCombo, stretch=1)
 
         # Remove Fling trainer background music when downloading
         self.removeFlingBgMusicCheckbox = QCheckBox(tr("Remove trainer background music"))
