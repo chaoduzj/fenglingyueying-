@@ -238,12 +238,6 @@ msgstr "CT 表搜索成功！"
 msgid "Search from GCM success!"
 msgstr "GCM 搜索成功！"
 
-msgid "Checking for internet connection..."
-msgstr "检查网络连接中..."
-
-msgid "No internet connection, download failed."
-msgstr "没有网络连接，下载失败。"
-
 msgid "Could not initialize the temporary download folder, please try turning your antivirus software off."
 msgstr "无法初始化临时下载文件夹，请尝试关闭您的杀毒软件。"
 
@@ -266,6 +260,9 @@ msgstr "下载成功！"
 msgid "An error occurred while downloading trainer: "
 msgstr "下载修改器时出错："
 
+msgid "Internet request failed."
+msgstr "网络请求失败。"
+
 msgid "Updating "
 msgstr "正在更新 "
 
@@ -274,9 +271,6 @@ msgstr "修改器已存在，已中止下载。"
 
 msgid "Downloading..."
 msgstr "下载中..."
-
-msgid "Internet request failed."
-msgstr "网络请求失败。"
 
 msgid "Decompressing..."
 msgstr "解压中..."

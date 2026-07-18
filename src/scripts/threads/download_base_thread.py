@@ -17,6 +17,9 @@ from config import *
 from search_index import translation_index
 
 _PARALLEL_THRESHOLD = 2 * 1024 * 1024  # skip parallel for files < 2 MB
+_API_TIMEOUT = (3, 15)
+_DOWNLOAD_TIMEOUT = (3, 30)
+_RANGE_DOWNLOAD_TIMEOUT = (3, 60)
 
 warnings.simplefilter("ignore", InsecureRequestWarning)
 
@@ -37,16 +40,18 @@ class DownloadBaseThread(QThread):
         super().__init__(parent)
         self.downloaded_file_path = ""
 
-    def request_download(self, url, download_path, verify=True, use_cloudScraper=False):
+    def request_download(self, url, download_path, verify=True, use_cloudScraper=False, raise_errors=False):
         try:
             if use_cloudScraper:
                 scraper = cloudscraper.create_scraper()
-                req = scraper.get(url, headers=self.headers, verify=verify, stream=True, timeout=30)
+                req = scraper.get(url, headers=self.headers, verify=verify, stream=True, timeout=_DOWNLOAD_TIMEOUT)
             else:
-                req = requests.get(url, headers=self.headers, verify=verify, stream=True, timeout=30)
+                req = requests.get(url, headers=self.headers, verify=verify, stream=True, timeout=_DOWNLOAD_TIMEOUT)
             req.raise_for_status()
         except Exception as e:
             print(f"Error requesting {url}: {str(e)}")
+            if raise_errors:
+                raise
             return ""
 
         file_path = os.path.join(download_path, self.find_download_fname(req))
@@ -57,9 +62,9 @@ class DownloadBaseThread(QThread):
             num_workers = min(total_size // (1024 * 1024), 6)
         else:
             num_workers = 1
-        return self.download_queued(req, url, file_path, total_size, verify, num_workers)
+        return self.download_queued(req, url, file_path, total_size, verify, num_workers, raise_errors)
 
-    def download_queued(self, initial_req, url, file_path, total_size, verify, num_workers):
+    def download_queued(self, initial_req, url, file_path, total_size, verify, num_workers, raise_errors=False):
         total_units = min(total_size // (1024 * 1024), 24) if num_workers > 1 else 1
         print(f"[Queue] starting: {total_units} units, {num_workers} workers, {total_size / (1024 * 1024):.1f} MB", flush=True)
 
@@ -85,6 +90,7 @@ class DownloadBaseThread(QThread):
         total_downloaded = [0]
         completed_units = [0]
         total_failures = [0]
+        last_error = [None]
         MAX_FAILURES = total_units + 10
         stop_event = threading.Event()
         downloaded_lock = threading.Lock()
@@ -109,7 +115,7 @@ class DownloadBaseThread(QThread):
                     bytes_this_unit = 0
                     try:
                         if start is not None:
-                            resp = session.get(url, headers={**self.headers, 'Range': f'bytes={start}-{end}'}, verify=verify, stream=True, timeout=60)
+                            resp = session.get(url, headers={**self.headers, 'Range': f'bytes={start}-{end}'}, verify=verify, stream=True, timeout=_RANGE_DOWNLOAD_TIMEOUT)
                             resp.raise_for_status()
                         else:
                             resp = initial_req
@@ -130,6 +136,7 @@ class DownloadBaseThread(QThread):
                         with downloaded_lock:
                             total_downloaded[0] -= bytes_this_unit
                             total_failures[0] += 1
+                            last_error[0] = e
                             failures = total_failures[0]
                         if failures >= MAX_FAILURES:
                             stop_event.set()
@@ -150,6 +157,8 @@ class DownloadBaseThread(QThread):
             print(f"[Queue] download failed: {total_failures[0]} total failures", flush=True)
             if os.path.exists(file_path):
                 os.remove(file_path)
+            if raise_errors and last_error[0] is not None:
+                raise last_error[0]
             return ""
 
         emit_progress()
@@ -174,7 +183,7 @@ class DownloadBaseThread(QThread):
         return urlparse(str(response.url)).path.split("/")[-1]
 
     @staticmethod
-    def get_signed_download_url(file_path_on_s3):
+    def get_signed_download_url(file_path_on_s3, raise_errors=False):
         if not SIGNED_URL_DOWNLOAD_ENDPOINT or not CLIENT_API_KEY:
             print("Error: API endpoint or Client API Key is not configured.")
             return None
@@ -187,7 +196,7 @@ class DownloadBaseThread(QThread):
         }
 
         try:
-            response = requests.get(SIGNED_URL_DOWNLOAD_ENDPOINT, headers=headers, params=params, timeout=15)
+            response = requests.get(SIGNED_URL_DOWNLOAD_ENDPOINT, headers=headers, params=params, timeout=_API_TIMEOUT)
             response.raise_for_status()
 
             data = response.json()
@@ -200,6 +209,8 @@ class DownloadBaseThread(QThread):
 
         except Exception as e:
             print(f"Error retrieving signed URL: {str(e)}")
+            if raise_errors:
+                raise
         return None
 
     @staticmethod
@@ -228,26 +239,6 @@ class DownloadBaseThread(QThread):
         except Exception as e:
             print(f"Error retrieving signed URL: {str(e)}")
         return None
-
-    @staticmethod
-    def is_internet_connected(urls=None, timeout=5):
-        if urls is None:
-            urls = [
-                "https://www.bing.com/",
-                "https://www.baidu.com/",
-                "http://www.google.com/",
-                "https://www.apple.com/",
-                "https://www.wechat.com/"
-            ]
-
-        for url in urls:
-            try:
-                response = requests.head(url, timeout=timeout)
-                response.raise_for_status()
-                return True
-            except requests.RequestException:
-                continue
-        return False
 
     @staticmethod
     def symbol_replacement(text):

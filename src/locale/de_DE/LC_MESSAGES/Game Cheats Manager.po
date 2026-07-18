@@ -238,12 +238,6 @@ msgstr "Suche von CT erfolgreich!"
 msgid "Search from GCM success!"
 msgstr "Suche von GCM erfolgreich!"
 
-msgid "Checking for internet connection..."
-msgstr "Internetverbindung wird geprüft..."
-
-msgid "No internet connection, download failed."
-msgstr "Keine Internetverbindung, Download fehlgeschlagen."
-
 msgid "Could not initialize the temporary download folder, please try turning your antivirus software off."
 msgstr "Der temporäre Download-Ordner konnte nicht initialisiert werden. Bitte versuche, deine Antivirensoftware zu deaktivieren."
 
@@ -266,6 +260,9 @@ msgstr "Download erfolgreich!"
 msgid "An error occurred while downloading trainer: "
 msgstr "Ein Fehler ist beim Herunterladen des Trainers aufgetreten: "
 
+msgid "Internet request failed."
+msgstr "Internet-Anfrage fehlgeschlagen."
+
 msgid "Updating "
 msgstr "Aktualisiere "
 
@@ -274,9 +271,6 @@ msgstr "Trainer existiert bereits, Download abgebrochen."
 
 msgid "Downloading..."
 msgstr "Lädt herunter..."
-
-msgid "Internet request failed."
-msgstr "Internet-Anfrage fehlgeschlagen."
 
 msgid "Decompressing..."
 msgstr "Entpacke..."

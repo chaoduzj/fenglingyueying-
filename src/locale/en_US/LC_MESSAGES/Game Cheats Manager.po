@@ -238,12 +238,6 @@ msgstr "Search from CT success!"
 msgid "Search from GCM success!"
 msgstr "Search from GCM success!"
 
-msgid "Checking for internet connection..."
-msgstr "Checking for internet connection..."
-
-msgid "No internet connection, download failed."
-msgstr "No internet connection, download failed."
-
 msgid "Could not initialize the temporary download folder, please try turning your antivirus software off."
 msgstr "Could not initialize the temporary download folder, please try turning your antivirus software off."
 
@@ -266,6 +260,9 @@ msgstr "Download success!"
 msgid "An error occurred while downloading trainer: "
 msgstr "An error occurred while downloading trainer: "
 
+msgid "Internet request failed."
+msgstr "Internet request failed."
+
 msgid "Updating "
 msgstr "Updating "
 
@@ -274,9 +271,6 @@ msgstr "Trainer already exists, aborted download."
 
 msgid "Downloading..."
 msgstr "Downloading..."
-
-msgid "Internet request failed."
-msgstr "Internet request failed."
 
 msgid "Decompressing..."
 msgstr "Decompressing..."
