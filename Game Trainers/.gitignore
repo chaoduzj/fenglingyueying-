@@ -4,6 +4,7 @@ bin/
 obj/
 .venv/
 tools/
+docs/
 *.sln
 *.ps1
 MonoBridge.dll
@@ -11,10 +12,8 @@ GCMInjection.dll
 IL2CPP.dll
 UE.dll
 trainers/**/*.ttf
-process_user_trainers.py
-user_trainers.json
-user_trainers.xlsx
-completed_trainers.txt
-User Trainers/
-docs/*.txt
-docs/*.md
+scripts/process_user_trainers.py
+data/user_trainers.json
+data/user_trainers.xlsx
+data/completed_trainers.txt
+data/User Trainers/
