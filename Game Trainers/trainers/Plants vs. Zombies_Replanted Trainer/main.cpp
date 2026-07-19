@@ -305,13 +305,15 @@ int main(int argc, char **argv)
 
     Fl_Input *add_plant_input = nullptr;
     std::vector<std::string> plant_columns = {"Plant ID", "Plant Name"};
-    Fl_Button *plant_info = create_info_button(&trainer, &add_plant_input, plant_columns, "Plant List", &plant_list_window, &Trainer::getPlantList, info_img);
+    std::vector<int> plant_column_widths = {100, 234};
+    Fl_Button *plant_info = create_info_button(&trainer, &add_plant_input, plant_columns, plant_column_widths, "Plant List", &plant_list_window, &Trainer::getPlantList, info_img);
     place_apply_widget(options1_flex, &trainer, "AddPlantToGarden", "Add Plant to Garden", &add_plant_input, "0", "0", "39", FL_INT_INPUT, plant_info);
     g_direction_check_button = dynamic_cast<Fl_Check_Button *>(place_indented_toggle_widget(options1_flex, "Facing Left").button);
 
     Fl_Input *spawn_zombie_input = nullptr;
     std::vector<std::string> zombie_columns = {"Zombie ID", "Zombie Name"};
-    Fl_Button *zombie_info = create_info_button(&trainer, &spawn_zombie_input, zombie_columns, "Zombie List", &zombie_list_window, &Trainer::getZombieList, info_img);
+    std::vector<int> zombie_column_widths = {100, 234};
+    Fl_Button *zombie_info = create_info_button(&trainer, &spawn_zombie_input, zombie_columns, zombie_column_widths, "Zombie List", &zombie_list_window, &Trainer::getZombieList, info_img);
     place_apply_widget(options1_flex, &trainer, "SpawnZombie", "Spawn Zombie", &spawn_zombie_input, "0", "0", "99", FL_INT_INPUT, zombie_info);
     g_spawn_row_input = place_indented_input_widget(options1_flex, "Which Row", "1", "1", "6");
     g_spawn_every_row_check_button = dynamic_cast<Fl_Check_Button *>(place_indented_toggle_widget(options1_flex, "Spawn in Every Row").button);

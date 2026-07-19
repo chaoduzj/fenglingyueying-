@@ -3,11 +3,13 @@ build/
 bin/
 obj/
 .venv/
+tools/
 *.sln
 *.ps1
 MonoBridge.dll
 GCMInjection.dll
 IL2CPP.dll
+UE.dll
 trainers/**/*.ttf
 process_user_trainers.py
 user_trainers.json

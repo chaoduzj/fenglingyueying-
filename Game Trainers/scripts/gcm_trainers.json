@@ -6,6 +6,12 @@
         "version": "2025.11.27"
     },
     {
+        "game_name": "Crab Champions",
+        "origin": "gcm",
+        "gcm_url": "GCM/GCM Trainers/Crab Champions Trainer.exe",
+        "version": "2026.7.19"
+    },
+    {
         "game_name": "Dancing Line",
         "origin": "gcm",
         "gcm_url": "GCM/GCM Trainers/Dancing Line Trainer.exe",
